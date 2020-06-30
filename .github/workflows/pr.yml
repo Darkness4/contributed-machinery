@@ -20,7 +20,7 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'master'
+          channel: 'dev'
       - name: Upgrade flutter to master latest
         run: |
           flutter channel master
@@ -52,7 +52,7 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'master'
+          channel: 'dev'
       - name: Upgrade flutter to master latest
         run: |
           flutter channel master
@@ -83,7 +83,7 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'master'
+          channel: 'dev'
       - name: Upgrade flutter to master latest
         run: |
           flutter channel master
