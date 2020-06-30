@@ -66,8 +66,13 @@ class ThreadCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
+                thread.request.title.getOrCrash(),
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Text(
                 thread.request.content.getOrCrash(),
-                style: const TextStyle(fontSize: 18),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
               if (thread.answers.length > 0) ...[
                 const SizedBox(height: 4),

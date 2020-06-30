@@ -19,10 +19,9 @@ class ThreadRepository implements IThreadRepository {
   @override
   Future<Either<ThreadFailure, Unit>> create(Thread thread) async {
     try {
-      final userDoc = await _firestore.userDocument();
       final threadDto = ThreadDto.fromDomain(thread);
 
-      await userDoc.threadCollection
+      await _firestore.threadCollection
           .document(threadDto.id)
           .setData(threadDto.toJson());
 
@@ -40,10 +39,9 @@ class ThreadRepository implements IThreadRepository {
   @override
   Future<Either<ThreadFailure, Unit>> delete(Thread thread) async {
     try {
-      final userDoc = await _firestore.userDocument();
       final threadId = thread.id.getOrCrash();
 
-      await userDoc.threadCollection.document(threadId).delete();
+      await _firestore.threadCollection.document(threadId).delete();
 
       return right(unit);
     } on PlatformException catch (e) {
@@ -58,10 +56,9 @@ class ThreadRepository implements IThreadRepository {
   @override
   Future<Either<ThreadFailure, Unit>> update(Thread thread) async {
     try {
-      final userDoc = await _firestore.userDocument();
       final threadDto = ThreadDto.fromDomain(thread);
 
-      await userDoc.threadCollection
+      await _firestore.threadCollection
           .document(threadDto.id)
           .updateData(threadDto.toJson());
 
@@ -80,8 +77,7 @@ class ThreadRepository implements IThreadRepository {
 
   @override
   Stream<Either<ThreadFailure, KtList<Thread>>> watchAll() async* {
-    final userDoc = await _firestore.userDocument();
-    yield* userDoc.threadCollection
+    yield* _firestore.threadCollection
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map(

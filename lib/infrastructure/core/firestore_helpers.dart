@@ -14,11 +14,6 @@ extension FirestoreX on Firestore {
         .collection('users')
         .document(user.id.getOrCrash());
   }
-}
 
-extension DocumentReferenceX on DocumentReference {
   CollectionReference get threadCollection => collection('threads');
-
-  /// Nested subcollection under a [threadCollection]'s document.
-  CollectionReference get answerCollection => collection('answers');
 }
