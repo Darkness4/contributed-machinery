@@ -27,7 +27,7 @@ class TitleField extends HookWidget {
           child: TextFormField(
             controller: textEditingController,
             decoration: const InputDecoration(
-              labelText: 'Thread',
+              labelText: 'Title',
               counterText: '',
             ),
             maxLength: RequestTitle.maxLength,

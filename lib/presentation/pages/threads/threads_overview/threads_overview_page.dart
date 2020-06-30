@@ -47,7 +47,7 @@ class ThreadsOverviewPage extends HookWidget implements AutoRouteWrapper {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Notes'),
+          title: const Text('Threads'),
           leading: IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {

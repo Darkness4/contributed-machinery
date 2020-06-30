@@ -85,7 +85,7 @@ class ThreadFormPage extends HookWidget {
                         insufficientPermissions: (_) =>
                             'Insufficient permissions ❌',
                         unableToUpdate: (_) =>
-                            "Couldn't update the note. Was it deleted from another device?",
+                            "Couldn't update the thread. Was it deleted from another device?",
                         unexpected: (_) =>
                             'Unexpected error occured, please contact support.'),
                   ).show(context);
@@ -126,7 +126,7 @@ class ThreadFormPageScaffold extends StatelessWidget {
           title: BlocBuilder<ThreadFormBloc, ThreadFormState>(
             condition: (p, c) => p.isEditing != c.isEditing,
             builder: (context, state) =>
-                Text(state.isEditing ? 'Edit a note' : 'Create a note'),
+                Text(state.isEditing ? 'Edit a thread' : 'Create a thread'),
           ),
           actions: <Widget>[
             Builder(

@@ -16,7 +16,7 @@ class _$ThreadWatcherEventTearOff {
     return const _WatchAllStarted();
   }
 
-  _ThreadsReceived notesReceived(
+  _ThreadsReceived threadsReceived(
       Either<ThreadFailure, KtList<Thread>> failureOrThreads) {
     return _ThreadsReceived(
       failureOrThreads,
@@ -32,25 +32,25 @@ mixin _$ThreadWatcherEvent {
   Result when<Result extends Object>({
     @required Result watchAllStarted(),
     @required
-        Result notesReceived(
+        Result threadsReceived(
             Either<ThreadFailure, KtList<Thread>> failureOrThreads),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result watchAllStarted(),
-    Result notesReceived(
+    Result threadsReceived(
         Either<ThreadFailure, KtList<Thread>> failureOrThreads),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result watchAllStarted(_WatchAllStarted value),
-    @required Result notesReceived(_ThreadsReceived value),
+    @required Result threadsReceived(_ThreadsReceived value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result watchAllStarted(_WatchAllStarted value),
-    Result notesReceived(_ThreadsReceived value),
+    Result threadsReceived(_ThreadsReceived value),
     @required Result orElse(),
   });
 }
@@ -108,11 +108,11 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   Result when<Result extends Object>({
     @required Result watchAllStarted(),
     @required
-        Result notesReceived(
+        Result threadsReceived(
             Either<ThreadFailure, KtList<Thread>> failureOrThreads),
   }) {
     assert(watchAllStarted != null);
-    assert(notesReceived != null);
+    assert(threadsReceived != null);
     return watchAllStarted();
   }
 
@@ -120,7 +120,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result watchAllStarted(),
-    Result notesReceived(
+    Result threadsReceived(
         Either<ThreadFailure, KtList<Thread>> failureOrThreads),
     @required Result orElse(),
   }) {
@@ -135,10 +135,10 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result watchAllStarted(_WatchAllStarted value),
-    @required Result notesReceived(_ThreadsReceived value),
+    @required Result threadsReceived(_ThreadsReceived value),
   }) {
     assert(watchAllStarted != null);
-    assert(notesReceived != null);
+    assert(threadsReceived != null);
     return watchAllStarted(this);
   }
 
@@ -146,7 +146,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result watchAllStarted(_WatchAllStarted value),
-    Result notesReceived(_ThreadsReceived value),
+    Result threadsReceived(_ThreadsReceived value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -199,7 +199,7 @@ class _$_ThreadsReceived implements _ThreadsReceived {
 
   @override
   String toString() {
-    return 'ThreadWatcherEvent.notesReceived(failureOrThreads: $failureOrThreads)';
+    return 'ThreadWatcherEvent.threadsReceived(failureOrThreads: $failureOrThreads)';
   }
 
   @override
@@ -225,25 +225,25 @@ class _$_ThreadsReceived implements _ThreadsReceived {
   Result when<Result extends Object>({
     @required Result watchAllStarted(),
     @required
-        Result notesReceived(
+        Result threadsReceived(
             Either<ThreadFailure, KtList<Thread>> failureOrThreads),
   }) {
     assert(watchAllStarted != null);
-    assert(notesReceived != null);
-    return notesReceived(failureOrThreads);
+    assert(threadsReceived != null);
+    return threadsReceived(failureOrThreads);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result watchAllStarted(),
-    Result notesReceived(
+    Result threadsReceived(
         Either<ThreadFailure, KtList<Thread>> failureOrThreads),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (notesReceived != null) {
-      return notesReceived(failureOrThreads);
+    if (threadsReceived != null) {
+      return threadsReceived(failureOrThreads);
     }
     return orElse();
   }
@@ -252,23 +252,23 @@ class _$_ThreadsReceived implements _ThreadsReceived {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result watchAllStarted(_WatchAllStarted value),
-    @required Result notesReceived(_ThreadsReceived value),
+    @required Result threadsReceived(_ThreadsReceived value),
   }) {
     assert(watchAllStarted != null);
-    assert(notesReceived != null);
-    return notesReceived(this);
+    assert(threadsReceived != null);
+    return threadsReceived(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result watchAllStarted(_WatchAllStarted value),
-    Result notesReceived(_ThreadsReceived value),
+    Result threadsReceived(_ThreadsReceived value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (notesReceived != null) {
-      return notesReceived(this);
+    if (threadsReceived != null) {
+      return threadsReceived(this);
     }
     return orElse();
   }

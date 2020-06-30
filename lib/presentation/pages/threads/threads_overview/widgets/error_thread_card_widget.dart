@@ -18,7 +18,7 @@ class ErrorThreadCard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Text(
-              'Invalid note, please contact support',
+              'Invalid thread, please contact support',
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .primaryTextTheme

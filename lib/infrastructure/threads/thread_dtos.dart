@@ -78,7 +78,7 @@ abstract class ThreadDto with _$ThreadDto {
       answers: thread.answers
           .getOrCrash()
           .mapIndexed(
-            (index, todoItem) => AnswerDto.fromDomain(todoItem),
+            (index, answer) => AnswerDto.fromDomain(answer),
           )
           .asList(),
       serverTimeStamp: FieldValue.serverTimestamp(),

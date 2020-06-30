@@ -35,7 +35,7 @@ class AnswerListWidget extends HookWidget {
         ),
       ],
       child: Consumer<FormAnswers>(
-        builder: (context, formTodos, child) {
+        builder: (context, formAnswers, child) {
           return ImplicitlyAnimatedReorderableList<AnswerPrimitive>(
             items: context.formAnswers.asList(),
             shrinkWrap: true,
@@ -57,7 +57,7 @@ class AnswerListWidget extends HookWidget {
                     scale: Tween<double>(begin: 1, end: 0.95)
                         .animate(dragAnimation),
                     child: AnswerTile(
-                      // We have to pass in the index and not a complete TodoItemPrimitive to always get the most fresh value held in FormTodos
+                      // We have to pass in the index and not a complete AnswerPrimitive to always get the most fresh value held in FormAnswers
                       index: index,
                       elevation: elevation,
                     ),
@@ -227,7 +227,7 @@ class AnswerTile extends HookWidget {
                       .answers
                       .value
                       .fold(
-                        // Failure stemming from the TodoList length should NOT be displayed by the individual TextFormFields
+                        // Failure stemming from the AnswerList length should NOT be displayed by the individual TextFormFields
                         (f) => null,
                         (answerList) => answerList[index].content.value.fold(
                               (f) => f.maybeMap(

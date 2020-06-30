@@ -27,7 +27,7 @@ class ContentField extends HookWidget {
           child: TextFormField(
             controller: textEditingController,
             decoration: const InputDecoration(
-              labelText: 'Thread',
+              labelText: 'Content',
               counterText: '',
             ),
             maxLength: RequestContent.maxLength,

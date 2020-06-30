@@ -14,9 +14,9 @@ import 'package:contributed_machinery/infrastructure/threads/thread_repository.d
 import 'package:contributed_machinery/domain/threads/i_thread_repository.dart';
 import 'package:contributed_machinery/application/sign_in_form/sign_in_form_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_actor/thread_actor_bloc.dart';
-import 'package:contributed_machinery/application/threads/thread_form/thread_form_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_watcher/thread_watcher_bloc.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
+import 'package:contributed_machinery/application/threads/thread_form/thread_form_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
@@ -28,11 +28,11 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<ThreadActorBloc>(
       () => ThreadActorBloc(g<IThreadRepository>()));
-  g.registerFactory<ThreadFormBloc>(
-      () => ThreadFormBloc(g<IThreadRepository>()));
   g.registerFactory<ThreadWatcherBloc>(
       () => ThreadWatcherBloc(g<IThreadRepository>()));
-  g.registerFactory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
+  g.registerLazySingleton<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
+  g.registerFactory<ThreadFormBloc>(
+      () => ThreadFormBloc(g<IThreadRepository>(), g<AuthBloc>()));
 
   //Register prod Dependencies --------
   if (environment == 'prod') {

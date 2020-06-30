@@ -17,12 +17,12 @@ part 'thread_watcher_bloc.freezed.dart';
 
 @injectable
 class ThreadWatcherBloc extends Bloc<ThreadWatcherEvent, ThreadWatcherState> {
-  final IThreadRepository _noteRepository;
+  final IThreadRepository _threadRepository;
 
-  ThreadWatcherBloc(this._noteRepository);
+  ThreadWatcherBloc(this._threadRepository);
 
   StreamSubscription<Either<ThreadFailure, KtList<Thread>>>
-      _noteStreamSubscription;
+      _threadStreamSubscription;
 
   @override
   ThreadWatcherState get initialState => const ThreadWatcherState.initial();
@@ -34,15 +34,14 @@ class ThreadWatcherBloc extends Bloc<ThreadWatcherEvent, ThreadWatcherState> {
     yield* event.map(
       watchAllStarted: (e) async* {
         yield const ThreadWatcherState.loadInProgress();
-        await _noteStreamSubscription?.cancel();
-        _noteStreamSubscription = _noteRepository
-            .watchAll()
-            .listen((notes) => add(ThreadWatcherEvent.notesReceived(notes)));
+        await _threadStreamSubscription?.cancel();
+        _threadStreamSubscription = _threadRepository.watchAll().listen(
+            (threads) => add(ThreadWatcherEvent.threadsReceived(threads)));
       },
-      notesReceived: (e) async* {
+      threadsReceived: (e) async* {
         yield e.failureOrThreads.fold(
           (f) => ThreadWatcherState.loadFailure(f),
-          (notes) => ThreadWatcherState.loadSuccess(notes),
+          (threads) => ThreadWatcherState.loadSuccess(threads),
         );
       },
     );
@@ -50,7 +49,7 @@ class ThreadWatcherBloc extends Bloc<ThreadWatcherEvent, ThreadWatcherState> {
 
   @override
   Future<void> close() async {
-    await _noteStreamSubscription.cancel();
+    await _threadStreamSubscription.cancel();
     return super.close();
   }
 }
