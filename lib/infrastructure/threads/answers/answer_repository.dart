@@ -4,6 +4,7 @@ import 'package:contributed_machinery/domain/threads/answers/i_answer_repository
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/infrastructure/core/firestore_helpers.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
@@ -19,13 +20,16 @@ class AnswerRepository implements IAnswerRepository {
   AnswerRepository(this._firestore);
 
   @override
-  Future<Either<AnswerFailure, Unit>> create(Answer thread) async {
+  Future<Either<AnswerFailure, Unit>> createByThread(Answer answer,
+      {@required Thread thread}) async {
     try {
-      final threadDto = AnswerDto.fromDomain(thread);
+      final threadDoc =
+          _firestore.threadCollection.document(thread.id.getOrCrash());
+      final answerDto = AnswerDto.fromDomain(answer);
 
-      await _firestore.threadCollection
-          .document(threadDto.id)
-          .setData(threadDto.toJson());
+      await threadDoc.answerCollection
+          .document(answerDto.id)
+          .setData(answerDto.toJson());
 
       return right(unit);
     } on PlatformException catch (e) {
@@ -39,11 +43,14 @@ class AnswerRepository implements IAnswerRepository {
   }
 
   @override
-  Future<Either<AnswerFailure, Unit>> delete(Answer thread) async {
+  Future<Either<AnswerFailure, Unit>> deleteByThread(Answer answer,
+      {@required Thread thread}) async {
     try {
-      final threadId = thread.id.getOrCrash();
+      final threadDoc =
+          _firestore.threadCollection.document(thread.id.getOrCrash());
+      final answerId = answer.id.getOrCrash();
 
-      await _firestore.threadCollection.document(threadId).delete();
+      await threadDoc.answerCollection.document(answerId).delete();
 
       return right(unit);
     } on PlatformException catch (e) {
@@ -56,13 +63,16 @@ class AnswerRepository implements IAnswerRepository {
   }
 
   @override
-  Future<Either<AnswerFailure, Unit>> update(Answer thread) async {
+  Future<Either<AnswerFailure, Unit>> updateByThread(Answer answer,
+      {@required Thread thread}) async {
     try {
-      final threadDto = AnswerDto.fromDomain(thread);
+      final threadDoc =
+          _firestore.threadCollection.document(thread.id.getOrCrash());
+      final answerDto = AnswerDto.fromDomain(answer);
 
-      await _firestore.threadCollection
-          .document(threadDto.id)
-          .updateData(threadDto.toJson());
+      await threadDoc.answerCollection
+          .document(answerDto.id)
+          .updateData(answerDto.toJson());
 
       return right(unit);
     } on PlatformException catch (e) {

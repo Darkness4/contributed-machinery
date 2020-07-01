@@ -49,7 +49,7 @@ class ThreadWatcherBloc extends Bloc<ThreadWatcherEvent, ThreadWatcherState> {
 
   @override
   Future<void> close() async {
-    await _threadStreamSubscription.cancel();
+    await _threadStreamSubscription?.cancel();
     return super.close();
   }
 }
