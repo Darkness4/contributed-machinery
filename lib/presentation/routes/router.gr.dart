@@ -13,6 +13,7 @@ import 'package:contributed_machinery/presentation/pages/threads/threads_overvie
 import 'package:contributed_machinery/presentation/pages/threads/thread_form/thread_form_page.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/presentation/pages/threads/thread_detail/thread_detail_page.dart';
+import 'package:contributed_machinery/presentation/routes/page_transitions.dart';
 import 'package:contributed_machinery/presentation/pages/threads/answer_form/answer_form_page.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 
@@ -76,11 +77,13 @@ class Router extends RouterBase {
           return misTypedArgsRoute<ThreadDetailPageArguments>(args);
         }
         final typedArgs = args as ThreadDetailPageArguments;
-        return MaterialPageRoute<dynamic>(
-          builder: (context) =>
+        return PageRouteBuilder<dynamic>(
+          pageBuilder: (context, animation, secondaryAnimation) =>
               ThreadDetailPage(key: typedArgs.key, thread: typedArgs.thread)
                   .wrappedRoute(context),
           settings: settings,
+          transitionsBuilder: PageTransitions.slideRight,
+          transitionDuration: const Duration(milliseconds: 300),
         );
       case Routes.answerFormPage:
         if (hasInvalidArgs<AnswerFormPageArguments>(args, isRequired: true)) {

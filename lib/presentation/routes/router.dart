@@ -6,6 +6,8 @@ import 'package:contributed_machinery/presentation/pages/threads/thread_detail/t
 import 'package:contributed_machinery/presentation/pages/threads/thread_form/thread_form_page.dart';
 import 'package:contributed_machinery/presentation/pages/threads/threads_overview/threads_overview_page.dart';
 
+import 'page_transitions.dart';
+
 @MaterialAutoRouter()
 class $Router {
   @initial
@@ -14,6 +16,10 @@ class $Router {
   ThreadsOverviewPage threadsOverviewPage;
   @MaterialRoute(fullscreenDialog: true)
   ThreadFormPage threadFormPage;
+  @CustomRoute(
+    transitionsBuilder: PageTransitions.slideRight,
+    durationInMilliseconds: 300,
+  )
   ThreadDetailPage threadDetailPage;
   @MaterialRoute(fullscreenDialog: true)
   AnswerFormPage answerFormPage;
