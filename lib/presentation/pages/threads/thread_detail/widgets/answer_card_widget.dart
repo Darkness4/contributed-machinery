@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
+import 'package:styled_widget/styled_widget.dart';
 
 class AnswerCard extends StatelessWidget {
   final Answer answer;
@@ -93,35 +94,24 @@ class AnswerCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(
-                  answer.author.getOrCrash(),
-                  style: Theme.of(context).textTheme.caption.apply(
-                        color: isSelf
-                            ? Colors.white
-                            : Theme.of(context).textTheme.caption.color,
-                      ),
-                ),
-                MarkdownBody(
-                  data: answer.content.getOrCrash(),
-                ),
-                Text(
-                  "Published : ${answer.published.getOrCrash().toLocal()}",
-                  style: Theme.of(context).textTheme.caption.apply(
-                        color: isSelf
-                            ? Colors.white
-                            : Theme.of(context).textTheme.caption.color,
-                      ),
-                  textAlign: TextAlign.end,
-                ),
-                Text(
-                  "Updated : ${answer.updated.getOrCrash().toLocal()}",
-                  style: Theme.of(context).textTheme.caption.apply(
-                        color: isSelf
-                            ? Colors.white
-                            : Theme.of(context).textTheme.caption.color,
-                      ),
-                  textAlign: TextAlign.end,
-                ),
+                Text(answer.author.getOrCrash())
+                    .textStyle(Theme.of(context).textTheme.caption)
+                    .textColor(isSelf
+                        ? Colors.white
+                        : Theme.of(context).textTheme.caption.color),
+                MarkdownBody(data: answer.content.getOrCrash()),
+                Text("Published : ${answer.published.getOrCrash().toLocal()}")
+                    .textAlignment(TextAlign.end)
+                    .textStyle(Theme.of(context).textTheme.caption)
+                    .textColor(isSelf
+                        ? Colors.white
+                        : Theme.of(context).textTheme.caption.color),
+                Text("Updated : ${answer.updated.getOrCrash().toLocal()}")
+                    .textAlignment(TextAlign.end)
+                    .textStyle(Theme.of(context).textTheme.caption)
+                    .textColor(isSelf
+                        ? Colors.white
+                        : Theme.of(context).textTheme.caption.color),
               ],
             ),
           ),

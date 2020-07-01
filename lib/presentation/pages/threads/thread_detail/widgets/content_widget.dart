@@ -8,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
+import 'package:styled_widget/styled_widget.dart';
 
 class ContentWidget extends StatelessWidget {
   const ContentWidget({
@@ -43,46 +44,33 @@ class ContentWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  thread.request.title.getOrCrash(),
-                  style: Theme.of(context).textTheme.headline5.apply(
-                        color: isSelf
-                            ? Colors.white
-                            : Theme.of(context).textTheme.headline5.color,
-                      ),
-                ),
-                Text(
-                  thread.request.author.getOrCrash(),
-                  style: Theme.of(context).textTheme.caption.apply(
-                        color: isSelf
-                            ? Colors.white
-                            : Theme.of(context).textTheme.caption.color,
-                      ),
-                ),
+                Text(thread.request.title.getOrCrash())
+                    .textStyle(Theme.of(context).textTheme.headline5)
+                    .textColor(isSelf
+                        ? Colors.white
+                        : Theme.of(context).textTheme.headline5.color),
+                Text(thread.request.author.getOrCrash())
+                    .textStyle(Theme.of(context).textTheme.caption)
+                    .textColor(isSelf
+                        ? Colors.white
+                        : Theme.of(context).textTheme.caption.color),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: MarkdownBody(
-                    data: thread.request.content.getOrCrash(),
-                  ),
+                  child:
+                      MarkdownBody(data: thread.request.content.getOrCrash()),
                 ),
-                Text(
-                  "Published : ${thread.request.published.getOrCrash().toLocal()}",
-                  style: Theme.of(context).textTheme.caption.apply(
-                        color: isSelf
-                            ? Colors.white
-                            : Theme.of(context).textTheme.caption.color,
-                      ),
-                  textAlign: TextAlign.end,
-                ),
-                Text(
-                  "Updated : ${thread.request.updated.getOrCrash().toLocal()}",
-                  style: Theme.of(context).textTheme.caption.apply(
-                        color: isSelf
-                            ? Colors.white
-                            : Theme.of(context).textTheme.caption.color,
-                      ),
-                  textAlign: TextAlign.end,
-                ),
+                Text("Published : ${thread.request.published.getOrCrash().toLocal()}")
+                    .textAlignment(TextAlign.end)
+                    .textStyle(Theme.of(context).textTheme.caption)
+                    .textColor(isSelf
+                        ? Colors.white
+                        : Theme.of(context).textTheme.caption.color),
+                Text("Updated : ${thread.request.updated.getOrCrash().toLocal()}")
+                    .textAlignment(TextAlign.end)
+                    .textStyle(Theme.of(context).textTheme.caption)
+                    .textColor(isSelf
+                        ? Colors.white
+                        : Theme.of(context).textTheme.caption.color),
               ],
             ),
           ),
