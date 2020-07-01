@@ -12,9 +12,9 @@ T _$identity<T>(T value) => value;
 class _$AnswerFailureTearOff {
   const _$AnswerFailureTearOff();
 
-  Unexpected unexpected(dynamic e) {
+  Unexpected unexpected(dynamic error) {
     return Unexpected(
-      e,
+      error,
     );
   }
 
@@ -33,13 +33,13 @@ const $AnswerFailure = _$AnswerFailureTearOff();
 mixin _$AnswerFailure {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result unexpected(dynamic e),
+    @required Result unexpected(dynamic error),
     @required Result insufficientPermissions(),
     @required Result unableToUpdate(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result unexpected(dynamic e),
+    Result unexpected(dynamic error),
     Result insufficientPermissions(),
     Result unableToUpdate(),
     @required Result orElse(),
@@ -78,7 +78,7 @@ abstract class $UnexpectedCopyWith<$Res> {
   factory $UnexpectedCopyWith(
           Unexpected value, $Res Function(Unexpected) then) =
       _$UnexpectedCopyWithImpl<$Res>;
-  $Res call({dynamic e});
+  $Res call({dynamic error});
 }
 
 class _$UnexpectedCopyWithImpl<$Res> extends _$AnswerFailureCopyWithImpl<$Res>
@@ -91,36 +91,36 @@ class _$UnexpectedCopyWithImpl<$Res> extends _$AnswerFailureCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object e = freezed,
+    Object error = freezed,
   }) {
     return _then(Unexpected(
-      e == freezed ? _value.e : e as dynamic,
+      error == freezed ? _value.error : error as dynamic,
     ));
   }
 }
 
 class _$Unexpected implements Unexpected {
-  const _$Unexpected(this.e) : assert(e != null);
+  const _$Unexpected(this.error) : assert(error != null);
 
   @override
-  final dynamic e;
+  final dynamic error;
 
   @override
   String toString() {
-    return 'AnswerFailure.unexpected(e: $e)';
+    return 'AnswerFailure.unexpected(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Unexpected &&
-            (identical(other.e, e) ||
-                const DeepCollectionEquality().equals(other.e, e)));
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(e);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
   @override
   $UnexpectedCopyWith<Unexpected> get copyWith =>
@@ -129,27 +129,27 @@ class _$Unexpected implements Unexpected {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result unexpected(dynamic e),
+    @required Result unexpected(dynamic error),
     @required Result insufficientPermissions(),
     @required Result unableToUpdate(),
   }) {
     assert(unexpected != null);
     assert(insufficientPermissions != null);
     assert(unableToUpdate != null);
-    return unexpected(e);
+    return unexpected(error);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result unexpected(dynamic e),
+    Result unexpected(dynamic error),
     Result insufficientPermissions(),
     Result unableToUpdate(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (unexpected != null) {
-      return unexpected(e);
+      return unexpected(error);
     }
     return orElse();
   }
@@ -184,9 +184,9 @@ class _$Unexpected implements Unexpected {
 }
 
 abstract class Unexpected implements AnswerFailure {
-  const factory Unexpected(dynamic e) = _$Unexpected;
+  const factory Unexpected(dynamic error) = _$Unexpected;
 
-  dynamic get e;
+  dynamic get error;
   $UnexpectedCopyWith<Unexpected> get copyWith;
 }
 
@@ -226,7 +226,7 @@ class _$InsufficientPermissions implements InsufficientPermissions {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result unexpected(dynamic e),
+    @required Result unexpected(dynamic error),
     @required Result insufficientPermissions(),
     @required Result unableToUpdate(),
   }) {
@@ -239,7 +239,7 @@ class _$InsufficientPermissions implements InsufficientPermissions {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result unexpected(dynamic e),
+    Result unexpected(dynamic error),
     Result insufficientPermissions(),
     Result unableToUpdate(),
     @required Result orElse(),
@@ -320,7 +320,7 @@ class _$UnableToUpdate implements UnableToUpdate {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result unexpected(dynamic e),
+    @required Result unexpected(dynamic error),
     @required Result insufficientPermissions(),
     @required Result unableToUpdate(),
   }) {
@@ -333,7 +333,7 @@ class _$UnableToUpdate implements UnableToUpdate {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result unexpected(dynamic e),
+    Result unexpected(dynamic error),
     Result insufficientPermissions(),
     Result unableToUpdate(),
     @required Result orElse(),

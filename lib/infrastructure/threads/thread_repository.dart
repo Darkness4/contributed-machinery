@@ -3,7 +3,9 @@ import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/domain/threads/thread_failure.dart';
 import 'package:contributed_machinery/infrastructure/core/firestore_helpers.dart';
 import 'package:contributed_machinery/infrastructure/threads/thread_dtos.dart';
+import 'package:contributed_machinery/injection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
@@ -26,11 +28,18 @@ class ThreadRepository implements IThreadRepository {
           .setData(threadDto.toJson());
 
       return right(unit);
-    } on PlatformException catch (e) {
+    } on PlatformException catch (e, s) {
       // These error codes and messages aren't in the documentation AFAIK, experiment in the debugger to find out about them.
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const ThreadFailure.insufficientPermissions());
       } else {
+        getIt<FirebaseAnalytics>().logEvent(
+          name: "UNEXPECTED_ERROR",
+          parameters: {
+            "error": e.toString(),
+            "stacktrace": s.toString(),
+          },
+        );
         return left(ThreadFailure.unexpected(e));
       }
     }
@@ -44,10 +53,17 @@ class ThreadRepository implements IThreadRepository {
       await _firestore.threadCollection.document(threadId).delete();
 
       return right(unit);
-    } on PlatformException catch (e) {
+    } on PlatformException catch (e, s) {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const ThreadFailure.insufficientPermissions());
       } else {
+        getIt<FirebaseAnalytics>().logEvent(
+          name: "UNEXPECTED_ERROR",
+          parameters: {
+            "error": e.toString(),
+            "stacktrace": s.toString(),
+          },
+        );
         return left(ThreadFailure.unexpected(e));
       }
     }
@@ -63,13 +79,20 @@ class ThreadRepository implements IThreadRepository {
           .updateData(threadDto.toJson());
 
       return right(unit);
-    } on PlatformException catch (e) {
+    } on PlatformException catch (e, s) {
       // These error codes and messages aren't in the documentation AFAIK, experiment in the debugger to find out about them.
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const ThreadFailure.insufficientPermissions());
       } else if (e.message.contains('NOT_FOUND')) {
         return left(const ThreadFailure.unableToUpdate());
       } else {
+        getIt<FirebaseAnalytics>().logEvent(
+          name: "UNEXPECTED_ERROR",
+          parameters: {
+            "error": e.toString(),
+            "stacktrace": s.toString(),
+          },
+        );
         return left(ThreadFailure.unexpected(e));
       }
     }
@@ -91,6 +114,12 @@ class ThreadRepository implements IThreadRepository {
       if (e is PlatformException && e.message.contains('PERMISSION_DENIED')) {
         return left(const ThreadFailure.insufficientPermissions());
       } else {
+        getIt<FirebaseAnalytics>().logEvent(
+          name: "UNEXPECTED_ERROR",
+          parameters: {
+            "error": e.toString(),
+          },
+        );
         return left(ThreadFailure.unexpected(e));
       }
     });

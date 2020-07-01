@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
 import 'package:contributed_machinery/injection.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +38,12 @@ class AppWidget extends StatelessWidget {
             ),
           ),
         ),
-        builder: ExtendedNavigator<Router>(router: Router()),
+        builder: ExtendedNavigator<Router>(
+          router: Router(),
+          observers: [
+            FirebaseAnalyticsObserver(analytics: getIt<FirebaseAnalytics>()),
+          ],
+        ),
       ),
     );
   }

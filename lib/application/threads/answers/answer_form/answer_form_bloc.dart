@@ -8,7 +8,6 @@ import 'package:contributed_machinery/domain/threads/answers/i_answer_repository
 import 'package:contributed_machinery/domain/threads/answers/value_objects.dart';
 import 'package:contributed_machinery/domain/threads/i_thread_repository.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
-import 'package:contributed_machinery/domain/threads/thread_failure.dart';
 import 'package:contributed_machinery/domain/threads/value_objects.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

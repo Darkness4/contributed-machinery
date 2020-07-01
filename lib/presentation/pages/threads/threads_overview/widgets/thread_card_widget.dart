@@ -79,9 +79,6 @@ class ThreadCard extends StatelessWidget {
                 thread.request.author.getOrCrash(),
                 style: Theme.of(context).textTheme.caption,
               ),
-              MarkdownBody(
-                data: thread.request.content.getOrCrash(),
-              ),
               Text(
                 "Published : ${thread.request.published.getOrCrash().toLocal()}",
                 style: Theme.of(context).textTheme.caption,

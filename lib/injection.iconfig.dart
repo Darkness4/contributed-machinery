@@ -5,6 +5,7 @@
 // **************************************************************************
 
 import 'package:contributed_machinery/infrastructure/core/firebase_injectable_module.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:contributed_machinery/infrastructure/auth/firebase_user_mapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,6 +27,8 @@ import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
   final firebaseInjectableModule = _$FirebaseInjectableModule();
+  g.registerLazySingleton<FirebaseAnalytics>(
+      () => firebaseInjectableModule.analytics);
   g.registerLazySingleton<FirebaseAuth>(
       () => firebaseInjectableModule.firebaseAuth);
   g.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
