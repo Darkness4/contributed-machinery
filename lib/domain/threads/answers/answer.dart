@@ -1,6 +1,7 @@
 import 'package:contributed_machinery/domain/core/entity.dart';
 import 'package:contributed_machinery/domain/core/failures.dart';
 import 'package:contributed_machinery/domain/core/value_objects.dart';
+import 'package:contributed_machinery/domain/threads/value_objects.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

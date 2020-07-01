@@ -17,3 +17,8 @@ extension FirestoreX on Firestore {
 
   CollectionReference get threadCollection => collection('threads');
 }
+
+extension DocumentReferenceX on DocumentReference {
+  /// Subcollection of a [threadCollection]
+  CollectionReference get answerCollection => collection('answers');
+}

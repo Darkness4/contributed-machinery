@@ -1,34 +1,12 @@
 import 'package:contributed_machinery/domain/core/value_objects.dart';
-import 'package:contributed_machinery/domain/threads/answer.dart';
 import 'package:contributed_machinery/domain/threads/request.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/domain/threads/value_objects.dart';
 import 'package:contributed_machinery/infrastructure/core/firestore_helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/collection.dart';
 
 part 'thread_dtos.freezed.dart';
 part 'thread_dtos.g.dart';
-
-@freezed
-abstract class AnswerDto with _$AnswerDto {
-  const factory AnswerDto({
-    @required String id,
-    @required String content,
-    @required String author,
-  }) = _AnswerDto;
-
-  factory AnswerDto.fromDomain(Answer answer) {
-    return AnswerDto(
-      id: answer.id.getOrCrash(),
-      content: answer.content.getOrCrash(),
-      author: answer.author.getOrCrash(),
-    );
-  }
-
-  factory AnswerDto.fromJson(Map<String, dynamic> json) =>
-      _$AnswerDtoFromJson(json);
-}
 
 @freezed
 abstract class RequestDto with _$RequestDto {
@@ -67,7 +45,6 @@ abstract class ThreadDto with _$ThreadDto {
   factory ThreadDto({
     @JsonKey(ignore: true) String id,
     @required RequestDto request,
-    @required List<AnswerDto> answers,
     @required @ServerTimestampConverter() FieldValue serverTimeStamp,
   }) = _ThreadDto;
 
@@ -75,12 +52,6 @@ abstract class ThreadDto with _$ThreadDto {
     return ThreadDto(
       id: thread.id.getOrCrash(),
       request: RequestDto.fromDomain(thread.request),
-      answers: thread.answers
-          .getOrCrash()
-          .mapIndexed(
-            (index, answer) => AnswerDto.fromDomain(answer),
-          )
-          .asList(),
       serverTimeStamp: FieldValue.serverTimestamp(),
     );
   }
@@ -91,16 +62,6 @@ abstract class ThreadDto with _$ThreadDto {
 
   factory ThreadDto.fromJson(Map<String, dynamic> json) =>
       _$ThreadDtoFromJson(json);
-}
-
-extension AnswerDtoX on AnswerDto {
-  Answer toDomain() {
-    return Answer(
-      id: UniqueId.fromUniqueString(id),
-      content: AnswerContent(content),
-      author: Author(author),
-    );
-  }
 }
 
 extension RequestDtoX on RequestDto {
@@ -118,8 +79,6 @@ extension ThreadDtoX on ThreadDto {
     return Thread(
       id: UniqueId.fromUniqueString(id),
       request: request.toDomain(),
-      answers:
-          AnswerList(answers.map((dto) => dto.toDomain()).toImmutableList()),
     );
   }
 }

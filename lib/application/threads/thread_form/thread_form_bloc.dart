@@ -6,11 +6,9 @@ import 'package:contributed_machinery/domain/threads/i_thread_repository.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/domain/threads/thread_failure.dart';
 import 'package:contributed_machinery/domain/threads/value_objects.dart';
-import 'package:contributed_machinery/presentation/pages/threads/thread_form/misc/answser_presentation_classes.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 part 'thread_form_event.dart';
@@ -60,16 +58,6 @@ class ThreadFormBloc extends Bloc<ThreadFormEvent, ThreadFormState> {
         yield state.copyWith(
           thread:
               state.thread.copyWith.request(title: RequestTitle(e.titleStr)),
-          saveFailureOrSuccessOption: none(),
-        );
-      },
-      answersChanged: (e) async* {
-        yield state.copyWith(
-          thread: state.thread.copyWith(
-            answers: AnswerList(
-              e.answers.map((primitive) => primitive.toDomain()),
-            ),
-          ),
           saveFailureOrSuccessOption: none(),
         );
       },

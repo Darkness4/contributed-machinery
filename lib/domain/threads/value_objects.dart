@@ -2,9 +2,6 @@ import 'package:contributed_machinery/domain/core/failures.dart';
 import 'package:contributed_machinery/domain/core/value_objects.dart';
 import 'package:contributed_machinery/domain/core/value_validators.dart';
 import 'package:dartz/dartz.dart';
-import 'package:kt_dart/collection.dart';
-
-import 'answer.dart';
 
 class RequestContent extends ValueObject<String> {
   @override
@@ -56,40 +53,4 @@ class Author extends ValueObject<String> {
   }
 
   const Author._(this.value);
-}
-
-class AnswerList extends ValueObject<KtList<Answer>> {
-  @override
-  final Either<ValueFailure<KtList<Answer>>, KtList<Answer>> value;
-
-  static const maxLength = 250;
-
-  factory AnswerList(KtList<Answer> input) {
-    assert(input != null);
-    return AnswerList._(
-      validateMaxListLength(input, maxLength),
-    );
-  }
-
-  const AnswerList._(this.value);
-
-  int get length {
-    return value.getOrElse(() => emptyList()).size;
-  }
-}
-
-class AnswerContent extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  static const maxLength = 500;
-
-  factory AnswerContent(String input) {
-    assert(input != null);
-    return AnswerContent._(
-      validateMaxStringLength(input, maxLength).flatMap(validateStringNotEmpty),
-    );
-  }
-
-  const AnswerContent._(this.value);
 }

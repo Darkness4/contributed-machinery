@@ -8,11 +8,7 @@ import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:provider/provider.dart';
 
-import 'misc/answser_presentation_classes.dart';
-import 'widgets/add_anwser_tile_widget.dart';
-import 'widgets/anwser_list_widget.dart';
 import 'widgets/content_field_widget.dart';
 import 'widgets/title_field_widget.dart';
 
@@ -122,50 +118,41 @@ class ThreadFormPageScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: BlocBuilder<ThreadFormBloc, ThreadFormState>(
-            condition: (p, c) => p.isEditing != c.isEditing,
-            builder: (context, state) =>
-                Text(state.isEditing ? 'Edit a thread' : 'Create a thread'),
-          ),
-          actions: <Widget>[
-            Builder(
-              builder: (context) {
-                return IconButton(
-                  icon: const Icon(Icons.check),
-                  onPressed: () {
-                    context
-                        .bloc<ThreadFormBloc>()
-                        .add(const ThreadFormEvent.saved());
-                  },
-                );
-              },
-            ),
-          ],
+      appBar: AppBar(
+        title: BlocBuilder<ThreadFormBloc, ThreadFormState>(
+          condition: (p, c) => p.isEditing != c.isEditing,
+          builder: (context, state) =>
+              Text(state.isEditing ? 'Edit a thread' : 'Create a thread'),
         ),
-        body: BlocBuilder<ThreadFormBloc, ThreadFormState>(
-          condition: (p, c) => p.showErrorMessages != c.showErrorMessages,
-          builder: (context, state) {
-            return ChangeNotifierProvider(
-              // State for the todo list.
-              // We can't operate with the validated ValueObjects and Entities directly in the UI
-              // Just like the SignInForm holds its state in TextEditingControllers as raw strings and we use ValueObjects such as EmailAddress
-              // only for showing messages and whatnot, we need to do the same here with the TodoList - but we, of course, have to manage the
-              // primitive state ourselves. After all, there isn't a pre-built widget for managing the values multiple checkboxes and text fields
-              create: (_) => FormAnswers(),
-              child: Form(
-                autovalidate: state.showErrorMessages,
-                child: const CustomScrollView(
-                  slivers: <Widget>[
-                    SliverToBoxAdapter(child: TitleField()),
-                    SliverToBoxAdapter(child: ContentField()),
-                    SliverToBoxAdapter(child: AnswerListWidget()),
-                    SliverToBoxAdapter(child: AddAnswerTile()),
-                  ],
-                ),
-              ),
-            );
-          },
-        ));
+        actions: <Widget>[
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.check),
+                onPressed: () {
+                  context
+                      .bloc<ThreadFormBloc>()
+                      .add(const ThreadFormEvent.saved());
+                },
+              );
+            },
+          ),
+        ],
+      ),
+      body: BlocBuilder<ThreadFormBloc, ThreadFormState>(
+        condition: (p, c) => p.showErrorMessages != c.showErrorMessages,
+        builder: (context, state) {
+          return Form(
+            autovalidate: state.showErrorMessages,
+            child: const CustomScrollView(
+              slivers: <Widget>[
+                SliverToBoxAdapter(child: TitleField()),
+                SliverToBoxAdapter(child: ContentField()),
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 }

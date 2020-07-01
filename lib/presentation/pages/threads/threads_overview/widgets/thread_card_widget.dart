@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:contributed_machinery/application/threads/thread_actor/thread_actor_bloc.dart';
-import 'package:contributed_machinery/domain/threads/answer.dart';
+import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kt_dart/collection.dart';
 
 class ThreadCard extends StatelessWidget {
   final Thread thread;
@@ -74,22 +73,6 @@ class ThreadCard extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
-              if (thread.answers.length > 0) ...[
-                const SizedBox(height: 4),
-                Wrap(
-                  spacing: 8,
-                  children: <Widget>[
-                    ...thread.answers
-                        .getOrCrash()
-                        .map(
-                          (answer) => AnswerDisplay(
-                            answer: answer,
-                          ),
-                        )
-                        .iter,
-                  ],
-                ),
-              ],
             ],
           ),
         ),

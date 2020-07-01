@@ -30,12 +30,6 @@ class _$ThreadFormEventTearOff {
     );
   }
 
-  _AnswersChanged answersChanged(KtList<AnswerPrimitive> answers) {
-    return _AnswersChanged(
-      answers,
-    );
-  }
-
   _Saved saved() {
     return const _Saved();
   }
@@ -50,7 +44,6 @@ mixin _$ThreadFormEvent {
     @required Result initialized(Option<Thread> initialThreadOption),
     @required Result titleChanged(String titleStr),
     @required Result contentChanged(String contentStr),
-    @required Result answersChanged(KtList<AnswerPrimitive> answers),
     @required Result saved(),
   });
   @optionalTypeArgs
@@ -58,7 +51,6 @@ mixin _$ThreadFormEvent {
     Result initialized(Option<Thread> initialThreadOption),
     Result titleChanged(String titleStr),
     Result contentChanged(String contentStr),
-    Result answersChanged(KtList<AnswerPrimitive> answers),
     Result saved(),
     @required Result orElse(),
   });
@@ -67,7 +59,6 @@ mixin _$ThreadFormEvent {
     @required Result initialized(_Initialized value),
     @required Result titleChanged(_TitleChanged value),
     @required Result contentChanged(_ContentChanged value),
-    @required Result answersChanged(_AnswersChanged value),
     @required Result saved(_Saved value),
   });
   @optionalTypeArgs
@@ -75,7 +66,6 @@ mixin _$ThreadFormEvent {
     Result initialized(_Initialized value),
     Result titleChanged(_TitleChanged value),
     Result contentChanged(_ContentChanged value),
-    Result answersChanged(_AnswersChanged value),
     Result saved(_Saved value),
     @required Result orElse(),
   });
@@ -161,13 +151,11 @@ class _$_Initialized implements _Initialized {
     @required Result initialized(Option<Thread> initialThreadOption),
     @required Result titleChanged(String titleStr),
     @required Result contentChanged(String contentStr),
-    @required Result answersChanged(KtList<AnswerPrimitive> answers),
     @required Result saved(),
   }) {
     assert(initialized != null);
     assert(titleChanged != null);
     assert(contentChanged != null);
-    assert(answersChanged != null);
     assert(saved != null);
     return initialized(initialThreadOption);
   }
@@ -178,7 +166,6 @@ class _$_Initialized implements _Initialized {
     Result initialized(Option<Thread> initialThreadOption),
     Result titleChanged(String titleStr),
     Result contentChanged(String contentStr),
-    Result answersChanged(KtList<AnswerPrimitive> answers),
     Result saved(),
     @required Result orElse(),
   }) {
@@ -195,13 +182,11 @@ class _$_Initialized implements _Initialized {
     @required Result initialized(_Initialized value),
     @required Result titleChanged(_TitleChanged value),
     @required Result contentChanged(_ContentChanged value),
-    @required Result answersChanged(_AnswersChanged value),
     @required Result saved(_Saved value),
   }) {
     assert(initialized != null);
     assert(titleChanged != null);
     assert(contentChanged != null);
-    assert(answersChanged != null);
     assert(saved != null);
     return initialized(this);
   }
@@ -212,7 +197,6 @@ class _$_Initialized implements _Initialized {
     Result initialized(_Initialized value),
     Result titleChanged(_TitleChanged value),
     Result contentChanged(_ContentChanged value),
-    Result answersChanged(_AnswersChanged value),
     Result saved(_Saved value),
     @required Result orElse(),
   }) {
@@ -293,13 +277,11 @@ class _$_TitleChanged implements _TitleChanged {
     @required Result initialized(Option<Thread> initialThreadOption),
     @required Result titleChanged(String titleStr),
     @required Result contentChanged(String contentStr),
-    @required Result answersChanged(KtList<AnswerPrimitive> answers),
     @required Result saved(),
   }) {
     assert(initialized != null);
     assert(titleChanged != null);
     assert(contentChanged != null);
-    assert(answersChanged != null);
     assert(saved != null);
     return titleChanged(titleStr);
   }
@@ -310,7 +292,6 @@ class _$_TitleChanged implements _TitleChanged {
     Result initialized(Option<Thread> initialThreadOption),
     Result titleChanged(String titleStr),
     Result contentChanged(String contentStr),
-    Result answersChanged(KtList<AnswerPrimitive> answers),
     Result saved(),
     @required Result orElse(),
   }) {
@@ -327,13 +308,11 @@ class _$_TitleChanged implements _TitleChanged {
     @required Result initialized(_Initialized value),
     @required Result titleChanged(_TitleChanged value),
     @required Result contentChanged(_ContentChanged value),
-    @required Result answersChanged(_AnswersChanged value),
     @required Result saved(_Saved value),
   }) {
     assert(initialized != null);
     assert(titleChanged != null);
     assert(contentChanged != null);
-    assert(answersChanged != null);
     assert(saved != null);
     return titleChanged(this);
   }
@@ -344,7 +323,6 @@ class _$_TitleChanged implements _TitleChanged {
     Result initialized(_Initialized value),
     Result titleChanged(_TitleChanged value),
     Result contentChanged(_ContentChanged value),
-    Result answersChanged(_AnswersChanged value),
     Result saved(_Saved value),
     @required Result orElse(),
   }) {
@@ -424,13 +402,11 @@ class _$_ContentChanged implements _ContentChanged {
     @required Result initialized(Option<Thread> initialThreadOption),
     @required Result titleChanged(String titleStr),
     @required Result contentChanged(String contentStr),
-    @required Result answersChanged(KtList<AnswerPrimitive> answers),
     @required Result saved(),
   }) {
     assert(initialized != null);
     assert(titleChanged != null);
     assert(contentChanged != null);
-    assert(answersChanged != null);
     assert(saved != null);
     return contentChanged(contentStr);
   }
@@ -441,7 +417,6 @@ class _$_ContentChanged implements _ContentChanged {
     Result initialized(Option<Thread> initialThreadOption),
     Result titleChanged(String titleStr),
     Result contentChanged(String contentStr),
-    Result answersChanged(KtList<AnswerPrimitive> answers),
     Result saved(),
     @required Result orElse(),
   }) {
@@ -458,13 +433,11 @@ class _$_ContentChanged implements _ContentChanged {
     @required Result initialized(_Initialized value),
     @required Result titleChanged(_TitleChanged value),
     @required Result contentChanged(_ContentChanged value),
-    @required Result answersChanged(_AnswersChanged value),
     @required Result saved(_Saved value),
   }) {
     assert(initialized != null);
     assert(titleChanged != null);
     assert(contentChanged != null);
-    assert(answersChanged != null);
     assert(saved != null);
     return contentChanged(this);
   }
@@ -475,7 +448,6 @@ class _$_ContentChanged implements _ContentChanged {
     Result initialized(_Initialized value),
     Result titleChanged(_TitleChanged value),
     Result contentChanged(_ContentChanged value),
-    Result answersChanged(_AnswersChanged value),
     Result saved(_Saved value),
     @required Result orElse(),
   }) {
@@ -492,137 +464,6 @@ abstract class _ContentChanged implements ThreadFormEvent {
 
   String get contentStr;
   _$ContentChangedCopyWith<_ContentChanged> get copyWith;
-}
-
-abstract class _$AnswersChangedCopyWith<$Res> {
-  factory _$AnswersChangedCopyWith(
-          _AnswersChanged value, $Res Function(_AnswersChanged) then) =
-      __$AnswersChangedCopyWithImpl<$Res>;
-  $Res call({KtList<AnswerPrimitive> answers});
-}
-
-class __$AnswersChangedCopyWithImpl<$Res>
-    extends _$ThreadFormEventCopyWithImpl<$Res>
-    implements _$AnswersChangedCopyWith<$Res> {
-  __$AnswersChangedCopyWithImpl(
-      _AnswersChanged _value, $Res Function(_AnswersChanged) _then)
-      : super(_value, (v) => _then(v as _AnswersChanged));
-
-  @override
-  _AnswersChanged get _value => super._value as _AnswersChanged;
-
-  @override
-  $Res call({
-    Object answers = freezed,
-  }) {
-    return _then(_AnswersChanged(
-      answers == freezed ? _value.answers : answers as KtList<AnswerPrimitive>,
-    ));
-  }
-}
-
-class _$_AnswersChanged implements _AnswersChanged {
-  const _$_AnswersChanged(this.answers) : assert(answers != null);
-
-  @override
-  final KtList<AnswerPrimitive> answers;
-
-  @override
-  String toString() {
-    return 'ThreadFormEvent.answersChanged(answers: $answers)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _AnswersChanged &&
-            (identical(other.answers, answers) ||
-                const DeepCollectionEquality().equals(other.answers, answers)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(answers);
-
-  @override
-  _$AnswersChangedCopyWith<_AnswersChanged> get copyWith =>
-      __$AnswersChangedCopyWithImpl<_AnswersChanged>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initialized(Option<Thread> initialThreadOption),
-    @required Result titleChanged(String titleStr),
-    @required Result contentChanged(String contentStr),
-    @required Result answersChanged(KtList<AnswerPrimitive> answers),
-    @required Result saved(),
-  }) {
-    assert(initialized != null);
-    assert(titleChanged != null);
-    assert(contentChanged != null);
-    assert(answersChanged != null);
-    assert(saved != null);
-    return answersChanged(answers);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initialized(Option<Thread> initialThreadOption),
-    Result titleChanged(String titleStr),
-    Result contentChanged(String contentStr),
-    Result answersChanged(KtList<AnswerPrimitive> answers),
-    Result saved(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (answersChanged != null) {
-      return answersChanged(answers);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initialized(_Initialized value),
-    @required Result titleChanged(_TitleChanged value),
-    @required Result contentChanged(_ContentChanged value),
-    @required Result answersChanged(_AnswersChanged value),
-    @required Result saved(_Saved value),
-  }) {
-    assert(initialized != null);
-    assert(titleChanged != null);
-    assert(contentChanged != null);
-    assert(answersChanged != null);
-    assert(saved != null);
-    return answersChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initialized(_Initialized value),
-    Result titleChanged(_TitleChanged value),
-    Result contentChanged(_ContentChanged value),
-    Result answersChanged(_AnswersChanged value),
-    Result saved(_Saved value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (answersChanged != null) {
-      return answersChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AnswersChanged implements ThreadFormEvent {
-  const factory _AnswersChanged(KtList<AnswerPrimitive> answers) =
-      _$_AnswersChanged;
-
-  KtList<AnswerPrimitive> get answers;
-  _$AnswersChangedCopyWith<_AnswersChanged> get copyWith;
 }
 
 abstract class _$SavedCopyWith<$Res> {
@@ -661,13 +502,11 @@ class _$_Saved implements _Saved {
     @required Result initialized(Option<Thread> initialThreadOption),
     @required Result titleChanged(String titleStr),
     @required Result contentChanged(String contentStr),
-    @required Result answersChanged(KtList<AnswerPrimitive> answers),
     @required Result saved(),
   }) {
     assert(initialized != null);
     assert(titleChanged != null);
     assert(contentChanged != null);
-    assert(answersChanged != null);
     assert(saved != null);
     return saved();
   }
@@ -678,7 +517,6 @@ class _$_Saved implements _Saved {
     Result initialized(Option<Thread> initialThreadOption),
     Result titleChanged(String titleStr),
     Result contentChanged(String contentStr),
-    Result answersChanged(KtList<AnswerPrimitive> answers),
     Result saved(),
     @required Result orElse(),
   }) {
@@ -695,13 +533,11 @@ class _$_Saved implements _Saved {
     @required Result initialized(_Initialized value),
     @required Result titleChanged(_TitleChanged value),
     @required Result contentChanged(_ContentChanged value),
-    @required Result answersChanged(_AnswersChanged value),
     @required Result saved(_Saved value),
   }) {
     assert(initialized != null);
     assert(titleChanged != null);
     assert(contentChanged != null);
-    assert(answersChanged != null);
     assert(saved != null);
     return saved(this);
   }
@@ -712,7 +548,6 @@ class _$_Saved implements _Saved {
     Result initialized(_Initialized value),
     Result titleChanged(_TitleChanged value),
     Result contentChanged(_ContentChanged value),
-    Result answersChanged(_AnswersChanged value),
     Result saved(_Saved value),
     @required Result orElse(),
   }) {

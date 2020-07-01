@@ -8,6 +8,8 @@ import 'package:contributed_machinery/infrastructure/core/firebase_injectable_mo
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:contributed_machinery/infrastructure/auth/firebase_user_mapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:contributed_machinery/infrastructure/threads/answers/answer_repository.dart';
+import 'package:contributed_machinery/domain/threads/answers/i_answer_repository.dart';
 import 'package:contributed_machinery/infrastructure/auth/firebase_auth_facade.dart';
 import 'package:contributed_machinery/domain/auth/i_auth_facade.dart';
 import 'package:contributed_machinery/infrastructure/threads/thread_repository.dart';
@@ -36,6 +38,8 @@ void $initGetIt(GetIt g, {String environment}) {
 
   //Register prod Dependencies --------
   if (environment == 'prod') {
+    g.registerLazySingleton<IAnswerRepository>(
+        () => AnswerRepository(g<Firestore>()));
     g.registerLazySingleton<IAuthFacade>(
         () => FirebaseAuthFacade(g<FirebaseAuth>(), g<FirebaseUserMapper>()));
     g.registerLazySingleton<IThreadRepository>(

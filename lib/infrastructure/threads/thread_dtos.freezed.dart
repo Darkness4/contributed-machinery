@@ -8,166 +8,6 @@ part of 'thread_dtos.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-AnswerDto _$AnswerDtoFromJson(Map<String, dynamic> json) {
-  return _AnswerDto.fromJson(json);
-}
-
-class _$AnswerDtoTearOff {
-  const _$AnswerDtoTearOff();
-
-  _AnswerDto call(
-      {@required String id,
-      @required String content,
-      @required String author}) {
-    return _AnswerDto(
-      id: id,
-      content: content,
-      author: author,
-    );
-  }
-}
-
-// ignore: unused_element
-const $AnswerDto = _$AnswerDtoTearOff();
-
-mixin _$AnswerDto {
-  String get id;
-  String get content;
-  String get author;
-
-  Map<String, dynamic> toJson();
-  $AnswerDtoCopyWith<AnswerDto> get copyWith;
-}
-
-abstract class $AnswerDtoCopyWith<$Res> {
-  factory $AnswerDtoCopyWith(AnswerDto value, $Res Function(AnswerDto) then) =
-      _$AnswerDtoCopyWithImpl<$Res>;
-  $Res call({String id, String content, String author});
-}
-
-class _$AnswerDtoCopyWithImpl<$Res> implements $AnswerDtoCopyWith<$Res> {
-  _$AnswerDtoCopyWithImpl(this._value, this._then);
-
-  final AnswerDto _value;
-  // ignore: unused_field
-  final $Res Function(AnswerDto) _then;
-
-  @override
-  $Res call({
-    Object id = freezed,
-    Object content = freezed,
-    Object author = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as String,
-      content: content == freezed ? _value.content : content as String,
-      author: author == freezed ? _value.author : author as String,
-    ));
-  }
-}
-
-abstract class _$AnswerDtoCopyWith<$Res> implements $AnswerDtoCopyWith<$Res> {
-  factory _$AnswerDtoCopyWith(
-          _AnswerDto value, $Res Function(_AnswerDto) then) =
-      __$AnswerDtoCopyWithImpl<$Res>;
-  @override
-  $Res call({String id, String content, String author});
-}
-
-class __$AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
-    implements _$AnswerDtoCopyWith<$Res> {
-  __$AnswerDtoCopyWithImpl(_AnswerDto _value, $Res Function(_AnswerDto) _then)
-      : super(_value, (v) => _then(v as _AnswerDto));
-
-  @override
-  _AnswerDto get _value => super._value as _AnswerDto;
-
-  @override
-  $Res call({
-    Object id = freezed,
-    Object content = freezed,
-    Object author = freezed,
-  }) {
-    return _then(_AnswerDto(
-      id: id == freezed ? _value.id : id as String,
-      content: content == freezed ? _value.content : content as String,
-      author: author == freezed ? _value.author : author as String,
-    ));
-  }
-}
-
-@JsonSerializable()
-class _$_AnswerDto implements _AnswerDto {
-  const _$_AnswerDto(
-      {@required this.id, @required this.content, @required this.author})
-      : assert(id != null),
-        assert(content != null),
-        assert(author != null);
-
-  factory _$_AnswerDto.fromJson(Map<String, dynamic> json) =>
-      _$_$_AnswerDtoFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String content;
-  @override
-  final String author;
-
-  @override
-  String toString() {
-    return 'AnswerDto(id: $id, content: $content, author: $author)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _AnswerDto &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.content, content) ||
-                const DeepCollectionEquality()
-                    .equals(other.content, content)) &&
-            (identical(other.author, author) ||
-                const DeepCollectionEquality().equals(other.author, author)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(content) ^
-      const DeepCollectionEquality().hash(author);
-
-  @override
-  _$AnswerDtoCopyWith<_AnswerDto> get copyWith =>
-      __$AnswerDtoCopyWithImpl<_AnswerDto>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_AnswerDtoToJson(this);
-  }
-}
-
-abstract class _AnswerDto implements AnswerDto {
-  const factory _AnswerDto(
-      {@required String id,
-      @required String content,
-      @required String author}) = _$_AnswerDto;
-
-  factory _AnswerDto.fromJson(Map<String, dynamic> json) =
-      _$_AnswerDto.fromJson;
-
-  @override
-  String get id;
-  @override
-  String get content;
-  @override
-  String get author;
-  @override
-  _$AnswerDtoCopyWith<_AnswerDto> get copyWith;
-}
-
 RequestDto _$RequestDtoFromJson(Map<String, dynamic> json) {
   return _RequestDto.fromJson(json);
 }
@@ -340,12 +180,10 @@ class _$ThreadDtoTearOff {
   _ThreadDto call(
       {@JsonKey(ignore: true) String id,
       @required RequestDto request,
-      @required List<AnswerDto> answers,
       @required @ServerTimestampConverter() FieldValue serverTimeStamp}) {
     return _ThreadDto(
       id: id,
       request: request,
-      answers: answers,
       serverTimeStamp: serverTimeStamp,
     );
   }
@@ -358,7 +196,6 @@ mixin _$ThreadDto {
   @JsonKey(ignore: true)
   String get id;
   RequestDto get request;
-  List<AnswerDto> get answers;
   @ServerTimestampConverter()
   FieldValue get serverTimeStamp;
 
@@ -372,7 +209,6 @@ abstract class $ThreadDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true) String id,
       RequestDto request,
-      List<AnswerDto> answers,
       @ServerTimestampConverter() FieldValue serverTimeStamp});
 
   $RequestDtoCopyWith<$Res> get request;
@@ -389,13 +225,11 @@ class _$ThreadDtoCopyWithImpl<$Res> implements $ThreadDtoCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object request = freezed,
-    Object answers = freezed,
     Object serverTimeStamp = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
       request: request == freezed ? _value.request : request as RequestDto,
-      answers: answers == freezed ? _value.answers : answers as List<AnswerDto>,
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp as FieldValue,
@@ -421,7 +255,6 @@ abstract class _$ThreadDtoCopyWith<$Res> implements $ThreadDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true) String id,
       RequestDto request,
-      List<AnswerDto> answers,
       @ServerTimestampConverter() FieldValue serverTimeStamp});
 
   @override
@@ -440,13 +273,11 @@ class __$ThreadDtoCopyWithImpl<$Res> extends _$ThreadDtoCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object request = freezed,
-    Object answers = freezed,
     Object serverTimeStamp = freezed,
   }) {
     return _then(_ThreadDto(
       id: id == freezed ? _value.id : id as String,
       request: request == freezed ? _value.request : request as RequestDto,
-      answers: answers == freezed ? _value.answers : answers as List<AnswerDto>,
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp as FieldValue,
@@ -459,10 +290,8 @@ class _$_ThreadDto implements _ThreadDto {
   _$_ThreadDto(
       {@JsonKey(ignore: true) this.id,
       @required this.request,
-      @required this.answers,
       @required @ServerTimestampConverter() this.serverTimeStamp})
       : assert(request != null),
-        assert(answers != null),
         assert(serverTimeStamp != null);
 
   factory _$_ThreadDto.fromJson(Map<String, dynamic> json) =>
@@ -474,14 +303,12 @@ class _$_ThreadDto implements _ThreadDto {
   @override
   final RequestDto request;
   @override
-  final List<AnswerDto> answers;
-  @override
   @ServerTimestampConverter()
   final FieldValue serverTimeStamp;
 
   @override
   String toString() {
-    return 'ThreadDto(id: $id, request: $request, answers: $answers, serverTimeStamp: $serverTimeStamp)';
+    return 'ThreadDto(id: $id, request: $request, serverTimeStamp: $serverTimeStamp)';
   }
 
   @override
@@ -493,9 +320,6 @@ class _$_ThreadDto implements _ThreadDto {
             (identical(other.request, request) ||
                 const DeepCollectionEquality()
                     .equals(other.request, request)) &&
-            (identical(other.answers, answers) ||
-                const DeepCollectionEquality()
-                    .equals(other.answers, answers)) &&
             (identical(other.serverTimeStamp, serverTimeStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.serverTimeStamp, serverTimeStamp)));
@@ -506,7 +330,6 @@ class _$_ThreadDto implements _ThreadDto {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(request) ^
-      const DeepCollectionEquality().hash(answers) ^
       const DeepCollectionEquality().hash(serverTimeStamp);
 
   @override
@@ -523,7 +346,6 @@ abstract class _ThreadDto implements ThreadDto {
   factory _ThreadDto(
           {@JsonKey(ignore: true) String id,
           @required RequestDto request,
-          @required List<AnswerDto> answers,
           @required @ServerTimestampConverter() FieldValue serverTimeStamp}) =
       _$_ThreadDto;
 
@@ -535,8 +357,6 @@ abstract class _ThreadDto implements ThreadDto {
   String get id;
   @override
   RequestDto get request;
-  @override
-  List<AnswerDto> get answers;
   @override
   @ServerTimestampConverter()
   FieldValue get serverTimeStamp;
