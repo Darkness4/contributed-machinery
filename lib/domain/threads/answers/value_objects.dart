@@ -7,12 +7,10 @@ class AnswerContent extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  static const maxLength = 500;
-
   factory AnswerContent(String input) {
     assert(input != null);
     return AnswerContent._(
-      validateMaxStringLength(input, maxLength).flatMap(validateStringNotEmpty),
+      validateStringNotEmpty(input),
     );
   }
 

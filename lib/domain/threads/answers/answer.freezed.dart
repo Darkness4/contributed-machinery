@@ -15,11 +15,15 @@ class _$AnswerTearOff {
   _Answer call(
       {@required UniqueId id,
       @required AnswerContent content,
-      @required Author author}) {
+      @required Author author,
+      @required ValueDateTime published,
+      @required ValueDateTime updated}) {
     return _Answer(
       id: id,
       content: content,
       author: author,
+      published: published,
+      updated: updated,
     );
   }
 }
@@ -31,6 +35,8 @@ mixin _$Answer {
   UniqueId get id;
   AnswerContent get content;
   Author get author;
+  ValueDateTime get published;
+  ValueDateTime get updated;
 
   $AnswerCopyWith<Answer> get copyWith;
 }
@@ -38,7 +44,12 @@ mixin _$Answer {
 abstract class $AnswerCopyWith<$Res> {
   factory $AnswerCopyWith(Answer value, $Res Function(Answer) then) =
       _$AnswerCopyWithImpl<$Res>;
-  $Res call({UniqueId id, AnswerContent content, Author author});
+  $Res call(
+      {UniqueId id,
+      AnswerContent content,
+      Author author,
+      ValueDateTime published,
+      ValueDateTime updated});
 }
 
 class _$AnswerCopyWithImpl<$Res> implements $AnswerCopyWith<$Res> {
@@ -53,11 +64,16 @@ class _$AnswerCopyWithImpl<$Res> implements $AnswerCopyWith<$Res> {
     Object id = freezed,
     Object content = freezed,
     Object author = freezed,
+    Object published = freezed,
+    Object updated = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
       content: content == freezed ? _value.content : content as AnswerContent,
       author: author == freezed ? _value.author : author as Author,
+      published:
+          published == freezed ? _value.published : published as ValueDateTime,
+      updated: updated == freezed ? _value.updated : updated as ValueDateTime,
     ));
   }
 }
@@ -66,7 +82,12 @@ abstract class _$AnswerCopyWith<$Res> implements $AnswerCopyWith<$Res> {
   factory _$AnswerCopyWith(_Answer value, $Res Function(_Answer) then) =
       __$AnswerCopyWithImpl<$Res>;
   @override
-  $Res call({UniqueId id, AnswerContent content, Author author});
+  $Res call(
+      {UniqueId id,
+      AnswerContent content,
+      Author author,
+      ValueDateTime published,
+      ValueDateTime updated});
 }
 
 class __$AnswerCopyWithImpl<$Res> extends _$AnswerCopyWithImpl<$Res>
@@ -82,21 +103,32 @@ class __$AnswerCopyWithImpl<$Res> extends _$AnswerCopyWithImpl<$Res>
     Object id = freezed,
     Object content = freezed,
     Object author = freezed,
+    Object published = freezed,
+    Object updated = freezed,
   }) {
     return _then(_Answer(
       id: id == freezed ? _value.id : id as UniqueId,
       content: content == freezed ? _value.content : content as AnswerContent,
       author: author == freezed ? _value.author : author as Author,
+      published:
+          published == freezed ? _value.published : published as ValueDateTime,
+      updated: updated == freezed ? _value.updated : updated as ValueDateTime,
     ));
   }
 }
 
 class _$_Answer implements _Answer {
   const _$_Answer(
-      {@required this.id, @required this.content, @required this.author})
+      {@required this.id,
+      @required this.content,
+      @required this.author,
+      @required this.published,
+      @required this.updated})
       : assert(id != null),
         assert(content != null),
-        assert(author != null);
+        assert(author != null),
+        assert(published != null),
+        assert(updated != null);
 
   @override
   final UniqueId id;
@@ -104,10 +136,14 @@ class _$_Answer implements _Answer {
   final AnswerContent content;
   @override
   final Author author;
+  @override
+  final ValueDateTime published;
+  @override
+  final ValueDateTime updated;
 
   @override
   String toString() {
-    return 'Answer(id: $id, content: $content, author: $author)';
+    return 'Answer(id: $id, content: $content, author: $author, published: $published, updated: $updated)';
   }
 
   @override
@@ -120,7 +156,12 @@ class _$_Answer implements _Answer {
                 const DeepCollectionEquality()
                     .equals(other.content, content)) &&
             (identical(other.author, author) ||
-                const DeepCollectionEquality().equals(other.author, author)));
+                const DeepCollectionEquality().equals(other.author, author)) &&
+            (identical(other.published, published) ||
+                const DeepCollectionEquality()
+                    .equals(other.published, published)) &&
+            (identical(other.updated, updated) ||
+                const DeepCollectionEquality().equals(other.updated, updated)));
   }
 
   @override
@@ -128,7 +169,9 @@ class _$_Answer implements _Answer {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(content) ^
-      const DeepCollectionEquality().hash(author);
+      const DeepCollectionEquality().hash(author) ^
+      const DeepCollectionEquality().hash(published) ^
+      const DeepCollectionEquality().hash(updated);
 
   @override
   _$AnswerCopyWith<_Answer> get copyWith =>
@@ -139,7 +182,9 @@ abstract class _Answer implements Answer {
   const factory _Answer(
       {@required UniqueId id,
       @required AnswerContent content,
-      @required Author author}) = _$_Answer;
+      @required Author author,
+      @required ValueDateTime published,
+      @required ValueDateTime updated}) = _$_Answer;
 
   @override
   UniqueId get id;
@@ -147,6 +192,10 @@ abstract class _Answer implements Answer {
   AnswerContent get content;
   @override
   Author get author;
+  @override
+  ValueDateTime get published;
+  @override
+  ValueDateTime get updated;
   @override
   _$AnswerCopyWith<_Answer> get copyWith;
 }

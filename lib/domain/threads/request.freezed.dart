@@ -15,11 +15,15 @@ class _$RequestTearOff {
   _Request call(
       {@required RequestTitle title,
       @required RequestContent content,
-      @required Author author}) {
+      @required Author author,
+      @required ValueDateTime published,
+      @required ValueDateTime updated}) {
     return _Request(
       title: title,
       content: content,
       author: author,
+      published: published,
+      updated: updated,
     );
   }
 }
@@ -31,6 +35,8 @@ mixin _$Request {
   RequestTitle get title;
   RequestContent get content;
   Author get author;
+  ValueDateTime get published;
+  ValueDateTime get updated;
 
   $RequestCopyWith<Request> get copyWith;
 }
@@ -38,7 +44,12 @@ mixin _$Request {
 abstract class $RequestCopyWith<$Res> {
   factory $RequestCopyWith(Request value, $Res Function(Request) then) =
       _$RequestCopyWithImpl<$Res>;
-  $Res call({RequestTitle title, RequestContent content, Author author});
+  $Res call(
+      {RequestTitle title,
+      RequestContent content,
+      Author author,
+      ValueDateTime published,
+      ValueDateTime updated});
 }
 
 class _$RequestCopyWithImpl<$Res> implements $RequestCopyWith<$Res> {
@@ -53,11 +64,16 @@ class _$RequestCopyWithImpl<$Res> implements $RequestCopyWith<$Res> {
     Object title = freezed,
     Object content = freezed,
     Object author = freezed,
+    Object published = freezed,
+    Object updated = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed ? _value.title : title as RequestTitle,
       content: content == freezed ? _value.content : content as RequestContent,
       author: author == freezed ? _value.author : author as Author,
+      published:
+          published == freezed ? _value.published : published as ValueDateTime,
+      updated: updated == freezed ? _value.updated : updated as ValueDateTime,
     ));
   }
 }
@@ -66,7 +82,12 @@ abstract class _$RequestCopyWith<$Res> implements $RequestCopyWith<$Res> {
   factory _$RequestCopyWith(_Request value, $Res Function(_Request) then) =
       __$RequestCopyWithImpl<$Res>;
   @override
-  $Res call({RequestTitle title, RequestContent content, Author author});
+  $Res call(
+      {RequestTitle title,
+      RequestContent content,
+      Author author,
+      ValueDateTime published,
+      ValueDateTime updated});
 }
 
 class __$RequestCopyWithImpl<$Res> extends _$RequestCopyWithImpl<$Res>
@@ -82,21 +103,32 @@ class __$RequestCopyWithImpl<$Res> extends _$RequestCopyWithImpl<$Res>
     Object title = freezed,
     Object content = freezed,
     Object author = freezed,
+    Object published = freezed,
+    Object updated = freezed,
   }) {
     return _then(_Request(
       title: title == freezed ? _value.title : title as RequestTitle,
       content: content == freezed ? _value.content : content as RequestContent,
       author: author == freezed ? _value.author : author as Author,
+      published:
+          published == freezed ? _value.published : published as ValueDateTime,
+      updated: updated == freezed ? _value.updated : updated as ValueDateTime,
     ));
   }
 }
 
 class _$_Request implements _Request {
   const _$_Request(
-      {@required this.title, @required this.content, @required this.author})
+      {@required this.title,
+      @required this.content,
+      @required this.author,
+      @required this.published,
+      @required this.updated})
       : assert(title != null),
         assert(content != null),
-        assert(author != null);
+        assert(author != null),
+        assert(published != null),
+        assert(updated != null);
 
   @override
   final RequestTitle title;
@@ -104,10 +136,14 @@ class _$_Request implements _Request {
   final RequestContent content;
   @override
   final Author author;
+  @override
+  final ValueDateTime published;
+  @override
+  final ValueDateTime updated;
 
   @override
   String toString() {
-    return 'Request(title: $title, content: $content, author: $author)';
+    return 'Request(title: $title, content: $content, author: $author, published: $published, updated: $updated)';
   }
 
   @override
@@ -120,7 +156,12 @@ class _$_Request implements _Request {
                 const DeepCollectionEquality()
                     .equals(other.content, content)) &&
             (identical(other.author, author) ||
-                const DeepCollectionEquality().equals(other.author, author)));
+                const DeepCollectionEquality().equals(other.author, author)) &&
+            (identical(other.published, published) ||
+                const DeepCollectionEquality()
+                    .equals(other.published, published)) &&
+            (identical(other.updated, updated) ||
+                const DeepCollectionEquality().equals(other.updated, updated)));
   }
 
   @override
@@ -128,7 +169,9 @@ class _$_Request implements _Request {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(content) ^
-      const DeepCollectionEquality().hash(author);
+      const DeepCollectionEquality().hash(author) ^
+      const DeepCollectionEquality().hash(published) ^
+      const DeepCollectionEquality().hash(updated);
 
   @override
   _$RequestCopyWith<_Request> get copyWith =>
@@ -139,7 +182,9 @@ abstract class _Request implements Request {
   const factory _Request(
       {@required RequestTitle title,
       @required RequestContent content,
-      @required Author author}) = _$_Request;
+      @required Author author,
+      @required ValueDateTime published,
+      @required ValueDateTime updated}) = _$_Request;
 
   @override
   RequestTitle get title;
@@ -147,6 +192,10 @@ abstract class _Request implements Request {
   RequestContent get content;
   @override
   Author get author;
+  @override
+  ValueDateTime get published;
+  @override
+  ValueDateTime get updated;
   @override
   _$RequestCopyWith<_Request> get copyWith;
 }

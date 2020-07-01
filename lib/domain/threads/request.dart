@@ -11,12 +11,16 @@ abstract class Request with _$Request {
     @required RequestTitle title,
     @required RequestContent content,
     @required Author author,
+    @required ValueDateTime published,
+    @required ValueDateTime updated,
   }) = _Request;
 
   factory Request.empty() => Request(
         title: RequestTitle(''),
         content: RequestContent(''),
         author: Author(''),
+        published: ValueDateTime(DateTime.now()),
+        updated: ValueDateTime(DateTime.now()),
       );
 }
 
@@ -25,6 +29,8 @@ extension RequestX on Request {
     return title.failureOrUnit
         .andThen(content.failureOrUnit)
         .andThen(author.failureOrUnit)
+        .andThen(published.failureOrUnit)
+        .andThen(updated.failureOrUnit)
         .fold((f) => some(f), (_) => none());
   }
 }

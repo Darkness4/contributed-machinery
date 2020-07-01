@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_actor/thread_actor_bloc.dart';
-import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +81,16 @@ class ThreadCard extends StatelessWidget {
               ),
               MarkdownBody(
                 data: thread.request.content.getOrCrash(),
+              ),
+              Text(
+                "Published : ${thread.request.published.getOrCrash().toLocal()}",
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.end,
+              ),
+              Text(
+                "Updated : ${thread.request.updated.getOrCrash().toLocal()}",
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.end,
               ),
             ],
           ),

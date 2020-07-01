@@ -15,12 +15,16 @@ abstract class Answer with _$Answer implements IEntity {
     @required UniqueId id,
     @required AnswerContent content,
     @required Author author,
+    @required ValueDateTime published,
+    @required ValueDateTime updated,
   }) = _Answer;
 
   factory Answer.empty() => Answer(
         id: UniqueId(),
         content: AnswerContent(''),
         author: Author(''),
+        published: ValueDateTime(DateTime.now()),
+        updated: ValueDateTime(DateTime.now()),
       );
 }
 
@@ -28,6 +32,8 @@ extension AnswerX on Answer {
   Option<ValueFailure<dynamic>> get failureOption {
     return content.failureOrUnit
         .andThen(author.failureOrUnit)
+        .andThen(published.failureOrUnit)
+        .andThen(updated.failureOrUnit)
         .fold((f) => some(f), (_) => none());
   }
 }

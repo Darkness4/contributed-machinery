@@ -14,6 +14,8 @@ abstract class RequestDto with _$RequestDto {
     @required String title,
     @required String content,
     @required String author,
+    @DateTimeTimestampConverter() @required DateTime published,
+    @DateTimeTimestampConverter() @required DateTime updated,
   }) = _RequestDto;
 
   factory RequestDto.fromDomain(Request request) {
@@ -21,6 +23,8 @@ abstract class RequestDto with _$RequestDto {
       title: request.title.getOrCrash(),
       content: request.content.getOrCrash(),
       author: request.author.getOrCrash(),
+      published: request.published.getOrCrash(),
+      updated: request.updated.getOrCrash(),
     );
   }
 
@@ -38,6 +42,19 @@ class ServerTimestampConverter implements JsonConverter<FieldValue, Object> {
 
   @override
   Object toJson(FieldValue fieldValue) => fieldValue;
+}
+
+class DateTimeTimestampConverter implements JsonConverter<DateTime, Timestamp> {
+  const DateTimeTimestampConverter();
+
+  @override
+  DateTime fromJson(Timestamp timestamp) {
+    assert(timestamp != null);
+    return timestamp.toDate();
+  }
+
+  @override
+  Timestamp toJson(DateTime date) => Timestamp.fromDate(date);
 }
 
 @freezed
@@ -70,6 +87,8 @@ extension RequestDtoX on RequestDto {
       title: RequestTitle(title),
       content: RequestContent(content),
       author: Author(author),
+      published: ValueDateTime(published),
+      updated: ValueDateTime(updated),
     );
   }
 }

@@ -17,6 +17,8 @@ abstract class AnswerDto with _$AnswerDto {
     @required String content,
     @required String author,
     @required @ServerTimestampConverter() FieldValue serverTimeStamp,
+    @DateTimeTimestampConverter() @required DateTime published,
+    @DateTimeTimestampConverter() @required DateTime updated,
   }) = _AnswerDto;
 
   factory AnswerDto.fromDomain(Answer answer) {
@@ -25,6 +27,8 @@ abstract class AnswerDto with _$AnswerDto {
       content: answer.content.getOrCrash(),
       author: answer.author.getOrCrash(),
       serverTimeStamp: FieldValue.serverTimestamp(),
+      published: answer.published.getOrCrash(),
+      updated: answer.updated.getOrCrash(),
     );
   }
 
@@ -34,6 +38,8 @@ abstract class AnswerDto with _$AnswerDto {
   factory AnswerDto.fromFirestore(DocumentSnapshot doc) {
     return AnswerDto.fromJson(doc.data).copyWith(id: doc.documentID);
   }
+
+  static DateTime dateTimeAsIs(DateTime dateTime) => dateTime;
 }
 
 extension AnswerDtoX on AnswerDto {
@@ -42,6 +48,8 @@ extension AnswerDtoX on AnswerDto {
       id: UniqueId.fromUniqueString(id),
       content: AnswerContent(content),
       author: Author(author),
+      published: ValueDateTime(published),
+      updated: ValueDateTime(updated),
     );
   }
 }

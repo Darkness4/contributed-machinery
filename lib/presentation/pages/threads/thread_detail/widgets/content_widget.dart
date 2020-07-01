@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:contributed_machinery/application/threads/thread_actor/thread_actor_bloc.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +29,7 @@ class ContentWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
                 thread.request.title.getOrCrash(),
@@ -44,6 +42,16 @@ class ContentWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: MarkdownBody(data: thread.request.content.getOrCrash()),
+              ),
+              Text(
+                "Published : ${thread.request.published.getOrCrash().toLocal()}",
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.end,
+              ),
+              Text(
+                "Updated : ${thread.request.updated.getOrCrash().toLocal()}",
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.end,
               ),
             ],
           ),

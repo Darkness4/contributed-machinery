@@ -12,6 +12,10 @@ _$_AnswerDto _$_$_AnswerDtoFromJson(Map<String, dynamic> json) {
     author: json['author'] as String,
     serverTimeStamp:
         const ServerTimestampConverter().fromJson(json['serverTimeStamp']),
+    published: const DateTimeTimestampConverter()
+        .fromJson(json['published'] as Timestamp),
+    updated: const DateTimeTimestampConverter()
+        .fromJson(json['updated'] as Timestamp),
   );
 }
 
@@ -21,4 +25,7 @@ Map<String, dynamic> _$_$_AnswerDtoToJson(_$_AnswerDto instance) =>
       'author': instance.author,
       'serverTimeStamp':
           const ServerTimestampConverter().toJson(instance.serverTimeStamp),
+      'published':
+          const DateTimeTimestampConverter().toJson(instance.published),
+      'updated': const DateTimeTimestampConverter().toJson(instance.updated),
     };

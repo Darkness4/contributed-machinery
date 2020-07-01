@@ -92,6 +92,16 @@ class AnswerCard extends StatelessWidget {
               MarkdownBody(
                 data: answer.content.getOrCrash(),
               ),
+              Text(
+                "Published : ${answer.published.getOrCrash().toLocal()}",
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.end,
+              ),
+              Text(
+                "Updated : ${answer.updated.getOrCrash().toLocal()}",
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.end,
+              ),
             ],
           ),
         ),

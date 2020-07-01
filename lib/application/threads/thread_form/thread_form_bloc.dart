@@ -71,8 +71,12 @@ class ThreadFormBloc extends Bloc<ThreadFormEvent, ThreadFormState> {
 
         if (state.thread.failureOption.isNone()) {
           failureOrSuccess = state.isEditing
-              ? await _threadRepository.update(state.thread)
-              : await _threadRepository.create(state.thread);
+              ? await _threadRepository.update(state.thread.copyWith
+                  .request(updated: ValueDateTime(DateTime.now())))
+              : await _threadRepository.create(state.thread.copyWith.request(
+                  published: ValueDateTime(DateTime.now()),
+                  updated: ValueDateTime(DateTime.now()),
+                ));
         }
         yield state.copyWith(
           isSaving: false,

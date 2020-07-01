@@ -19,12 +19,16 @@ class _$AnswerDtoTearOff {
       {@JsonKey(ignore: true) String id,
       @required String content,
       @required String author,
-      @required @ServerTimestampConverter() FieldValue serverTimeStamp}) {
+      @required @ServerTimestampConverter() FieldValue serverTimeStamp,
+      @required @DateTimeTimestampConverter() DateTime published,
+      @required @DateTimeTimestampConverter() DateTime updated}) {
     return _AnswerDto(
       id: id,
       content: content,
       author: author,
       serverTimeStamp: serverTimeStamp,
+      published: published,
+      updated: updated,
     );
   }
 }
@@ -39,6 +43,10 @@ mixin _$AnswerDto {
   String get author;
   @ServerTimestampConverter()
   FieldValue get serverTimeStamp;
+  @DateTimeTimestampConverter()
+  DateTime get published;
+  @DateTimeTimestampConverter()
+  DateTime get updated;
 
   Map<String, dynamic> toJson();
   $AnswerDtoCopyWith<AnswerDto> get copyWith;
@@ -51,7 +59,9 @@ abstract class $AnswerDtoCopyWith<$Res> {
       {@JsonKey(ignore: true) String id,
       String content,
       String author,
-      @ServerTimestampConverter() FieldValue serverTimeStamp});
+      @ServerTimestampConverter() FieldValue serverTimeStamp,
+      @DateTimeTimestampConverter() DateTime published,
+      @DateTimeTimestampConverter() DateTime updated});
 }
 
 class _$AnswerDtoCopyWithImpl<$Res> implements $AnswerDtoCopyWith<$Res> {
@@ -67,6 +77,8 @@ class _$AnswerDtoCopyWithImpl<$Res> implements $AnswerDtoCopyWith<$Res> {
     Object content = freezed,
     Object author = freezed,
     Object serverTimeStamp = freezed,
+    Object published = freezed,
+    Object updated = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
@@ -75,6 +87,9 @@ class _$AnswerDtoCopyWithImpl<$Res> implements $AnswerDtoCopyWith<$Res> {
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp as FieldValue,
+      published:
+          published == freezed ? _value.published : published as DateTime,
+      updated: updated == freezed ? _value.updated : updated as DateTime,
     ));
   }
 }
@@ -88,7 +103,9 @@ abstract class _$AnswerDtoCopyWith<$Res> implements $AnswerDtoCopyWith<$Res> {
       {@JsonKey(ignore: true) String id,
       String content,
       String author,
-      @ServerTimestampConverter() FieldValue serverTimeStamp});
+      @ServerTimestampConverter() FieldValue serverTimeStamp,
+      @DateTimeTimestampConverter() DateTime published,
+      @DateTimeTimestampConverter() DateTime updated});
 }
 
 class __$AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
@@ -105,6 +122,8 @@ class __$AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
     Object content = freezed,
     Object author = freezed,
     Object serverTimeStamp = freezed,
+    Object published = freezed,
+    Object updated = freezed,
   }) {
     return _then(_AnswerDto(
       id: id == freezed ? _value.id : id as String,
@@ -113,6 +132,9 @@ class __$AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp as FieldValue,
+      published:
+          published == freezed ? _value.published : published as DateTime,
+      updated: updated == freezed ? _value.updated : updated as DateTime,
     ));
   }
 }
@@ -123,10 +145,14 @@ class _$_AnswerDto implements _AnswerDto {
       {@JsonKey(ignore: true) this.id,
       @required this.content,
       @required this.author,
-      @required @ServerTimestampConverter() this.serverTimeStamp})
+      @required @ServerTimestampConverter() this.serverTimeStamp,
+      @required @DateTimeTimestampConverter() this.published,
+      @required @DateTimeTimestampConverter() this.updated})
       : assert(content != null),
         assert(author != null),
-        assert(serverTimeStamp != null);
+        assert(serverTimeStamp != null),
+        assert(published != null),
+        assert(updated != null);
 
   factory _$_AnswerDto.fromJson(Map<String, dynamic> json) =>
       _$_$_AnswerDtoFromJson(json);
@@ -141,10 +167,16 @@ class _$_AnswerDto implements _AnswerDto {
   @override
   @ServerTimestampConverter()
   final FieldValue serverTimeStamp;
+  @override
+  @DateTimeTimestampConverter()
+  final DateTime published;
+  @override
+  @DateTimeTimestampConverter()
+  final DateTime updated;
 
   @override
   String toString() {
-    return 'AnswerDto(id: $id, content: $content, author: $author, serverTimeStamp: $serverTimeStamp)';
+    return 'AnswerDto(id: $id, content: $content, author: $author, serverTimeStamp: $serverTimeStamp, published: $published, updated: $updated)';
   }
 
   @override
@@ -160,7 +192,12 @@ class _$_AnswerDto implements _AnswerDto {
                 const DeepCollectionEquality().equals(other.author, author)) &&
             (identical(other.serverTimeStamp, serverTimeStamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.serverTimeStamp, serverTimeStamp)));
+                    .equals(other.serverTimeStamp, serverTimeStamp)) &&
+            (identical(other.published, published) ||
+                const DeepCollectionEquality()
+                    .equals(other.published, published)) &&
+            (identical(other.updated, updated) ||
+                const DeepCollectionEquality().equals(other.updated, updated)));
   }
 
   @override
@@ -169,7 +206,9 @@ class _$_AnswerDto implements _AnswerDto {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(content) ^
       const DeepCollectionEquality().hash(author) ^
-      const DeepCollectionEquality().hash(serverTimeStamp);
+      const DeepCollectionEquality().hash(serverTimeStamp) ^
+      const DeepCollectionEquality().hash(published) ^
+      const DeepCollectionEquality().hash(updated);
 
   @override
   _$AnswerDtoCopyWith<_AnswerDto> get copyWith =>
@@ -183,11 +222,12 @@ class _$_AnswerDto implements _AnswerDto {
 
 abstract class _AnswerDto implements AnswerDto {
   const factory _AnswerDto(
-          {@JsonKey(ignore: true) String id,
-          @required String content,
-          @required String author,
-          @required @ServerTimestampConverter() FieldValue serverTimeStamp}) =
-      _$_AnswerDto;
+      {@JsonKey(ignore: true) String id,
+      @required String content,
+      @required String author,
+      @required @ServerTimestampConverter() FieldValue serverTimeStamp,
+      @required @DateTimeTimestampConverter() DateTime published,
+      @required @DateTimeTimestampConverter() DateTime updated}) = _$_AnswerDto;
 
   factory _AnswerDto.fromJson(Map<String, dynamic> json) =
       _$_AnswerDto.fromJson;
@@ -202,6 +242,12 @@ abstract class _AnswerDto implements AnswerDto {
   @override
   @ServerTimestampConverter()
   FieldValue get serverTimeStamp;
+  @override
+  @DateTimeTimestampConverter()
+  DateTime get published;
+  @override
+  @DateTimeTimestampConverter()
+  DateTime get updated;
   @override
   _$AnswerDtoCopyWith<_AnswerDto> get copyWith;
 }

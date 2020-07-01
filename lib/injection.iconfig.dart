@@ -42,8 +42,11 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerLazySingleton<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
   g.registerFactory<ThreadFormBloc>(
       () => ThreadFormBloc(g<IThreadRepository>(), g<AuthBloc>()));
-  g.registerFactory<AnswerFormBloc>(
-      () => AnswerFormBloc(g<IAnswerRepository>(), g<AuthBloc>()));
+  g.registerFactory<AnswerFormBloc>(() => AnswerFormBloc(
+        g<IAnswerRepository>(),
+        g<AuthBloc>(),
+        g<IThreadRepository>(),
+      ));
 
   //Register prod Dependencies --------
   if (environment == 'prod') {

@@ -31,7 +31,7 @@ class ThreadRepository implements IThreadRepository {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const ThreadFailure.insufficientPermissions());
       } else {
-        return left(const ThreadFailure.unexpected());
+        return left(ThreadFailure.unexpected(e));
       }
     }
   }
@@ -48,7 +48,7 @@ class ThreadRepository implements IThreadRepository {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const ThreadFailure.insufficientPermissions());
       } else {
-        return left(const ThreadFailure.unexpected());
+        return left(ThreadFailure.unexpected(e));
       }
     }
   }
@@ -70,7 +70,7 @@ class ThreadRepository implements IThreadRepository {
       } else if (e.message.contains('NOT_FOUND')) {
         return left(const ThreadFailure.unableToUpdate());
       } else {
-        return left(const ThreadFailure.unexpected());
+        return left(ThreadFailure.unexpected(e));
       }
     }
   }
@@ -91,8 +91,7 @@ class ThreadRepository implements IThreadRepository {
       if (e is PlatformException && e.message.contains('PERMISSION_DENIED')) {
         return left(const ThreadFailure.insufficientPermissions());
       } else {
-        // TODO: Log these unexpected errors everywhere
-        return left(const ThreadFailure.unexpected());
+        return left(ThreadFailure.unexpected(e));
       }
     });
   }

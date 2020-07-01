@@ -18,11 +18,15 @@ class _$RequestDtoTearOff {
   _RequestDto call(
       {@required String title,
       @required String content,
-      @required String author}) {
+      @required String author,
+      @required @DateTimeTimestampConverter() DateTime published,
+      @required @DateTimeTimestampConverter() DateTime updated}) {
     return _RequestDto(
       title: title,
       content: content,
       author: author,
+      published: published,
+      updated: updated,
     );
   }
 }
@@ -34,6 +38,10 @@ mixin _$RequestDto {
   String get title;
   String get content;
   String get author;
+  @DateTimeTimestampConverter()
+  DateTime get published;
+  @DateTimeTimestampConverter()
+  DateTime get updated;
 
   Map<String, dynamic> toJson();
   $RequestDtoCopyWith<RequestDto> get copyWith;
@@ -43,7 +51,12 @@ abstract class $RequestDtoCopyWith<$Res> {
   factory $RequestDtoCopyWith(
           RequestDto value, $Res Function(RequestDto) then) =
       _$RequestDtoCopyWithImpl<$Res>;
-  $Res call({String title, String content, String author});
+  $Res call(
+      {String title,
+      String content,
+      String author,
+      @DateTimeTimestampConverter() DateTime published,
+      @DateTimeTimestampConverter() DateTime updated});
 }
 
 class _$RequestDtoCopyWithImpl<$Res> implements $RequestDtoCopyWith<$Res> {
@@ -58,11 +71,16 @@ class _$RequestDtoCopyWithImpl<$Res> implements $RequestDtoCopyWith<$Res> {
     Object title = freezed,
     Object content = freezed,
     Object author = freezed,
+    Object published = freezed,
+    Object updated = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed ? _value.title : title as String,
       content: content == freezed ? _value.content : content as String,
       author: author == freezed ? _value.author : author as String,
+      published:
+          published == freezed ? _value.published : published as DateTime,
+      updated: updated == freezed ? _value.updated : updated as DateTime,
     ));
   }
 }
@@ -72,7 +90,12 @@ abstract class _$RequestDtoCopyWith<$Res> implements $RequestDtoCopyWith<$Res> {
           _RequestDto value, $Res Function(_RequestDto) then) =
       __$RequestDtoCopyWithImpl<$Res>;
   @override
-  $Res call({String title, String content, String author});
+  $Res call(
+      {String title,
+      String content,
+      String author,
+      @DateTimeTimestampConverter() DateTime published,
+      @DateTimeTimestampConverter() DateTime updated});
 }
 
 class __$RequestDtoCopyWithImpl<$Res> extends _$RequestDtoCopyWithImpl<$Res>
@@ -89,11 +112,16 @@ class __$RequestDtoCopyWithImpl<$Res> extends _$RequestDtoCopyWithImpl<$Res>
     Object title = freezed,
     Object content = freezed,
     Object author = freezed,
+    Object published = freezed,
+    Object updated = freezed,
   }) {
     return _then(_RequestDto(
       title: title == freezed ? _value.title : title as String,
       content: content == freezed ? _value.content : content as String,
       author: author == freezed ? _value.author : author as String,
+      published:
+          published == freezed ? _value.published : published as DateTime,
+      updated: updated == freezed ? _value.updated : updated as DateTime,
     ));
   }
 }
@@ -101,10 +129,16 @@ class __$RequestDtoCopyWithImpl<$Res> extends _$RequestDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RequestDto implements _RequestDto {
   const _$_RequestDto(
-      {@required this.title, @required this.content, @required this.author})
+      {@required this.title,
+      @required this.content,
+      @required this.author,
+      @required @DateTimeTimestampConverter() this.published,
+      @required @DateTimeTimestampConverter() this.updated})
       : assert(title != null),
         assert(content != null),
-        assert(author != null);
+        assert(author != null),
+        assert(published != null),
+        assert(updated != null);
 
   factory _$_RequestDto.fromJson(Map<String, dynamic> json) =>
       _$_$_RequestDtoFromJson(json);
@@ -115,10 +149,16 @@ class _$_RequestDto implements _RequestDto {
   final String content;
   @override
   final String author;
+  @override
+  @DateTimeTimestampConverter()
+  final DateTime published;
+  @override
+  @DateTimeTimestampConverter()
+  final DateTime updated;
 
   @override
   String toString() {
-    return 'RequestDto(title: $title, content: $content, author: $author)';
+    return 'RequestDto(title: $title, content: $content, author: $author, published: $published, updated: $updated)';
   }
 
   @override
@@ -131,7 +171,12 @@ class _$_RequestDto implements _RequestDto {
                 const DeepCollectionEquality()
                     .equals(other.content, content)) &&
             (identical(other.author, author) ||
-                const DeepCollectionEquality().equals(other.author, author)));
+                const DeepCollectionEquality().equals(other.author, author)) &&
+            (identical(other.published, published) ||
+                const DeepCollectionEquality()
+                    .equals(other.published, published)) &&
+            (identical(other.updated, updated) ||
+                const DeepCollectionEquality().equals(other.updated, updated)));
   }
 
   @override
@@ -139,7 +184,9 @@ class _$_RequestDto implements _RequestDto {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(content) ^
-      const DeepCollectionEquality().hash(author);
+      const DeepCollectionEquality().hash(author) ^
+      const DeepCollectionEquality().hash(published) ^
+      const DeepCollectionEquality().hash(updated);
 
   @override
   _$RequestDtoCopyWith<_RequestDto> get copyWith =>
@@ -153,9 +200,12 @@ class _$_RequestDto implements _RequestDto {
 
 abstract class _RequestDto implements RequestDto {
   const factory _RequestDto(
-      {@required String title,
-      @required String content,
-      @required String author}) = _$_RequestDto;
+          {@required String title,
+          @required String content,
+          @required String author,
+          @required @DateTimeTimestampConverter() DateTime published,
+          @required @DateTimeTimestampConverter() DateTime updated}) =
+      _$_RequestDto;
 
   factory _RequestDto.fromJson(Map<String, dynamic> json) =
       _$_RequestDto.fromJson;
@@ -166,6 +216,12 @@ abstract class _RequestDto implements RequestDto {
   String get content;
   @override
   String get author;
+  @override
+  @DateTimeTimestampConverter()
+  DateTime get published;
+  @override
+  @DateTimeTimestampConverter()
+  DateTime get updated;
   @override
   _$RequestDtoCopyWith<_RequestDto> get copyWith;
 }

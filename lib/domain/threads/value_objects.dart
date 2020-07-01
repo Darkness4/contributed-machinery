@@ -7,12 +7,10 @@ class RequestContent extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  static const maxLength = 1000;
-
   factory RequestContent(String input) {
     assert(input != null);
     return RequestContent._(
-      validateMaxStringLength(input, maxLength).flatMap(validateStringNotEmpty),
+      validateStringNotEmpty(input),
     );
   }
 
@@ -53,4 +51,16 @@ class Author extends ValueObject<String> {
   }
 
   const Author._(this.value);
+}
+
+class ValueDateTime extends ValueObject<DateTime> {
+  @override
+  final Either<ValueFailure<DateTime>, DateTime> value;
+
+  factory ValueDateTime(DateTime input) {
+    assert(input != null);
+    return ValueDateTime._(right(input));
+  }
+
+  const ValueDateTime._(this.value);
 }

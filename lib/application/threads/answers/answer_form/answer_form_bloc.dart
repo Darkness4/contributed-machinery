@@ -6,7 +6,9 @@ import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer_failure.dart';
 import 'package:contributed_machinery/domain/threads/answers/i_answer_repository.dart';
 import 'package:contributed_machinery/domain/threads/answers/value_objects.dart';
+import 'package:contributed_machinery/domain/threads/i_thread_repository.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
+import 'package:contributed_machinery/domain/threads/thread_failure.dart';
 import 'package:contributed_machinery/domain/threads/value_objects.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,9 +23,11 @@ part 'answer_form_bloc.freezed.dart';
 @injectable
 class AnswerFormBloc extends Bloc<AnswerFormEvent, AnswerFormState> {
   final IAnswerRepository _answerRepository;
+  final IThreadRepository _threadRepository;
   final AuthBloc _authBloc;
 
-  AnswerFormBloc(this._answerRepository, this._authBloc);
+  AnswerFormBloc(
+      this._answerRepository, this._authBloc, this._threadRepository);
 
   @override
   AnswerFormState get initialState => AnswerFormState.initial();
@@ -65,10 +69,20 @@ class AnswerFormBloc extends Bloc<AnswerFormEvent, AnswerFormState> {
 
         if (state.answer.failureOption.isNone()) {
           failureOrSuccess = state.isEditing
-              ? await _answerRepository.updateByThread(state.answer,
+              ? await _answerRepository.updateByThread(
+                  state.answer.copyWith(
+                    updated: ValueDateTime(DateTime.now()),
+                  ),
                   thread: e.thread)
-              : await _answerRepository.createByThread(state.answer,
+              : await _answerRepository.createByThread(
+                  state.answer.copyWith(
+                    updated: ValueDateTime(DateTime.now()),
+                    published: ValueDateTime(DateTime.now()),
+                  ),
                   thread: e.thread);
+
+          await _threadRepository.update(e.thread.copyWith
+              .request(updated: ValueDateTime(DateTime.now())));
         }
         yield state.copyWith(
           isSaving: false,

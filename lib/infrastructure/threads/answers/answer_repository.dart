@@ -37,7 +37,7 @@ class AnswerRepository implements IAnswerRepository {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const AnswerFailure.insufficientPermissions());
       } else {
-        return left(const AnswerFailure.unexpected());
+        return left(AnswerFailure.unexpected(e));
       }
     }
   }
@@ -57,7 +57,7 @@ class AnswerRepository implements IAnswerRepository {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const AnswerFailure.insufficientPermissions());
       } else {
-        return left(const AnswerFailure.unexpected());
+        return left(AnswerFailure.unexpected(e));
       }
     }
   }
@@ -82,7 +82,7 @@ class AnswerRepository implements IAnswerRepository {
       } else if (e.message.contains('NOT_FOUND')) {
         return left(const AnswerFailure.unableToUpdate());
       } else {
-        return left(const AnswerFailure.unexpected());
+        return left(AnswerFailure.unexpected(e));
       }
     }
   }
@@ -94,7 +94,7 @@ class AnswerRepository implements IAnswerRepository {
         _firestore.threadCollection.document(thread.id.getOrCrash());
 
     yield* threadDoc.answerCollection
-        .orderBy('serverTimeStamp')
+        .orderBy('published')
         .snapshots()
         .map(
           (snapshot) => right<AnswerFailure, KtList<Answer>>(
@@ -107,8 +107,7 @@ class AnswerRepository implements IAnswerRepository {
       if (e is PlatformException && e.message.contains('PERMISSION_DENIED')) {
         return left(const AnswerFailure.insufficientPermissions());
       } else {
-        // TODO: Log these unexpected errors everywhere
-        return left(const AnswerFailure.unexpected());
+        return left(AnswerFailure.unexpected(e));
       }
     });
   }
