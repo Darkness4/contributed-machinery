@@ -19,7 +19,6 @@ import 'package:contributed_machinery/application/search/search_bloc.dart';
 import 'package:contributed_machinery/application/sign_in_form/sign_in_form_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_actor/thread_actor_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_watcher/thread_watcher_bloc.dart';
-import 'package:contributed_machinery/application/threads/answers/answer_actor/answer_actor_bloc.dart';
 import 'package:contributed_machinery/application/threads/answers/answer_watcher/answer_watcher_bloc.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_form/thread_form_bloc.dart';
@@ -40,8 +39,6 @@ void $initGetIt(GetIt g, {String environment}) {
       () => ThreadActorBloc(g<IThreadRepository>()));
   g.registerFactory<ThreadWatcherBloc>(
       () => ThreadWatcherBloc(g<IThreadRepository>()));
-  g.registerFactory<AnswerActorBloc>(
-      () => AnswerActorBloc(g<IAnswerRepository>()));
   g.registerFactory<AnswerWatcherBloc>(
       () => AnswerWatcherBloc(g<IAnswerRepository>()));
   g.registerLazySingleton<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));

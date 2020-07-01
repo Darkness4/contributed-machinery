@@ -9,6 +9,7 @@ abstract class AnswerFormState with _$AnswerFormState {
     @required bool showErrorMessages,
     @required bool isEditing,
     @required bool isSaving,
+    @required bool isDeleting,
     @required Option<Either<AnswerFailure, Unit>> saveFailureOrSuccessOption,
   }) = _AnswerFormState;
 
@@ -17,6 +18,7 @@ abstract class AnswerFormState with _$AnswerFormState {
         showErrorMessages: false,
         isEditing: false,
         isSaving: false,
+        isDeleting: false,
         saveFailureOrSuccessOption: none(),
       );
 }

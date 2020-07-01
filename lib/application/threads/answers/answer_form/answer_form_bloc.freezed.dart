@@ -29,6 +29,13 @@ class _$AnswerFormEventTearOff {
       thread: thread,
     );
   }
+
+  _DeletedByThread deletedByThread(Answer answer, {@required Thread thread}) {
+    return _DeletedByThread(
+      answer,
+      thread: thread,
+    );
+  }
 }
 
 // ignore: unused_element
@@ -40,12 +47,14 @@ mixin _$AnswerFormEvent {
     @required Result initialized(Option<Answer> initialAnswerOption),
     @required Result contentChanged(String contentStr),
     @required Result saved(Thread thread),
+    @required Result deletedByThread(Answer answer, Thread thread),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initialized(Option<Answer> initialAnswerOption),
     Result contentChanged(String contentStr),
     Result saved(Thread thread),
+    Result deletedByThread(Answer answer, Thread thread),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -53,12 +62,14 @@ mixin _$AnswerFormEvent {
     @required Result initialized(_Initialized value),
     @required Result contentChanged(_ContentChanged value),
     @required Result saved(_Saved value),
+    @required Result deletedByThread(_DeletedByThread value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initialized(_Initialized value),
     Result contentChanged(_ContentChanged value),
     Result saved(_Saved value),
+    Result deletedByThread(_DeletedByThread value),
     @required Result orElse(),
   });
 }
@@ -143,10 +154,12 @@ class _$_Initialized implements _Initialized {
     @required Result initialized(Option<Answer> initialAnswerOption),
     @required Result contentChanged(String contentStr),
     @required Result saved(Thread thread),
+    @required Result deletedByThread(Answer answer, Thread thread),
   }) {
     assert(initialized != null);
     assert(contentChanged != null);
     assert(saved != null);
+    assert(deletedByThread != null);
     return initialized(initialAnswerOption);
   }
 
@@ -156,6 +169,7 @@ class _$_Initialized implements _Initialized {
     Result initialized(Option<Answer> initialAnswerOption),
     Result contentChanged(String contentStr),
     Result saved(Thread thread),
+    Result deletedByThread(Answer answer, Thread thread),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -171,10 +185,12 @@ class _$_Initialized implements _Initialized {
     @required Result initialized(_Initialized value),
     @required Result contentChanged(_ContentChanged value),
     @required Result saved(_Saved value),
+    @required Result deletedByThread(_DeletedByThread value),
   }) {
     assert(initialized != null);
     assert(contentChanged != null);
     assert(saved != null);
+    assert(deletedByThread != null);
     return initialized(this);
   }
 
@@ -184,6 +200,7 @@ class _$_Initialized implements _Initialized {
     Result initialized(_Initialized value),
     Result contentChanged(_ContentChanged value),
     Result saved(_Saved value),
+    Result deletedByThread(_DeletedByThread value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -263,10 +280,12 @@ class _$_ContentChanged implements _ContentChanged {
     @required Result initialized(Option<Answer> initialAnswerOption),
     @required Result contentChanged(String contentStr),
     @required Result saved(Thread thread),
+    @required Result deletedByThread(Answer answer, Thread thread),
   }) {
     assert(initialized != null);
     assert(contentChanged != null);
     assert(saved != null);
+    assert(deletedByThread != null);
     return contentChanged(contentStr);
   }
 
@@ -276,6 +295,7 @@ class _$_ContentChanged implements _ContentChanged {
     Result initialized(Option<Answer> initialAnswerOption),
     Result contentChanged(String contentStr),
     Result saved(Thread thread),
+    Result deletedByThread(Answer answer, Thread thread),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -291,10 +311,12 @@ class _$_ContentChanged implements _ContentChanged {
     @required Result initialized(_Initialized value),
     @required Result contentChanged(_ContentChanged value),
     @required Result saved(_Saved value),
+    @required Result deletedByThread(_DeletedByThread value),
   }) {
     assert(initialized != null);
     assert(contentChanged != null);
     assert(saved != null);
+    assert(deletedByThread != null);
     return contentChanged(this);
   }
 
@@ -304,6 +326,7 @@ class _$_ContentChanged implements _ContentChanged {
     Result initialized(_Initialized value),
     Result contentChanged(_ContentChanged value),
     Result saved(_Saved value),
+    Result deletedByThread(_DeletedByThread value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -390,10 +413,12 @@ class _$_Saved implements _Saved {
     @required Result initialized(Option<Answer> initialAnswerOption),
     @required Result contentChanged(String contentStr),
     @required Result saved(Thread thread),
+    @required Result deletedByThread(Answer answer, Thread thread),
   }) {
     assert(initialized != null);
     assert(contentChanged != null);
     assert(saved != null);
+    assert(deletedByThread != null);
     return saved(thread);
   }
 
@@ -403,6 +428,7 @@ class _$_Saved implements _Saved {
     Result initialized(Option<Answer> initialAnswerOption),
     Result contentChanged(String contentStr),
     Result saved(Thread thread),
+    Result deletedByThread(Answer answer, Thread thread),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -418,10 +444,12 @@ class _$_Saved implements _Saved {
     @required Result initialized(_Initialized value),
     @required Result contentChanged(_ContentChanged value),
     @required Result saved(_Saved value),
+    @required Result deletedByThread(_DeletedByThread value),
   }) {
     assert(initialized != null);
     assert(contentChanged != null);
     assert(saved != null);
+    assert(deletedByThread != null);
     return saved(this);
   }
 
@@ -431,6 +459,7 @@ class _$_Saved implements _Saved {
     Result initialized(_Initialized value),
     Result contentChanged(_ContentChanged value),
     Result saved(_Saved value),
+    Result deletedByThread(_DeletedByThread value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -448,6 +477,165 @@ abstract class _Saved implements AnswerFormEvent {
   _$SavedCopyWith<_Saved> get copyWith;
 }
 
+abstract class _$DeletedByThreadCopyWith<$Res> {
+  factory _$DeletedByThreadCopyWith(
+          _DeletedByThread value, $Res Function(_DeletedByThread) then) =
+      __$DeletedByThreadCopyWithImpl<$Res>;
+  $Res call({Answer answer, Thread thread});
+
+  $AnswerCopyWith<$Res> get answer;
+  $ThreadCopyWith<$Res> get thread;
+}
+
+class __$DeletedByThreadCopyWithImpl<$Res>
+    extends _$AnswerFormEventCopyWithImpl<$Res>
+    implements _$DeletedByThreadCopyWith<$Res> {
+  __$DeletedByThreadCopyWithImpl(
+      _DeletedByThread _value, $Res Function(_DeletedByThread) _then)
+      : super(_value, (v) => _then(v as _DeletedByThread));
+
+  @override
+  _DeletedByThread get _value => super._value as _DeletedByThread;
+
+  @override
+  $Res call({
+    Object answer = freezed,
+    Object thread = freezed,
+  }) {
+    return _then(_DeletedByThread(
+      answer == freezed ? _value.answer : answer as Answer,
+      thread: thread == freezed ? _value.thread : thread as Thread,
+    ));
+  }
+
+  @override
+  $AnswerCopyWith<$Res> get answer {
+    if (_value.answer == null) {
+      return null;
+    }
+    return $AnswerCopyWith<$Res>(_value.answer, (value) {
+      return _then(_value.copyWith(answer: value));
+    });
+  }
+
+  @override
+  $ThreadCopyWith<$Res> get thread {
+    if (_value.thread == null) {
+      return null;
+    }
+    return $ThreadCopyWith<$Res>(_value.thread, (value) {
+      return _then(_value.copyWith(thread: value));
+    });
+  }
+}
+
+class _$_DeletedByThread implements _DeletedByThread {
+  const _$_DeletedByThread(this.answer, {@required this.thread})
+      : assert(answer != null),
+        assert(thread != null);
+
+  @override
+  final Answer answer;
+  @override
+  final Thread thread;
+
+  @override
+  String toString() {
+    return 'AnswerFormEvent.deletedByThread(answer: $answer, thread: $thread)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _DeletedByThread &&
+            (identical(other.answer, answer) ||
+                const DeepCollectionEquality().equals(other.answer, answer)) &&
+            (identical(other.thread, thread) ||
+                const DeepCollectionEquality().equals(other.thread, thread)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(answer) ^
+      const DeepCollectionEquality().hash(thread);
+
+  @override
+  _$DeletedByThreadCopyWith<_DeletedByThread> get copyWith =>
+      __$DeletedByThreadCopyWithImpl<_DeletedByThread>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initialized(Option<Answer> initialAnswerOption),
+    @required Result contentChanged(String contentStr),
+    @required Result saved(Thread thread),
+    @required Result deletedByThread(Answer answer, Thread thread),
+  }) {
+    assert(initialized != null);
+    assert(contentChanged != null);
+    assert(saved != null);
+    assert(deletedByThread != null);
+    return deletedByThread(answer, thread);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initialized(Option<Answer> initialAnswerOption),
+    Result contentChanged(String contentStr),
+    Result saved(Thread thread),
+    Result deletedByThread(Answer answer, Thread thread),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (deletedByThread != null) {
+      return deletedByThread(answer, thread);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initialized(_Initialized value),
+    @required Result contentChanged(_ContentChanged value),
+    @required Result saved(_Saved value),
+    @required Result deletedByThread(_DeletedByThread value),
+  }) {
+    assert(initialized != null);
+    assert(contentChanged != null);
+    assert(saved != null);
+    assert(deletedByThread != null);
+    return deletedByThread(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initialized(_Initialized value),
+    Result contentChanged(_ContentChanged value),
+    Result saved(_Saved value),
+    Result deletedByThread(_DeletedByThread value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (deletedByThread != null) {
+      return deletedByThread(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeletedByThread implements AnswerFormEvent {
+  const factory _DeletedByThread(Answer answer, {@required Thread thread}) =
+      _$_DeletedByThread;
+
+  Answer get answer;
+  Thread get thread;
+  _$DeletedByThreadCopyWith<_DeletedByThread> get copyWith;
+}
+
 class _$AnswerFormStateTearOff {
   const _$AnswerFormStateTearOff();
 
@@ -461,12 +649,15 @@ class _$AnswerFormStateTearOff {
       @required
           bool isSaving,
       @required
+          bool isDeleting,
+      @required
           Option<Either<AnswerFailure, Unit>> saveFailureOrSuccessOption}) {
     return _AnswerFormState(
       answer: answer,
       showErrorMessages: showErrorMessages,
       isEditing: isEditing,
       isSaving: isSaving,
+      isDeleting: isDeleting,
       saveFailureOrSuccessOption: saveFailureOrSuccessOption,
     );
   }
@@ -480,6 +671,7 @@ mixin _$AnswerFormState {
   bool get showErrorMessages;
   bool get isEditing;
   bool get isSaving;
+  bool get isDeleting;
   Option<Either<AnswerFailure, Unit>> get saveFailureOrSuccessOption;
 
   $AnswerFormStateCopyWith<AnswerFormState> get copyWith;
@@ -494,6 +686,7 @@ abstract class $AnswerFormStateCopyWith<$Res> {
       bool showErrorMessages,
       bool isEditing,
       bool isSaving,
+      bool isDeleting,
       Option<Either<AnswerFailure, Unit>> saveFailureOrSuccessOption});
 
   $AnswerCopyWith<$Res> get answer;
@@ -513,6 +706,7 @@ class _$AnswerFormStateCopyWithImpl<$Res>
     Object showErrorMessages = freezed,
     Object isEditing = freezed,
     Object isSaving = freezed,
+    Object isDeleting = freezed,
     Object saveFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
@@ -522,6 +716,8 @@ class _$AnswerFormStateCopyWithImpl<$Res>
           : showErrorMessages as bool,
       isEditing: isEditing == freezed ? _value.isEditing : isEditing as bool,
       isSaving: isSaving == freezed ? _value.isSaving : isSaving as bool,
+      isDeleting:
+          isDeleting == freezed ? _value.isDeleting : isDeleting as bool,
       saveFailureOrSuccessOption: saveFailureOrSuccessOption == freezed
           ? _value.saveFailureOrSuccessOption
           : saveFailureOrSuccessOption as Option<Either<AnswerFailure, Unit>>,
@@ -550,6 +746,7 @@ abstract class _$AnswerFormStateCopyWith<$Res>
       bool showErrorMessages,
       bool isEditing,
       bool isSaving,
+      bool isDeleting,
       Option<Either<AnswerFailure, Unit>> saveFailureOrSuccessOption});
 
   @override
@@ -572,6 +769,7 @@ class __$AnswerFormStateCopyWithImpl<$Res>
     Object showErrorMessages = freezed,
     Object isEditing = freezed,
     Object isSaving = freezed,
+    Object isDeleting = freezed,
     Object saveFailureOrSuccessOption = freezed,
   }) {
     return _then(_AnswerFormState(
@@ -581,6 +779,8 @@ class __$AnswerFormStateCopyWithImpl<$Res>
           : showErrorMessages as bool,
       isEditing: isEditing == freezed ? _value.isEditing : isEditing as bool,
       isSaving: isSaving == freezed ? _value.isSaving : isSaving as bool,
+      isDeleting:
+          isDeleting == freezed ? _value.isDeleting : isDeleting as bool,
       saveFailureOrSuccessOption: saveFailureOrSuccessOption == freezed
           ? _value.saveFailureOrSuccessOption
           : saveFailureOrSuccessOption as Option<Either<AnswerFailure, Unit>>,
@@ -594,11 +794,13 @@ class _$_AnswerFormState implements _AnswerFormState {
       @required this.showErrorMessages,
       @required this.isEditing,
       @required this.isSaving,
+      @required this.isDeleting,
       @required this.saveFailureOrSuccessOption})
       : assert(answer != null),
         assert(showErrorMessages != null),
         assert(isEditing != null),
         assert(isSaving != null),
+        assert(isDeleting != null),
         assert(saveFailureOrSuccessOption != null);
 
   @override
@@ -610,11 +812,13 @@ class _$_AnswerFormState implements _AnswerFormState {
   @override
   final bool isSaving;
   @override
+  final bool isDeleting;
+  @override
   final Option<Either<AnswerFailure, Unit>> saveFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AnswerFormState(answer: $answer, showErrorMessages: $showErrorMessages, isEditing: $isEditing, isSaving: $isSaving, saveFailureOrSuccessOption: $saveFailureOrSuccessOption)';
+    return 'AnswerFormState(answer: $answer, showErrorMessages: $showErrorMessages, isEditing: $isEditing, isSaving: $isSaving, isDeleting: $isDeleting, saveFailureOrSuccessOption: $saveFailureOrSuccessOption)';
   }
 
   @override
@@ -632,6 +836,9 @@ class _$_AnswerFormState implements _AnswerFormState {
             (identical(other.isSaving, isSaving) ||
                 const DeepCollectionEquality()
                     .equals(other.isSaving, isSaving)) &&
+            (identical(other.isDeleting, isDeleting) ||
+                const DeepCollectionEquality()
+                    .equals(other.isDeleting, isDeleting)) &&
             (identical(other.saveFailureOrSuccessOption,
                     saveFailureOrSuccessOption) ||
                 const DeepCollectionEquality().equals(
@@ -646,6 +853,7 @@ class _$_AnswerFormState implements _AnswerFormState {
       const DeepCollectionEquality().hash(showErrorMessages) ^
       const DeepCollectionEquality().hash(isEditing) ^
       const DeepCollectionEquality().hash(isSaving) ^
+      const DeepCollectionEquality().hash(isDeleting) ^
       const DeepCollectionEquality().hash(saveFailureOrSuccessOption);
 
   @override
@@ -664,6 +872,8 @@ abstract class _AnswerFormState implements AnswerFormState {
           @required
               bool isSaving,
           @required
+              bool isDeleting,
+          @required
               Option<Either<AnswerFailure, Unit>> saveFailureOrSuccessOption}) =
       _$_AnswerFormState;
 
@@ -675,6 +885,8 @@ abstract class _AnswerFormState implements AnswerFormState {
   bool get isEditing;
   @override
   bool get isSaving;
+  @override
+  bool get isDeleting;
   @override
   Option<Either<AnswerFailure, Unit>> get saveFailureOrSuccessOption;
   @override

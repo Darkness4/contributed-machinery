@@ -134,9 +134,28 @@ class AnswerFormPageScaffold extends StatelessWidget {
         title: BlocBuilder<AnswerFormBloc, AnswerFormState>(
           condition: (p, c) => p.isEditing != c.isEditing,
           builder: (context, state) =>
-              Text(state.isEditing ? 'Edit a answer' : 'Create a thread'),
+              Text(state.isEditing ? 'Edit an answer' : 'Create an answer'),
         ),
         actions: <Widget>[
+          BlocBuilder<AnswerFormBloc, AnswerFormState>(
+            builder: (context, state) {
+              if (state.isEditing) {
+                return IconButton(
+                  onPressed: () {
+                    context
+                        .bloc<AnswerFormBloc>()
+                        .add(AnswerFormEvent.deletedByThread(
+                          context.bloc<AnswerFormBloc>().state.answer,
+                          thread: context.read<Thread>(),
+                        ));
+                  },
+                  icon: const Icon(Icons.delete_forever),
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
           Builder(
             builder: (context) {
               return IconButton(

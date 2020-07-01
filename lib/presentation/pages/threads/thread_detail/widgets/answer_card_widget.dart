@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bubble/bubble.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
-import 'package:contributed_machinery/application/threads/answers/answer_actor/answer_actor_bloc.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
@@ -44,46 +43,6 @@ class AnswerCard extends StatelessWidget {
                 editedAnswer: answer,
                 editedThread: thread,
               ),
-            );
-          }
-        },
-        onLongPress: () {
-          final authBlocState = context.bloc<AuthBloc>().state;
-
-          if (authBlocState is Authenticated &&
-              authBlocState.user.emailAddress.getOrCrash() ==
-                  answer.author.getOrCrash()) {
-            final answerActorBloc = context.bloc<AnswerActorBloc>();
-            showDialog(
-              context: context,
-              builder: (context) {
-                return BlocProvider.value(
-                  value: answerActorBloc,
-                  child: AlertDialog(
-                    title: const Text('Selected answer:'),
-                    content: Text(
-                      answer.content.getOrCrash(),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    actions: <Widget>[
-                      FlatButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('CANCEL'),
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          answerActorBloc.add(AnswerActorEvent.deletedByThread(
-                              answer,
-                              thread: thread));
-                          Navigator.pop(context);
-                        },
-                        child: const Text('DELETE'),
-                      ),
-                    ],
-                  ),
-                );
-              },
             );
           }
         },

@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
-import 'package:contributed_machinery/application/threads/answers/answer_actor/answer_actor_bloc.dart';
 import 'package:contributed_machinery/application/threads/answers/answer_watcher/answer_watcher_bloc.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/injection.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -34,9 +32,6 @@ class ThreadDetailPage extends HookWidget implements AutoRouteWrapper {
             create: (context) => getIt<AnswerWatcherBloc>()
               ..add(AnswerWatcherEvent.watchAllByThreadStarted(thread)),
           ),
-          BlocProvider<AnswerActorBloc>(
-            create: (context) => getIt<AnswerActorBloc>(),
-          ),
           Provider(create: (_) => thread),
         ],
         child: this,
@@ -61,25 +56,6 @@ class ThreadDetailPageScaffold extends StatelessWidget {
             );
           },
         ),
-        BlocListener<AnswerActorBloc, AnswerActorState>(
-          listener: (context, state) {
-            state.maybeMap(
-              deleteFailure: (state) {
-                FlushbarHelper.createError(
-                  duration: const Duration(seconds: 5),
-                  message: state.failure.map(
-                      // Use localized strings here in your apps
-                      insufficientPermissions: (_) =>
-                          'Insufficient permissions ❌',
-                      unableToUpdate: (_) => 'Impossible error',
-                      unexpected: (_) =>
-                          'Unexpected error occured while deleting, please contact support.'),
-                ).show(context);
-              },
-              orElse: () {},
-            );
-          },
-        )
       ],
       child: Scaffold(
         appBar: AppBar(
