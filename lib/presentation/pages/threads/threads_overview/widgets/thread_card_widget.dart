@@ -5,7 +5,6 @@ import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 
 class ThreadCard extends StatelessWidget {
   final Thread thread;
@@ -19,8 +18,9 @@ class ThreadCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
-      //! For showcasing the effects of clipBehavior
-      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      color: Colors.white,
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       child: InkWell(
         onTap: () {
           ExtendedNavigator.ofRouter<Router>().pushNamed(
@@ -73,7 +73,7 @@ class ThreadCard extends StatelessWidget {
             children: <Widget>[
               Text(
                 thread.request.title.getOrCrash(),
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headline5,
               ),
               Text(
                 thread.request.author.getOrCrash(),

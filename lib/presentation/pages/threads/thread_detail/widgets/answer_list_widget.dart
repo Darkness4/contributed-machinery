@@ -1,6 +1,7 @@
 import 'package:contributed_machinery/application/threads/answers/answer_watcher/answer_watcher_bloc.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'answer_card_widget.dart';
@@ -22,7 +23,14 @@ class AnswerListWidget extends StatelessWidget {
             child: CircularProgressIndicator(),
           ),
           loadSuccess: (state) {
+            final ScrollController _controller = ScrollController();
+
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              _controller.jumpTo(_controller.position.maxScrollExtent);
+            });
             return ListView.builder(
+              controller: _controller,
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 final answer = state.answers[index];
                 if (answer.failureOption.isSome()) {

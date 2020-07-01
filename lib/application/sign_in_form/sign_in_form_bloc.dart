@@ -26,25 +26,30 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   Stream<SignInFormState> mapEventToState(
     SignInFormEvent event,
   ) async* {
-    yield* event.map(emailChanged: (e) async* {
-      yield state.copyWith(
-        emailAddress: EmailAddress(e.emailStr),
-        authFailureOrSuccessOption: none(),
-      );
-    }, passwordChanged: (e) async* {
-      yield state.copyWith(
-        password: Password(e.passwordStr),
-        authFailureOrSuccessOption: none(),
-      );
-    }, registerWithEmailAndPasswordPressed: (e) async* {
-      yield* _performActionOnAuthFacadeWithEmailAndPassword(
-        _authFacade.registerWithEmailAndPassword,
-      );
-    }, signInWithEmailAndPasswordPressed: (e) async* {
-      yield* _performActionOnAuthFacadeWithEmailAndPassword(
-        _authFacade.signInWithEmailAndPassword,
-      );
-    });
+    yield* event.map(
+      emailChanged: (e) async* {
+        yield state.copyWith(
+          emailAddress: EmailAddress(e.emailStr),
+          authFailureOrSuccessOption: none(),
+        );
+      },
+      passwordChanged: (e) async* {
+        yield state.copyWith(
+          password: Password(e.passwordStr),
+          authFailureOrSuccessOption: none(),
+        );
+      },
+      registerWithEmailAndPasswordPressed: (e) async* {
+        yield* _performActionOnAuthFacadeWithEmailAndPassword(
+          _authFacade.registerWithEmailAndPassword,
+        );
+      },
+      signInWithEmailAndPasswordPressed: (e) async* {
+        yield* _performActionOnAuthFacadeWithEmailAndPassword(
+          _authFacade.signInWithEmailAndPassword,
+        );
+      },
+    );
   }
 
   Stream<SignInFormState> _performActionOnAuthFacadeWithEmailAndPassword(

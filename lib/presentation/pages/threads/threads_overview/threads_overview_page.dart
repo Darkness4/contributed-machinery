@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
+import 'package:contributed_machinery/application/search/search_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_actor/thread_actor_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_watcher/thread_watcher_bloc.dart';
 import 'package:contributed_machinery/injection.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
+import 'package:contributed_machinery/presentation/widgets/search_app_bar.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +16,9 @@ import 'widgets/threads_overview_body_widget.dart';
 class ThreadsOverviewPage extends HookWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
+    final controller = useTextEditingController();
+    final focusNode = useFocusNode();
+
     return MultiBlocListener(
       listeners: [
         BlocListener<AuthBloc, AuthState>(
@@ -46,8 +51,13 @@ class ThreadsOverviewPage extends HookWidget implements AutoRouteWrapper {
         )
       ],
       child: Scaffold(
+        backgroundColor: Colors.blue[800],
         appBar: AppBar(
           title: const Text('Threads'),
+          bottom: SearchAppBar(
+            controller: controller,
+            focusNode: focusNode,
+          ),
           leading: IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
@@ -55,7 +65,10 @@ class ThreadsOverviewPage extends HookWidget implements AutoRouteWrapper {
             },
           ),
         ),
-        body: ThreadsOverviewBody(),
+        body: GestureDetector(
+          onTap: focusNode.unfocus,
+          child: ThreadsOverviewBody(),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             ExtendedNavigator.ofRouter<Router>().pushNamed(
@@ -78,6 +91,9 @@ class ThreadsOverviewPage extends HookWidget implements AutoRouteWrapper {
           ),
           BlocProvider<ThreadActorBloc>(
             create: (context) => getIt<ThreadActorBloc>(),
+          ),
+          BlocProvider(
+            create: (_) => getIt<SearchBloc>(),
           ),
         ],
         child: this,

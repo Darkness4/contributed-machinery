@@ -92,7 +92,8 @@ class ThreadDetailPageScaffold extends StatelessWidget {
                 Expanded(child: ContentWidget()),
               ],
             ),
-            const Expanded(child: AnswerListWidget()),
+            const Divider(),
+            const Expanded(child: Scrollbar(child: AnswerListWidget())),
           ],
         ),
         floatingActionButton: FloatingActionButton(

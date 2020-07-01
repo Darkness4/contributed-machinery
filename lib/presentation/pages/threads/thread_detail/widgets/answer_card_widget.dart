@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bubble/bubble.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
 import 'package:contributed_machinery/application/threads/answers/answer_actor/answer_actor_bloc.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer.dart';
@@ -20,10 +21,15 @@ class AnswerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final thread = context.watch<Thread>();
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      //! For showcasing the effects of clipBehavior
-      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    final authState = context.bloc<AuthBloc>().state;
+    final isSelf = authState is Authenticated &&
+        authState.user.emailAddress.getOrCrash() == answer.author.getOrCrash();
+
+    return Bubble(
+      margin: const BubbleEdges.all(8.0),
+      nip: isSelf ? BubbleNip.rightTop : BubbleNip.leftTop,
+      color:
+          isSelf ? Theme.of(context).primaryColor : Theme.of(context).cardColor,
       child: InkWell(
         onTap: () {
           final authBlocState = context.bloc<AuthBloc>().state;
@@ -82,27 +88,42 @@ class AnswerCard extends StatelessWidget {
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(
-                answer.author.getOrCrash(),
-                style: Theme.of(context).textTheme.caption,
-              ),
-              MarkdownBody(
-                data: answer.content.getOrCrash(),
-              ),
-              Text(
-                "Published : ${answer.published.getOrCrash().toLocal()}",
-                style: Theme.of(context).textTheme.caption,
-                textAlign: TextAlign.end,
-              ),
-              Text(
-                "Updated : ${answer.updated.getOrCrash().toLocal()}",
-                style: Theme.of(context).textTheme.caption,
-                textAlign: TextAlign.end,
-              ),
-            ],
+          child: Theme(
+            data: isSelf ? ThemeData.dark() : ThemeData.light(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                  answer.author.getOrCrash(),
+                  style: Theme.of(context).textTheme.caption.apply(
+                        color: isSelf
+                            ? Colors.white
+                            : Theme.of(context).textTheme.caption.color,
+                      ),
+                ),
+                MarkdownBody(
+                  data: answer.content.getOrCrash(),
+                ),
+                Text(
+                  "Published : ${answer.published.getOrCrash().toLocal()}",
+                  style: Theme.of(context).textTheme.caption.apply(
+                        color: isSelf
+                            ? Colors.white
+                            : Theme.of(context).textTheme.caption.color,
+                      ),
+                  textAlign: TextAlign.end,
+                ),
+                Text(
+                  "Updated : ${answer.updated.getOrCrash().toLocal()}",
+                  style: Theme.of(context).textTheme.caption.apply(
+                        color: isSelf
+                            ? Colors.white
+                            : Theme.of(context).textTheme.caption.color,
+                      ),
+                  textAlign: TextAlign.end,
+                ),
+              ],
+            ),
           ),
         ),
       ),

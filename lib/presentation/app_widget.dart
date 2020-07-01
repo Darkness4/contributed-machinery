@@ -21,7 +21,7 @@ class AppWidget extends StatelessWidget {
         title: 'Contributed Machinery',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
-          primaryColor: Colors.blue,
+          primaryColor: Colors.blue[800],
           accentColor: Colors.blueAccent,
           appBarTheme: ThemeData.light().appBarTheme.copyWith(
                 brightness: Brightness.dark,

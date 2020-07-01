@@ -15,6 +15,7 @@ import 'package:contributed_machinery/infrastructure/auth/firebase_auth_facade.d
 import 'package:contributed_machinery/domain/auth/i_auth_facade.dart';
 import 'package:contributed_machinery/infrastructure/threads/thread_repository.dart';
 import 'package:contributed_machinery/domain/threads/i_thread_repository.dart';
+import 'package:contributed_machinery/application/search/search_bloc.dart';
 import 'package:contributed_machinery/application/sign_in_form/sign_in_form_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_actor/thread_actor_bloc.dart';
 import 'package:contributed_machinery/application/threads/thread_watcher/thread_watcher_bloc.dart';
@@ -33,6 +34,7 @@ void $initGetIt(GetIt g, {String environment}) {
       () => firebaseInjectableModule.firebaseAuth);
   g.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
   g.registerLazySingleton<Firestore>(() => firebaseInjectableModule.firestore);
+  g.registerFactory<SearchBloc>(() => SearchBloc());
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<ThreadActorBloc>(
       () => ThreadActorBloc(g<IThreadRepository>()));
