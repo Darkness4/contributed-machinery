@@ -12,17 +12,24 @@ import 'package:contributed_machinery/presentation/pages/sign_in/sign_in_page.da
 import 'package:contributed_machinery/presentation/pages/threads/threads_overview/threads_overview_page.dart';
 import 'package:contributed_machinery/presentation/pages/threads/thread_form/thread_form_page.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
+import 'package:contributed_machinery/presentation/pages/threads/thread_detail/thread_detail_page.dart';
+import 'package:contributed_machinery/presentation/pages/threads/answer_form/answer_form_page.dart';
+import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 
 abstract class Routes {
   static const splashPage = '/';
   static const signInPage = '/sign-in-page';
   static const threadsOverviewPage = '/threads-overview-page';
   static const threadFormPage = '/thread-form-page';
+  static const threadDetailPage = '/thread-detail-page';
+  static const answerFormPage = '/answer-form-page';
   static const all = {
     splashPage,
     signInPage,
     threadsOverviewPage,
     threadFormPage,
+    threadDetailPage,
+    answerFormPage,
   };
 }
 
@@ -64,6 +71,31 @@ class Router extends RouterBase {
           settings: settings,
           fullscreenDialog: true,
         );
+      case Routes.threadDetailPage:
+        if (hasInvalidArgs<ThreadDetailPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<ThreadDetailPageArguments>(args);
+        }
+        final typedArgs = args as ThreadDetailPageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) =>
+              ThreadDetailPage(key: typedArgs.key, thread: typedArgs.thread)
+                  .wrappedRoute(context),
+          settings: settings,
+        );
+      case Routes.answerFormPage:
+        if (hasInvalidArgs<AnswerFormPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<AnswerFormPageArguments>(args);
+        }
+        final typedArgs = args as AnswerFormPageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => AnswerFormPage(
+                  key: typedArgs.key,
+                  editedAnswer: typedArgs.editedAnswer,
+                  editedThread: typedArgs.editedThread)
+              .wrappedRoute(context),
+          settings: settings,
+          fullscreenDialog: true,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -79,4 +111,20 @@ class ThreadFormPageArguments {
   final Key key;
   final Thread editedThread;
   ThreadFormPageArguments({this.key, @required this.editedThread});
+}
+
+//ThreadDetailPage arguments holder class
+class ThreadDetailPageArguments {
+  final Key key;
+  final Thread thread;
+  ThreadDetailPageArguments({this.key, @required this.thread});
+}
+
+//AnswerFormPage arguments holder class
+class AnswerFormPageArguments {
+  final Key key;
+  final Answer editedAnswer;
+  final Thread editedThread;
+  AnswerFormPageArguments(
+      {this.key, @required this.editedAnswer, @required this.editedThread});
 }

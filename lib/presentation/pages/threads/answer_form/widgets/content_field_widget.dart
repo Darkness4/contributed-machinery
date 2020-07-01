@@ -1,4 +1,4 @@
-import 'package:contributed_machinery/application/threads/thread_form/thread_form_bloc.dart';
+import 'package:contributed_machinery/application/threads/answers/answer_form/answer_form_bloc.dart';
 import 'package:contributed_machinery/domain/threads/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -14,13 +14,13 @@ class ContentField extends HookWidget {
   Widget build(BuildContext context) {
     final textEditingController = useTextEditingController();
 
-    return BlocConsumer<ThreadFormBloc, ThreadFormState>(
+    return BlocConsumer<AnswerFormBloc, AnswerFormState>(
       listenWhen: (p, c) => p.isEditing != c.isEditing,
       listener: (context, state) {
         // In case of an initial data failure... We can't get to this point though.
-        textEditingController.text = state.thread.request.content.getOrCrash();
+        textEditingController.text = state.answer.content.getOrCrash();
       },
-      buildWhen: (p, c) => p.thread.request.content != c.thread.request.content,
+      buildWhen: (p, c) => p.answer.content != c.answer.content,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(10),
@@ -34,13 +34,12 @@ class ContentField extends HookWidget {
             textInputAction: TextInputAction.newline,
             maxLength: RequestContent.maxLength,
             onChanged: (value) => context
-                .bloc<ThreadFormBloc>()
-                .add(ThreadFormEvent.contentChanged(value)),
+                .bloc<AnswerFormBloc>()
+                .add(AnswerFormEvent.contentChanged(value)),
             validator: (_) => context
-                .bloc<ThreadFormBloc>()
+                .bloc<AnswerFormBloc>()
                 .state
-                .thread
-                .request
+                .answer
                 .content
                 .value
                 .fold(

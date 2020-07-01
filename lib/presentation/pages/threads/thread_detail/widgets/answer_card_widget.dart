@@ -1,50 +1,61 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:contributed_machinery/application/auth_bloc.dart';
-import 'package:contributed_machinery/application/threads/thread_actor/thread_actor_bloc.dart';
+import 'package:contributed_machinery/application/threads/answers/answer_actor/answer_actor_bloc.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:provider/provider.dart';
 
-class ThreadCard extends StatelessWidget {
-  final Thread thread;
+class AnswerCard extends StatelessWidget {
+  final Answer answer;
 
-  const ThreadCard({
+  const AnswerCard({
     Key key,
-    @required this.thread,
+    @required this.answer,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final thread = context.watch<Thread>();
     return Card(
       clipBehavior: Clip.antiAlias,
       //! For showcasing the effects of clipBehavior
       // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: () {
-          ExtendedNavigator.ofRouter<Router>().pushNamed(
-            Routes.threadDetailPage,
-            arguments: ThreadDetailPageArguments(thread: thread),
-          );
+          final authBlocState = context.bloc<AuthBloc>().state;
+
+          if (authBlocState is Authenticated &&
+              authBlocState.user.emailAddress.getOrCrash() ==
+                  answer.author.getOrCrash()) {
+            ExtendedNavigator.ofRouter<Router>().pushNamed(
+              Routes.answerFormPage,
+              arguments: AnswerFormPageArguments(
+                editedAnswer: answer,
+                editedThread: thread,
+              ),
+            );
+          }
         },
         onLongPress: () {
           final authBlocState = context.bloc<AuthBloc>().state;
 
           if (authBlocState is Authenticated &&
               authBlocState.user.emailAddress.getOrCrash() ==
-                  thread.request.author.getOrCrash()) {
-            final threadActorBloc = context.bloc<ThreadActorBloc>();
+                  answer.author.getOrCrash()) {
+            final answerActorBloc = context.bloc<AnswerActorBloc>();
             showDialog(
               context: context,
               builder: (context) {
                 return BlocProvider.value(
-                  value: threadActorBloc,
+                  value: answerActorBloc,
                   child: AlertDialog(
-                    title: const Text('Selected thread:'),
+                    title: const Text('Selected answer:'),
                     content: Text(
-                      thread.request.content.getOrCrash(),
+                      answer.content.getOrCrash(),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -55,7 +66,9 @@ class ThreadCard extends StatelessWidget {
                       ),
                       FlatButton(
                         onPressed: () {
-                          threadActorBloc.add(ThreadActorEvent.deleted(thread));
+                          answerActorBloc.add(AnswerActorEvent.deletedByThread(
+                              answer,
+                              thread: thread));
                           Navigator.pop(context);
                         },
                         child: const Text('DELETE'),
@@ -73,15 +86,11 @@ class ThreadCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                thread.request.title.getOrCrash(),
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
-                thread.request.author.getOrCrash(),
+                answer.author.getOrCrash(),
                 style: Theme.of(context).textTheme.caption,
               ),
               MarkdownBody(
-                data: thread.request.content.getOrCrash(),
+                data: answer.content.getOrCrash(),
               ),
             ],
           ),

@@ -94,7 +94,7 @@ class AnswerRepository implements IAnswerRepository {
         _firestore.threadCollection.document(thread.id.getOrCrash());
 
     yield* threadDoc.answerCollection
-        .orderBy('serverTimeStamp', descending: true)
+        .orderBy('serverTimeStamp')
         .snapshots()
         .map(
           (snapshot) => right<AnswerFailure, KtList<Answer>>(
