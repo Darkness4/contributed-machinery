@@ -31,7 +31,7 @@ class ThreadDetailPage extends StatelessWidget implements AutoRouteWrapper {
             create: (context) => getIt<AnswerWatcherBloc>()
               ..add(AnswerWatcherEvent.watchAllByThreadStarted(thread)),
           ),
-          Provider(create: (_) => thread),
+          Provider.value(value: thread),
         ],
         child: this,
       );

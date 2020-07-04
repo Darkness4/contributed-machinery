@@ -70,7 +70,7 @@ class AnswerFormPage extends StatelessWidget implements AutoRouteWrapper {
             create: (context) => getIt<AnswerFormBloc>()
               ..add(AnswerFormEvent.initialized(optionOf(editedAnswer))),
           ),
-          Provider(create: (_) => editedThread),
+          Provider.value(value: editedThread),
         ],
         child: this,
       );
