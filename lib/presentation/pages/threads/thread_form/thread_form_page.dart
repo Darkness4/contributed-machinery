@@ -121,7 +121,7 @@ class ThreadFormPageScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: BlocBuilder<ThreadFormBloc, ThreadFormState>(
-          condition: (p, c) => p.isEditing != c.isEditing,
+          buildWhen: (p, c) => p.isEditing != c.isEditing,
           builder: (context, state) =>
               Text(state.isEditing ? 'Edit a thread' : 'Create a thread'),
         ),
@@ -141,7 +141,7 @@ class ThreadFormPageScaffold extends StatelessWidget {
         ],
       ),
       body: BlocBuilder<ThreadFormBloc, ThreadFormState>(
-        condition: (p, c) => p.showErrorMessages != c.showErrorMessages,
+        buildWhen: (p, c) => p.showErrorMessages != c.showErrorMessages,
         builder: (context, state) {
           return Form(
             autovalidate: state.showErrorMessages,

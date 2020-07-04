@@ -19,13 +19,11 @@ part 'thread_watcher_bloc.freezed.dart';
 class ThreadWatcherBloc extends Bloc<ThreadWatcherEvent, ThreadWatcherState> {
   final IThreadRepository _threadRepository;
 
-  ThreadWatcherBloc(this._threadRepository);
+  ThreadWatcherBloc(this._threadRepository)
+      : super(const ThreadWatcherState.initial());
 
   StreamSubscription<Either<ThreadFailure, KtList<Thread>>>
       _threadStreamSubscription;
-
-  @override
-  ThreadWatcherState get initialState => const ThreadWatcherState.initial();
 
   @override
   Stream<ThreadWatcherState> mapEventToState(

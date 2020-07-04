@@ -8,19 +8,16 @@ import 'package:contributed_machinery/presentation/pages/threads/threads_overvie
 
 import 'page_transitions.dart';
 
-@MaterialAutoRouter()
-class $Router {
-  @initial
-  SplashPage splashPage;
-  SignInPage signInPage;
-  ThreadsOverviewPage threadsOverviewPage;
-  @MaterialRoute(fullscreenDialog: true)
-  ThreadFormPage threadFormPage;
-  @CustomRoute(
+@MaterialAutoRouter(routes: <AutoRoute>[
+  MaterialRoute(page: SplashPage, initial: true),
+  MaterialRoute(page: SignInPage),
+  MaterialRoute(page: ThreadsOverviewPage),
+  MaterialRoute(page: ThreadFormPage, fullscreenDialog: true),
+  CustomRoute(
     transitionsBuilder: PageTransitions.slideRight,
     durationInMilliseconds: 300,
-  )
-  ThreadDetailPage threadDetailPage;
-  @MaterialRoute(fullscreenDialog: true)
-  AnswerFormPage answerFormPage;
-}
+    page: ThreadDetailPage,
+  ),
+  MaterialRoute(page: AnswerFormPage, fullscreenDialog: true),
+])
+class $Router {}

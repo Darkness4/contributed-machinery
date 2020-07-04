@@ -25,11 +25,8 @@ class AnswerFormBloc extends Bloc<AnswerFormEvent, AnswerFormState> {
   final IThreadRepository _threadRepository;
   final AuthBloc _authBloc;
 
-  AnswerFormBloc(
-      this._answerRepository, this._authBloc, this._threadRepository);
-
-  @override
-  AnswerFormState get initialState => AnswerFormState.initial();
+  AnswerFormBloc(this._answerRepository, this._authBloc, this._threadRepository)
+      : super(AnswerFormState.initial());
 
   @override
   Stream<AnswerFormState> mapEventToState(

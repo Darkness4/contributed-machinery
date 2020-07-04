@@ -11,8 +11,7 @@ part 'search_bloc.freezed.dart';
 
 @injectable
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  @override
-  SearchState get initialState => const SearchState('');
+  SearchBloc() : super(const SearchState(''));
 
   @override
   Stream<SearchState> mapEventToState(

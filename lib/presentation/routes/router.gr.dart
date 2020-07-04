@@ -17,14 +17,14 @@ import 'package:contributed_machinery/presentation/routes/page_transitions.dart'
 import 'package:contributed_machinery/presentation/pages/threads/answer_form/answer_form_page.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 
-abstract class Routes {
-  static const splashPage = '/';
-  static const signInPage = '/sign-in-page';
-  static const threadsOverviewPage = '/threads-overview-page';
-  static const threadFormPage = '/thread-form-page';
-  static const threadDetailPage = '/thread-detail-page';
-  static const answerFormPage = '/answer-form-page';
-  static const all = {
+class Routes {
+  static const String splashPage = '/';
+  static const String signInPage = '/sign-in-page';
+  static const String threadsOverviewPage = '/threads-overview-page';
+  static const String threadFormPage = '/thread-form-page';
+  static const String threadDetailPage = '/thread-detail-page';
+  static const String answerFormPage = '/answer-form-page';
+  static const all = <String>{
     splashPage,
     signInPage,
     threadsOverviewPage,
@@ -36,73 +36,69 @@ abstract class Routes {
 
 class Router extends RouterBase {
   @override
-  Set<String> get allRoutes => Routes.all;
-
-  @Deprecated('call ExtendedNavigator.ofRouter<Router>() directly')
-  static ExtendedNavigatorState get navigator =>
-      ExtendedNavigator.ofRouter<Router>();
-
+  List<RouteDef> get routes => _routes;
+  final _routes = <RouteDef>[
+    RouteDef(Routes.splashPage, page: SplashPage),
+    RouteDef(Routes.signInPage, page: SignInPage),
+    RouteDef(Routes.threadsOverviewPage, page: ThreadsOverviewPage),
+    RouteDef(Routes.threadFormPage, page: ThreadFormPage),
+    RouteDef(Routes.threadDetailPage, page: ThreadDetailPage),
+    RouteDef(Routes.answerFormPage, page: AnswerFormPage),
+  ];
   @override
-  Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    final args = settings.arguments;
-    switch (settings.name) {
-      case Routes.splashPage:
-        return MaterialPageRoute<dynamic>(
-          builder: (context) => SplashPage(),
-          settings: settings,
-        );
-      case Routes.signInPage:
-        return MaterialPageRoute<dynamic>(
-          builder: (context) => SignInPage(),
-          settings: settings,
-        );
-      case Routes.threadsOverviewPage:
-        return MaterialPageRoute<dynamic>(
-          builder: (context) => ThreadsOverviewPage().wrappedRoute(context),
-          settings: settings,
-        );
-      case Routes.threadFormPage:
-        if (hasInvalidArgs<ThreadFormPageArguments>(args, isRequired: true)) {
-          return misTypedArgsRoute<ThreadFormPageArguments>(args);
-        }
-        final typedArgs = args as ThreadFormPageArguments;
-        return MaterialPageRoute<dynamic>(
-          builder: (context) => ThreadFormPage(
-              key: typedArgs.key, editedThread: typedArgs.editedThread),
-          settings: settings,
-          fullscreenDialog: true,
-        );
-      case Routes.threadDetailPage:
-        if (hasInvalidArgs<ThreadDetailPageArguments>(args, isRequired: true)) {
-          return misTypedArgsRoute<ThreadDetailPageArguments>(args);
-        }
-        final typedArgs = args as ThreadDetailPageArguments;
-        return PageRouteBuilder<dynamic>(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              ThreadDetailPage(key: typedArgs.key, thread: typedArgs.thread)
-                  .wrappedRoute(context),
-          settings: settings,
-          transitionsBuilder: PageTransitions.slideRight,
-          transitionDuration: const Duration(milliseconds: 300),
-        );
-      case Routes.answerFormPage:
-        if (hasInvalidArgs<AnswerFormPageArguments>(args, isRequired: true)) {
-          return misTypedArgsRoute<AnswerFormPageArguments>(args);
-        }
-        final typedArgs = args as AnswerFormPageArguments;
-        return MaterialPageRoute<dynamic>(
-          builder: (context) => AnswerFormPage(
-                  key: typedArgs.key,
-                  editedAnswer: typedArgs.editedAnswer,
-                  editedThread: typedArgs.editedThread)
-              .wrappedRoute(context),
-          settings: settings,
-          fullscreenDialog: true,
-        );
-      default:
-        return unknownRoutePage(settings.name);
-    }
-  }
+  Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
+  final _pagesMap = <Type, AutoRouteFactory>{
+    SplashPage: (RouteData data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SplashPage(),
+        settings: data,
+      );
+    },
+    SignInPage: (RouteData data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SignInPage(),
+        settings: data,
+      );
+    },
+    ThreadsOverviewPage: (RouteData data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ThreadsOverviewPage().wrappedRoute(context),
+        settings: data,
+      );
+    },
+    ThreadFormPage: (RouteData data) {
+      var args = data.getArgs<ThreadFormPageArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) =>
+            ThreadFormPage(key: args.key, editedThread: args.editedThread),
+        settings: data,
+        fullscreenDialog: true,
+      );
+    },
+    ThreadDetailPage: (RouteData data) {
+      var args = data.getArgs<ThreadDetailPageArguments>(nullOk: false);
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            ThreadDetailPage(key: args.key, thread: args.thread)
+                .wrappedRoute(context),
+        settings: data,
+        transitionsBuilder: PageTransitions.slideRight,
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    },
+    AnswerFormPage: (RouteData data) {
+      var args = data.getArgs<AnswerFormPageArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AnswerFormPage(
+          key: args.key,
+          editedAnswer: args.editedAnswer,
+          editedThread: args.editedThread,
+        ).wrappedRoute(context),
+        settings: data,
+        fullscreenDialog: true,
+      );
+    },
+  };
 }
 
 // *************************************************************************

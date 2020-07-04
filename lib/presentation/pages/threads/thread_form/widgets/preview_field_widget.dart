@@ -12,7 +12,7 @@ class PreviewField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThreadFormBloc, ThreadFormState>(
-      condition: (p, c) =>
+      buildWhen: (p, c) =>
           p.thread.request.content != c.thread.request.content ||
           p.thread.request.title != c.thread.request.title,
       builder: (context, state) {

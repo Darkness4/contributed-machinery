@@ -12,7 +12,7 @@ class PreviewField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AnswerFormBloc, AnswerFormState>(
-      condition: (p, c) => p.answer.content != c.answer.content,
+      buildWhen: (p, c) => p.answer.content != c.answer.content,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(10),

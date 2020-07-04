@@ -20,13 +20,11 @@ part 'answer_watcher_bloc.freezed.dart';
 class AnswerWatcherBloc extends Bloc<AnswerWatcherEvent, AnswerWatcherState> {
   final IAnswerRepository _answerRepository;
 
-  AnswerWatcherBloc(this._answerRepository);
+  AnswerWatcherBloc(this._answerRepository)
+      : super(const AnswerWatcherState.initial());
 
   StreamSubscription<Either<AnswerFailure, KtList<Answer>>>
       _threadStreamSubscription;
-
-  @override
-  AnswerWatcherState get initialState => const AnswerWatcherState.initial();
 
   @override
   Stream<AnswerWatcherState> mapEventToState(

@@ -132,7 +132,7 @@ class AnswerFormPageScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: BlocBuilder<AnswerFormBloc, AnswerFormState>(
-          condition: (p, c) => p.isEditing != c.isEditing,
+          buildWhen: (p, c) => p.isEditing != c.isEditing,
           builder: (context, state) =>
               Text(state.isEditing ? 'Edit an answer' : 'Create an answer'),
         ),
@@ -170,7 +170,7 @@ class AnswerFormPageScaffold extends StatelessWidget {
         ],
       ),
       body: BlocBuilder<AnswerFormBloc, AnswerFormState>(
-        condition: (p, c) => p.showErrorMessages != c.showErrorMessages,
+        buildWhen: (p, c) => p.showErrorMessages != c.showErrorMessages,
         builder: (context, state) {
           return Form(
             autovalidate: state.showErrorMessages,

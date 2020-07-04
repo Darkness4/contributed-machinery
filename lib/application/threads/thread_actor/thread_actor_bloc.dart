@@ -17,10 +17,8 @@ part 'thread_actor_bloc.freezed.dart';
 class ThreadActorBloc extends Bloc<ThreadActorEvent, ThreadActorState> {
   final IThreadRepository _threadRepository;
 
-  ThreadActorBloc(this._threadRepository);
-
-  @override
-  ThreadActorState get initialState => const ThreadActorState.initial();
+  ThreadActorBloc(this._threadRepository)
+      : super(const ThreadActorState.initial());
 
   @override
   Stream<ThreadActorState> mapEventToState(

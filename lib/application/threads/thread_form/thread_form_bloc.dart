@@ -21,10 +21,8 @@ class ThreadFormBloc extends Bloc<ThreadFormEvent, ThreadFormState> {
   final IThreadRepository _threadRepository;
   final AuthBloc _authBloc;
 
-  ThreadFormBloc(this._threadRepository, this._authBloc);
-
-  @override
-  ThreadFormState get initialState => ThreadFormState.initial();
+  ThreadFormBloc(this._threadRepository, this._authBloc)
+      : super(ThreadFormState.initial());
 
   @override
   Stream<ThreadFormState> mapEventToState(
