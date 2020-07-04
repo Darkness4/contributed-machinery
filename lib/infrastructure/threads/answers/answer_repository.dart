@@ -9,7 +9,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'answer_dtos.dart';
@@ -111,7 +110,7 @@ class AnswerRepository implements IAnswerRepository {
   }
 
   @override
-  Stream<Either<AnswerFailure, KtList<Answer>>> watchAllByThread(
+  Stream<Either<AnswerFailure, IList<Answer>>> watchAllByThread(
       Thread thread) async* {
     final threadDoc =
         _firestore.threadCollection.document(thread.id.getOrCrash());
@@ -120,10 +119,9 @@ class AnswerRepository implements IAnswerRepository {
         .orderBy('published')
         .snapshots()
         .map(
-          (snapshot) => right<AnswerFailure, KtList<Answer>>(
-            snapshot.documents
-                .map((doc) => AnswerDto.fromFirestore(doc).toDomain())
-                .toImmutableList(),
+          (snapshot) => right<AnswerFailure, IList<Answer>>(
+            IList.from(snapshot.documents
+                .map((doc) => AnswerDto.fromFirestore(doc).toDomain())),
           ),
         )
         .onErrorReturnWith((e) {

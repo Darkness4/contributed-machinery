@@ -17,7 +17,7 @@ class _$ThreadWatcherEventTearOff {
   }
 
   _ThreadsReceived threadsReceived(
-      Either<ThreadFailure, KtList<Thread>> failureOrThreads) {
+      Either<ThreadFailure, IList<Thread>> failureOrThreads) {
     return _ThreadsReceived(
       failureOrThreads,
     );
@@ -33,13 +33,13 @@ mixin _$ThreadWatcherEvent {
     @required Result watchAllStarted(),
     @required
         Result threadsReceived(
-            Either<ThreadFailure, KtList<Thread>> failureOrThreads),
+            Either<ThreadFailure, IList<Thread>> failureOrThreads),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result watchAllStarted(),
     Result threadsReceived(
-        Either<ThreadFailure, KtList<Thread>> failureOrThreads),
+        Either<ThreadFailure, IList<Thread>> failureOrThreads),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -109,7 +109,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
     @required Result watchAllStarted(),
     @required
         Result threadsReceived(
-            Either<ThreadFailure, KtList<Thread>> failureOrThreads),
+            Either<ThreadFailure, IList<Thread>> failureOrThreads),
   }) {
     assert(watchAllStarted != null);
     assert(threadsReceived != null);
@@ -121,7 +121,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   Result maybeWhen<Result extends Object>({
     Result watchAllStarted(),
     Result threadsReceived(
-        Either<ThreadFailure, KtList<Thread>> failureOrThreads),
+        Either<ThreadFailure, IList<Thread>> failureOrThreads),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -165,7 +165,7 @@ abstract class _$ThreadsReceivedCopyWith<$Res> {
   factory _$ThreadsReceivedCopyWith(
           _ThreadsReceived value, $Res Function(_ThreadsReceived) then) =
       __$ThreadsReceivedCopyWithImpl<$Res>;
-  $Res call({Either<ThreadFailure, KtList<Thread>> failureOrThreads});
+  $Res call({Either<ThreadFailure, IList<Thread>> failureOrThreads});
 }
 
 class __$ThreadsReceivedCopyWithImpl<$Res>
@@ -185,7 +185,7 @@ class __$ThreadsReceivedCopyWithImpl<$Res>
     return _then(_ThreadsReceived(
       failureOrThreads == freezed
           ? _value.failureOrThreads
-          : failureOrThreads as Either<ThreadFailure, KtList<Thread>>,
+          : failureOrThreads as Either<ThreadFailure, IList<Thread>>,
     ));
   }
 }
@@ -195,7 +195,7 @@ class _$_ThreadsReceived implements _ThreadsReceived {
       : assert(failureOrThreads != null);
 
   @override
-  final Either<ThreadFailure, KtList<Thread>> failureOrThreads;
+  final Either<ThreadFailure, IList<Thread>> failureOrThreads;
 
   @override
   String toString() {
@@ -226,7 +226,7 @@ class _$_ThreadsReceived implements _ThreadsReceived {
     @required Result watchAllStarted(),
     @required
         Result threadsReceived(
-            Either<ThreadFailure, KtList<Thread>> failureOrThreads),
+            Either<ThreadFailure, IList<Thread>> failureOrThreads),
   }) {
     assert(watchAllStarted != null);
     assert(threadsReceived != null);
@@ -238,7 +238,7 @@ class _$_ThreadsReceived implements _ThreadsReceived {
   Result maybeWhen<Result extends Object>({
     Result watchAllStarted(),
     Result threadsReceived(
-        Either<ThreadFailure, KtList<Thread>> failureOrThreads),
+        Either<ThreadFailure, IList<Thread>> failureOrThreads),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -276,10 +276,10 @@ class _$_ThreadsReceived implements _ThreadsReceived {
 
 abstract class _ThreadsReceived implements ThreadWatcherEvent {
   const factory _ThreadsReceived(
-          Either<ThreadFailure, KtList<Thread>> failureOrThreads) =
+          Either<ThreadFailure, IList<Thread>> failureOrThreads) =
       _$_ThreadsReceived;
 
-  Either<ThreadFailure, KtList<Thread>> get failureOrThreads;
+  Either<ThreadFailure, IList<Thread>> get failureOrThreads;
   _$ThreadsReceivedCopyWith<_ThreadsReceived> get copyWith;
 }
 
@@ -294,7 +294,7 @@ class _$ThreadWatcherStateTearOff {
     return const DataTransferInProgress();
   }
 
-  LoadSuccess loadSuccess(KtList<Thread> threads) {
+  LoadSuccess loadSuccess(IList<Thread> threads) {
     return LoadSuccess(
       threads,
     );
@@ -315,14 +315,14 @@ mixin _$ThreadWatcherState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Thread> threads),
+    @required Result loadSuccess(IList<Thread> threads),
     @required Result loadFailure(ThreadFailure threadFailure),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Thread> threads),
+    Result loadSuccess(IList<Thread> threads),
     Result loadFailure(ThreadFailure threadFailure),
     @required Result orElse(),
   });
@@ -393,7 +393,7 @@ class _$Initial implements Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Thread> threads),
+    @required Result loadSuccess(IList<Thread> threads),
     @required Result loadFailure(ThreadFailure threadFailure),
   }) {
     assert(initial != null);
@@ -408,7 +408,7 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Thread> threads),
+    Result loadSuccess(IList<Thread> threads),
     Result loadFailure(ThreadFailure threadFailure),
     @required Result orElse(),
   }) {
@@ -493,7 +493,7 @@ class _$DataTransferInProgress implements DataTransferInProgress {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Thread> threads),
+    @required Result loadSuccess(IList<Thread> threads),
     @required Result loadFailure(ThreadFailure threadFailure),
   }) {
     assert(initial != null);
@@ -508,7 +508,7 @@ class _$DataTransferInProgress implements DataTransferInProgress {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Thread> threads),
+    Result loadSuccess(IList<Thread> threads),
     Result loadFailure(ThreadFailure threadFailure),
     @required Result orElse(),
   }) {
@@ -559,7 +559,7 @@ abstract class $LoadSuccessCopyWith<$Res> {
   factory $LoadSuccessCopyWith(
           LoadSuccess value, $Res Function(LoadSuccess) then) =
       _$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({KtList<Thread> threads});
+  $Res call({IList<Thread> threads});
 }
 
 class _$LoadSuccessCopyWithImpl<$Res>
@@ -577,7 +577,7 @@ class _$LoadSuccessCopyWithImpl<$Res>
     Object threads = freezed,
   }) {
     return _then(LoadSuccess(
-      threads == freezed ? _value.threads : threads as KtList<Thread>,
+      threads == freezed ? _value.threads : threads as IList<Thread>,
     ));
   }
 }
@@ -586,7 +586,7 @@ class _$LoadSuccess implements LoadSuccess {
   const _$LoadSuccess(this.threads) : assert(threads != null);
 
   @override
-  final KtList<Thread> threads;
+  final IList<Thread> threads;
 
   @override
   String toString() {
@@ -614,7 +614,7 @@ class _$LoadSuccess implements LoadSuccess {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Thread> threads),
+    @required Result loadSuccess(IList<Thread> threads),
     @required Result loadFailure(ThreadFailure threadFailure),
   }) {
     assert(initial != null);
@@ -629,7 +629,7 @@ class _$LoadSuccess implements LoadSuccess {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Thread> threads),
+    Result loadSuccess(IList<Thread> threads),
     Result loadFailure(ThreadFailure threadFailure),
     @required Result orElse(),
   }) {
@@ -673,9 +673,9 @@ class _$LoadSuccess implements LoadSuccess {
 }
 
 abstract class LoadSuccess implements ThreadWatcherState {
-  const factory LoadSuccess(KtList<Thread> threads) = _$LoadSuccess;
+  const factory LoadSuccess(IList<Thread> threads) = _$LoadSuccess;
 
-  KtList<Thread> get threads;
+  IList<Thread> get threads;
   $LoadSuccessCopyWith<LoadSuccess> get copyWith;
 }
 
@@ -753,7 +753,7 @@ class _$LoadFailure implements LoadFailure {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Thread> threads),
+    @required Result loadSuccess(IList<Thread> threads),
     @required Result loadFailure(ThreadFailure threadFailure),
   }) {
     assert(initial != null);
@@ -768,7 +768,7 @@ class _$LoadFailure implements LoadFailure {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Thread> threads),
+    Result loadSuccess(IList<Thread> threads),
     Result loadFailure(ThreadFailure threadFailure),
     @required Result orElse(),
   }) {

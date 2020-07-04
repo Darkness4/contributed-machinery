@@ -2,17 +2,21 @@ import 'package:contributed_machinery/application/threads/answers/answer_form/an
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
-class ContentField extends HookWidget {
+class ContentField extends StatefulWidget {
   const ContentField({
     Key key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final textEditingController = useTextEditingController();
+  _ContentFieldState createState() => _ContentFieldState();
+}
 
+class _ContentFieldState extends State<ContentField> {
+  TextEditingController textEditingController;
+
+  @override
+  Widget build(BuildContext context) {
     return BlocConsumer<AnswerFormBloc, AnswerFormState>(
       listenWhen: (p, c) => p.isEditing != c.isEditing,
       listener: (context, state) {
@@ -52,5 +56,17 @@ class ContentField extends HookWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    textEditingController?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    textEditingController = TextEditingController();
+    super.initState();
   }
 }

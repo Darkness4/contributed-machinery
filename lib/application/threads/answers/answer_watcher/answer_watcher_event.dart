@@ -5,6 +5,5 @@ abstract class AnswerWatcherEvent with _$AnswerWatcherEvent {
   const factory AnswerWatcherEvent.watchAllByThreadStarted(Thread thread) =
       _WatchAllStarted;
   const factory AnswerWatcherEvent.answersReceived(
-          Either<AnswerFailure, KtList<Answer>> failureOrAnswers) =
-      _AnswersReceived;
+      Either<AnswerFailure, IList<Answer>> failureOrAnswers) = _AnswersReceived;
 }

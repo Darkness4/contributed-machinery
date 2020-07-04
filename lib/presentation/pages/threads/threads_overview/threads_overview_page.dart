@@ -9,16 +9,39 @@ import 'package:contributed_machinery/presentation/widgets/search_app_bar.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'widgets/threads_overview_body_widget.dart';
 
-class ThreadsOverviewPage extends HookWidget implements AutoRouteWrapper {
+class ThreadsOverviewPage extends StatefulWidget implements AutoRouteWrapper {
+  const ThreadsOverviewPage();
+
+  @override
+  _ThreadsOverviewPageState createState() => _ThreadsOverviewPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<ThreadWatcherBloc>(
+            create: (context) => getIt<ThreadWatcherBloc>()
+              ..add(const ThreadWatcherEvent.watchAllStarted()),
+          ),
+          BlocProvider<ThreadActorBloc>(
+            create: (context) => getIt<ThreadActorBloc>(),
+          ),
+          BlocProvider(
+            create: (_) => getIt<SearchBloc>(),
+          ),
+        ],
+        child: this,
+      );
+}
+
+class _ThreadsOverviewPageState extends State<ThreadsOverviewPage> {
+  TextEditingController textEditingController;
+  FocusNode focusNode;
+
   @override
   Widget build(BuildContext context) {
-    final controller = useTextEditingController();
-    final focusNode = useFocusNode();
-
     return MultiBlocListener(
       listeners: [
         BlocListener<AuthBloc, AuthState>(
@@ -55,7 +78,7 @@ class ThreadsOverviewPage extends HookWidget implements AutoRouteWrapper {
         appBar: AppBar(
           title: const Text('Threads'),
           bottom: SearchAppBar(
-            controller: controller,
+            controller: textEditingController,
             focusNode: focusNode,
           ),
           leading: IconButton(
@@ -83,19 +106,16 @@ class ThreadsOverviewPage extends HookWidget implements AutoRouteWrapper {
   }
 
   @override
-  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
-        providers: [
-          BlocProvider<ThreadWatcherBloc>(
-            create: (context) => getIt<ThreadWatcherBloc>()
-              ..add(const ThreadWatcherEvent.watchAllStarted()),
-          ),
-          BlocProvider<ThreadActorBloc>(
-            create: (context) => getIt<ThreadActorBloc>(),
-          ),
-          BlocProvider(
-            create: (_) => getIt<SearchBloc>(),
-          ),
-        ],
-        child: this,
-      );
+  void dispose() {
+    textEditingController?.dispose();
+    focusNode?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    textEditingController = TextEditingController();
+    focusNode = FocusNode();
+    super.initState();
+  }
 }

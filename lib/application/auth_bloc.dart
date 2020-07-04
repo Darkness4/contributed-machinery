@@ -5,7 +5,6 @@ import 'package:contributed_machinery/domain/auth/i_auth_facade.dart';
 import 'package:contributed_machinery/domain/auth/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';

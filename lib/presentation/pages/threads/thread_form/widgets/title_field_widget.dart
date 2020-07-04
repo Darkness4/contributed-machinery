@@ -3,17 +3,21 @@ import 'package:contributed_machinery/domain/threads/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
-class TitleField extends HookWidget {
+class TitleField extends StatefulWidget {
   const TitleField({
     Key key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final textEditingController = useTextEditingController();
+  _TitleFieldState createState() => _TitleFieldState();
+}
 
+class _TitleFieldState extends State<TitleField> {
+  TextEditingController textEditingController;
+
+  @override
+  Widget build(BuildContext context) {
     return BlocConsumer<ThreadFormBloc, ThreadFormState>(
       listenWhen: (p, c) => p.isEditing != c.isEditing,
       listener: (context, state) {
@@ -53,5 +57,17 @@ class TitleField extends HookWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    textEditingController?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    textEditingController = TextEditingController();
+    super.initState();
   }
 }

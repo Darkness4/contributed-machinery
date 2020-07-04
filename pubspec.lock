@@ -35,7 +35,7 @@ packages:
       name: auto_route
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0+1"
+    version: "0.6.1"
   auto_route_generator:
     dependency: "direct dev"
     description:
@@ -335,13 +335,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0"
-  flutter_hooks:
-    dependency: "direct main"
-    description:
-      name: flutter_hooks
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.0"
   flutter_markdown:
     dependency: "direct main"
     description:
@@ -478,13 +471,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
-  kt_dart:
-    dependency: "direct main"
-    description:
-      name: kt_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.0+1"
   lint:
     dependency: "direct dev"
     description:

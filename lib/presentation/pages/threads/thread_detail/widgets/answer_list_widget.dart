@@ -28,17 +28,19 @@ class AnswerListWidget extends StatelessWidget {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               _controller.jumpTo(_controller.position.maxScrollExtent);
             });
+
+            final answers = state.answers.toList();
             return ListView.builder(
               controller: _controller,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                final answer = state.answers[index];
+                final answer = answers[index];
                 if (answer.failureOption.isSome()) {
                   return ErrorAnswerCard(answer: answer);
                 }
                 return AnswerCard(answer: answer);
               },
-              itemCount: state.answers.size,
+              itemCount: state.answers.length(),
             );
           },
           loadFailure: (state) {

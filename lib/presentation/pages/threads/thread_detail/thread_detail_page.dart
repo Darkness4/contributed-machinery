@@ -6,13 +6,12 @@ import 'package:contributed_machinery/injection.dart';
 import 'package:contributed_machinery/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
 
 import 'widgets/answer_list_widget.dart';
 import 'widgets/content_widget.dart';
 
-class ThreadDetailPage extends HookWidget implements AutoRouteWrapper {
+class ThreadDetailPage extends StatelessWidget implements AutoRouteWrapper {
   final Thread thread;
 
   const ThreadDetailPage({

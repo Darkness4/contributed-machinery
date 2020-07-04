@@ -7,7 +7,6 @@ import 'package:contributed_machinery/domain/threads/thread_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 part 'thread_watcher_event.dart';
@@ -22,7 +21,7 @@ class ThreadWatcherBloc extends Bloc<ThreadWatcherEvent, ThreadWatcherState> {
   ThreadWatcherBloc(this._threadRepository)
       : super(const ThreadWatcherState.initial());
 
-  StreamSubscription<Either<ThreadFailure, KtList<Thread>>>
+  StreamSubscription<Either<ThreadFailure, IList<Thread>>>
       _threadStreamSubscription;
 
   @override

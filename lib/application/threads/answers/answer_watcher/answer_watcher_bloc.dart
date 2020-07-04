@@ -8,7 +8,6 @@ import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 part 'answer_watcher_event.dart';
@@ -23,7 +22,7 @@ class AnswerWatcherBloc extends Bloc<AnswerWatcherEvent, AnswerWatcherState> {
   AnswerWatcherBloc(this._answerRepository)
       : super(const AnswerWatcherState.initial());
 
-  StreamSubscription<Either<AnswerFailure, KtList<Answer>>>
+  StreamSubscription<Either<AnswerFailure, IList<Answer>>>
       _threadStreamSubscription;
 
   @override

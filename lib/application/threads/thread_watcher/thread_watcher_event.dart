@@ -4,6 +4,5 @@ part of 'thread_watcher_bloc.dart';
 abstract class ThreadWatcherEvent with _$ThreadWatcherEvent {
   const factory ThreadWatcherEvent.watchAllStarted() = _WatchAllStarted;
   const factory ThreadWatcherEvent.threadsReceived(
-          Either<ThreadFailure, KtList<Thread>> failureOrThreads) =
-      _ThreadsReceived;
+      Either<ThreadFailure, IList<Thread>> failureOrThreads) = _ThreadsReceived;
 }

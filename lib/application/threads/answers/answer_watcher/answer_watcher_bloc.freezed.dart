@@ -19,7 +19,7 @@ class _$AnswerWatcherEventTearOff {
   }
 
   _AnswersReceived answersReceived(
-      Either<AnswerFailure, KtList<Answer>> failureOrAnswers) {
+      Either<AnswerFailure, IList<Answer>> failureOrAnswers) {
     return _AnswersReceived(
       failureOrAnswers,
     );
@@ -35,13 +35,13 @@ mixin _$AnswerWatcherEvent {
     @required Result watchAllByThreadStarted(Thread thread),
     @required
         Result answersReceived(
-            Either<AnswerFailure, KtList<Answer>> failureOrAnswers),
+            Either<AnswerFailure, IList<Answer>> failureOrAnswers),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result watchAllByThreadStarted(Thread thread),
     Result answersReceived(
-        Either<AnswerFailure, KtList<Answer>> failureOrAnswers),
+        Either<AnswerFailure, IList<Answer>> failureOrAnswers),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -144,7 +144,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
     @required Result watchAllByThreadStarted(Thread thread),
     @required
         Result answersReceived(
-            Either<AnswerFailure, KtList<Answer>> failureOrAnswers),
+            Either<AnswerFailure, IList<Answer>> failureOrAnswers),
   }) {
     assert(watchAllByThreadStarted != null);
     assert(answersReceived != null);
@@ -156,7 +156,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   Result maybeWhen<Result extends Object>({
     Result watchAllByThreadStarted(Thread thread),
     Result answersReceived(
-        Either<AnswerFailure, KtList<Answer>> failureOrAnswers),
+        Either<AnswerFailure, IList<Answer>> failureOrAnswers),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -203,7 +203,7 @@ abstract class _$AnswersReceivedCopyWith<$Res> {
   factory _$AnswersReceivedCopyWith(
           _AnswersReceived value, $Res Function(_AnswersReceived) then) =
       __$AnswersReceivedCopyWithImpl<$Res>;
-  $Res call({Either<AnswerFailure, KtList<Answer>> failureOrAnswers});
+  $Res call({Either<AnswerFailure, IList<Answer>> failureOrAnswers});
 }
 
 class __$AnswersReceivedCopyWithImpl<$Res>
@@ -223,7 +223,7 @@ class __$AnswersReceivedCopyWithImpl<$Res>
     return _then(_AnswersReceived(
       failureOrAnswers == freezed
           ? _value.failureOrAnswers
-          : failureOrAnswers as Either<AnswerFailure, KtList<Answer>>,
+          : failureOrAnswers as Either<AnswerFailure, IList<Answer>>,
     ));
   }
 }
@@ -233,7 +233,7 @@ class _$_AnswersReceived implements _AnswersReceived {
       : assert(failureOrAnswers != null);
 
   @override
-  final Either<AnswerFailure, KtList<Answer>> failureOrAnswers;
+  final Either<AnswerFailure, IList<Answer>> failureOrAnswers;
 
   @override
   String toString() {
@@ -264,7 +264,7 @@ class _$_AnswersReceived implements _AnswersReceived {
     @required Result watchAllByThreadStarted(Thread thread),
     @required
         Result answersReceived(
-            Either<AnswerFailure, KtList<Answer>> failureOrAnswers),
+            Either<AnswerFailure, IList<Answer>> failureOrAnswers),
   }) {
     assert(watchAllByThreadStarted != null);
     assert(answersReceived != null);
@@ -276,7 +276,7 @@ class _$_AnswersReceived implements _AnswersReceived {
   Result maybeWhen<Result extends Object>({
     Result watchAllByThreadStarted(Thread thread),
     Result answersReceived(
-        Either<AnswerFailure, KtList<Answer>> failureOrAnswers),
+        Either<AnswerFailure, IList<Answer>> failureOrAnswers),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -314,10 +314,10 @@ class _$_AnswersReceived implements _AnswersReceived {
 
 abstract class _AnswersReceived implements AnswerWatcherEvent {
   const factory _AnswersReceived(
-          Either<AnswerFailure, KtList<Answer>> failureOrAnswers) =
+          Either<AnswerFailure, IList<Answer>> failureOrAnswers) =
       _$_AnswersReceived;
 
-  Either<AnswerFailure, KtList<Answer>> get failureOrAnswers;
+  Either<AnswerFailure, IList<Answer>> get failureOrAnswers;
   _$AnswersReceivedCopyWith<_AnswersReceived> get copyWith;
 }
 
@@ -332,7 +332,7 @@ class _$AnswerWatcherStateTearOff {
     return const DataTransferInProgress();
   }
 
-  LoadSuccess loadSuccess(KtList<Answer> answers) {
+  LoadSuccess loadSuccess(IList<Answer> answers) {
     return LoadSuccess(
       answers,
     );
@@ -353,14 +353,14 @@ mixin _$AnswerWatcherState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Answer> answers),
+    @required Result loadSuccess(IList<Answer> answers),
     @required Result loadFailure(AnswerFailure answerFailure),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Answer> answers),
+    Result loadSuccess(IList<Answer> answers),
     Result loadFailure(AnswerFailure answerFailure),
     @required Result orElse(),
   });
@@ -431,7 +431,7 @@ class _$Initial implements Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Answer> answers),
+    @required Result loadSuccess(IList<Answer> answers),
     @required Result loadFailure(AnswerFailure answerFailure),
   }) {
     assert(initial != null);
@@ -446,7 +446,7 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Answer> answers),
+    Result loadSuccess(IList<Answer> answers),
     Result loadFailure(AnswerFailure answerFailure),
     @required Result orElse(),
   }) {
@@ -531,7 +531,7 @@ class _$DataTransferInProgress implements DataTransferInProgress {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Answer> answers),
+    @required Result loadSuccess(IList<Answer> answers),
     @required Result loadFailure(AnswerFailure answerFailure),
   }) {
     assert(initial != null);
@@ -546,7 +546,7 @@ class _$DataTransferInProgress implements DataTransferInProgress {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Answer> answers),
+    Result loadSuccess(IList<Answer> answers),
     Result loadFailure(AnswerFailure answerFailure),
     @required Result orElse(),
   }) {
@@ -597,7 +597,7 @@ abstract class $LoadSuccessCopyWith<$Res> {
   factory $LoadSuccessCopyWith(
           LoadSuccess value, $Res Function(LoadSuccess) then) =
       _$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({KtList<Answer> answers});
+  $Res call({IList<Answer> answers});
 }
 
 class _$LoadSuccessCopyWithImpl<$Res>
@@ -615,7 +615,7 @@ class _$LoadSuccessCopyWithImpl<$Res>
     Object answers = freezed,
   }) {
     return _then(LoadSuccess(
-      answers == freezed ? _value.answers : answers as KtList<Answer>,
+      answers == freezed ? _value.answers : answers as IList<Answer>,
     ));
   }
 }
@@ -624,7 +624,7 @@ class _$LoadSuccess implements LoadSuccess {
   const _$LoadSuccess(this.answers) : assert(answers != null);
 
   @override
-  final KtList<Answer> answers;
+  final IList<Answer> answers;
 
   @override
   String toString() {
@@ -652,7 +652,7 @@ class _$LoadSuccess implements LoadSuccess {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Answer> answers),
+    @required Result loadSuccess(IList<Answer> answers),
     @required Result loadFailure(AnswerFailure answerFailure),
   }) {
     assert(initial != null);
@@ -667,7 +667,7 @@ class _$LoadSuccess implements LoadSuccess {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Answer> answers),
+    Result loadSuccess(IList<Answer> answers),
     Result loadFailure(AnswerFailure answerFailure),
     @required Result orElse(),
   }) {
@@ -711,9 +711,9 @@ class _$LoadSuccess implements LoadSuccess {
 }
 
 abstract class LoadSuccess implements AnswerWatcherState {
-  const factory LoadSuccess(KtList<Answer> answers) = _$LoadSuccess;
+  const factory LoadSuccess(IList<Answer> answers) = _$LoadSuccess;
 
-  KtList<Answer> get answers;
+  IList<Answer> get answers;
   $LoadSuccessCopyWith<LoadSuccess> get copyWith;
 }
 
@@ -791,7 +791,7 @@ class _$LoadFailure implements LoadFailure {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loadInProgress(),
-    @required Result loadSuccess(KtList<Answer> answers),
+    @required Result loadSuccess(IList<Answer> answers),
     @required Result loadFailure(AnswerFailure answerFailure),
   }) {
     assert(initial != null);
@@ -806,7 +806,7 @@ class _$LoadFailure implements LoadFailure {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loadInProgress(),
-    Result loadSuccess(KtList<Answer> answers),
+    Result loadSuccess(IList<Answer> answers),
     Result loadFailure(AnswerFailure answerFailure),
     @required Result orElse(),
   }) {

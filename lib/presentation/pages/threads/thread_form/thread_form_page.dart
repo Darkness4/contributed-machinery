@@ -7,7 +7,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'widgets/content_field_widget.dart';
 import 'widgets/preview_field_widget.dart';
@@ -53,7 +52,7 @@ class SavingInProgressOverlay extends StatelessWidget {
   }
 }
 
-class ThreadFormPage extends HookWidget {
+class ThreadFormPage extends StatelessWidget {
   final Thread editedThread;
 
   const ThreadFormPage({

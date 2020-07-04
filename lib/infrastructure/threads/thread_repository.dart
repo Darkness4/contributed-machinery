@@ -8,7 +8,6 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
 @prod
@@ -99,15 +98,14 @@ class ThreadRepository implements IThreadRepository {
   }
 
   @override
-  Stream<Either<ThreadFailure, KtList<Thread>>> watchAll() async* {
+  Stream<Either<ThreadFailure, IList<Thread>>> watchAll() async* {
     yield* _firestore.threadCollection
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map(
-          (snapshot) => right<ThreadFailure, KtList<Thread>>(
-            snapshot.documents
-                .map((doc) => ThreadDto.fromFirestore(doc).toDomain())
-                .toImmutableList(),
+          (snapshot) => right<ThreadFailure, IList<Thread>>(
+            IList.from(snapshot.documents
+                .map((doc) => ThreadDto.fromFirestore(doc).toDomain())),
           ),
         )
         .onErrorReturnWith((e) {

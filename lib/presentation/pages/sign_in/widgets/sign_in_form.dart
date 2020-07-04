@@ -93,6 +93,8 @@ class SignInForm extends StatelessWidget {
                           ),
                           (_) => null,
                         ),
+                onFieldSubmitted: (_) => context.bloc<SignInFormBloc>().add(
+                    const SignInFormEvent.signInWithEmailAndPasswordPressed()),
               ),
               const SizedBox(height: 8),
               Row(
