@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'thread_actor_bloc.dart';
 
@@ -12,6 +12,7 @@ T _$identity<T>(T value) => value;
 class _$ThreadActorEventTearOff {
   const _$ThreadActorEventTearOff();
 
+// ignore: unused_element
   _Deleted deleted(Thread thread) {
     return _Deleted(
       thread,
@@ -197,20 +198,24 @@ abstract class _Deleted implements ThreadActorEvent {
 class _$ThreadActorStateTearOff {
   const _$ThreadActorStateTearOff();
 
+// ignore: unused_element
   Initial initial() {
     return const Initial();
   }
 
+// ignore: unused_element
   ActionInProgress actionInProgress() {
     return const ActionInProgress();
   }
 
+// ignore: unused_element
   DeleteFailure deleteFailure(ThreadFailure failure) {
     return DeleteFailure(
       failure,
     );
   }
 
+// ignore: unused_element
   DeleteSuccess deleteSuccess() {
     return const DeleteSuccess();
   }

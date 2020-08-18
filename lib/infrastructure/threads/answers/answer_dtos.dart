@@ -1,8 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contributed_machinery/domain/core/value_objects.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 import 'package:contributed_machinery/domain/threads/answers/value_objects.dart';
 import 'package:contributed_machinery/domain/threads/value_objects.dart';
-import 'package:contributed_machinery/infrastructure/core/firestore_helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../thread_dtos.dart';
@@ -36,7 +36,7 @@ abstract class AnswerDto with _$AnswerDto {
       _$AnswerDtoFromJson(json);
 
   factory AnswerDto.fromFirestore(DocumentSnapshot doc) {
-    return AnswerDto.fromJson(doc.data).copyWith(id: doc.documentID);
+    return AnswerDto.fromJson(doc.data()).copyWith(id: doc.id);
   }
 
   static DateTime dateTimeAsIs(DateTime dateTime) => dateTime;

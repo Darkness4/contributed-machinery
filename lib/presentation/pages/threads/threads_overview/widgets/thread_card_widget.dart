@@ -23,7 +23,7 @@ class ThreadCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       child: InkWell(
         onTap: () {
-          ExtendedNavigator.ofRouter<Router>().pushNamed(
+          context.navigator.push(
             Routes.threadDetailPage,
             arguments: ThreadDetailPageArguments(thread: thread),
           );

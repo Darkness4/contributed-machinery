@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'thread_form_bloc.dart';
 
@@ -12,24 +12,28 @@ T _$identity<T>(T value) => value;
 class _$ThreadFormEventTearOff {
   const _$ThreadFormEventTearOff();
 
+// ignore: unused_element
   _Initialized initialized(Option<Thread> initialThreadOption) {
     return _Initialized(
       initialThreadOption,
     );
   }
 
+// ignore: unused_element
   _TitleChanged titleChanged(String titleStr) {
     return _TitleChanged(
       titleStr,
     );
   }
 
+// ignore: unused_element
   _ContentChanged contentChanged(String contentStr) {
     return _ContentChanged(
       contentStr,
     );
   }
 
+// ignore: unused_element
   _Saved saved() {
     return const _Saved();
   }
@@ -566,6 +570,7 @@ abstract class _Saved implements ThreadFormEvent {
 class _$ThreadFormStateTearOff {
   const _$ThreadFormStateTearOff();
 
+// ignore: unused_element
   _ThreadFormState call(
       {@required
           Thread thread,

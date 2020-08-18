@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contributed_machinery/domain/threads/i_thread_repository.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/domain/threads/thread_failure.dart';
@@ -13,7 +14,7 @@ import 'package:rxdart/rxdart.dart';
 @prod
 @LazySingleton(as: IThreadRepository)
 class ThreadRepository implements IThreadRepository {
-  final Firestore _firestore;
+  final FirebaseFirestore _firestore;
 
   ThreadRepository(this._firestore);
 
@@ -23,8 +24,8 @@ class ThreadRepository implements IThreadRepository {
       final threadDto = ThreadDto.fromDomain(thread);
 
       await _firestore.threadCollection
-          .document(threadDto.id)
-          .setData(threadDto.toJson());
+          .doc(threadDto.id)
+          .set(threadDto.toJson());
 
       return right(unit);
     } on PlatformException catch (e, s) {
@@ -49,7 +50,7 @@ class ThreadRepository implements IThreadRepository {
     try {
       final threadId = thread.id.getOrCrash();
 
-      await _firestore.threadCollection.document(threadId).delete();
+      await _firestore.threadCollection.doc(threadId).delete();
 
       return right(unit);
     } on PlatformException catch (e, s) {
@@ -74,8 +75,8 @@ class ThreadRepository implements IThreadRepository {
       final threadDto = ThreadDto.fromDomain(thread);
 
       await _firestore.threadCollection
-          .document(threadDto.id)
-          .updateData(threadDto.toJson());
+          .doc(threadDto.id)
+          .update(threadDto.toJson());
 
       return right(unit);
     } on PlatformException catch (e, s) {
@@ -104,7 +105,7 @@ class ThreadRepository implements IThreadRepository {
         .snapshots()
         .map(
           (snapshot) => right<ThreadFailure, IList<Thread>>(
-            IList.from(snapshot.documents
+            IList.from(snapshot.docs
                 .map((doc) => ThreadDto.fromFirestore(doc).toDomain())),
           ),
         )

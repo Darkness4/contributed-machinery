@@ -5,8 +5,7 @@ import 'package:contributed_machinery/presentation/pages/threads/answer_form/ans
 import 'package:contributed_machinery/presentation/pages/threads/thread_detail/thread_detail_page.dart';
 import 'package:contributed_machinery/presentation/pages/threads/thread_form/thread_form_page.dart';
 import 'package:contributed_machinery/presentation/pages/threads/threads_overview/threads_overview_page.dart';
-
-import 'page_transitions.dart';
+import 'package:flutter/material.dart';
 
 @MaterialAutoRouter(routes: <AutoRoute>[
   MaterialRoute(page: SplashPage, initial: true),
@@ -14,10 +13,26 @@ import 'page_transitions.dart';
   MaterialRoute(page: ThreadsOverviewPage),
   MaterialRoute(page: ThreadFormPage, fullscreenDialog: true),
   CustomRoute(
-    transitionsBuilder: PageTransitions.slideRight,
+    transitionsBuilder: slideRight,
     durationInMilliseconds: 300,
     page: ThreadDetailPage,
   ),
   MaterialRoute(page: AnswerFormPage, fullscreenDialog: true),
 ])
 class $Router {}
+
+Widget slideRight(BuildContext context, Animation<double> animation,
+    Animation<double> secondaryAnimation, Widget child) {
+  return SlideTransition(
+    position: Tween<Offset>(
+      begin: const Offset(1.0, 0.0),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: animation,
+        curve: Curves.fastOutSlowIn,
+      ),
+    ),
+    child: child,
+  );
+}

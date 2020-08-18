@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer.dart';
 import 'package:contributed_machinery/domain/threads/answers/answer_failure.dart';
 import 'package:contributed_machinery/domain/threads/answers/i_answer_repository.dart';
@@ -16,7 +17,7 @@ import 'answer_dtos.dart';
 @prod
 @LazySingleton(as: IAnswerRepository)
 class AnswerRepository implements IAnswerRepository {
-  final Firestore _firestore;
+  final FirebaseFirestore _firestore;
 
   AnswerRepository(this._firestore);
 
@@ -24,13 +25,12 @@ class AnswerRepository implements IAnswerRepository {
   Future<Either<AnswerFailure, Unit>> createByThread(Answer answer,
       {@required Thread thread}) async {
     try {
-      final threadDoc =
-          _firestore.threadCollection.document(thread.id.getOrCrash());
+      final threadDoc = _firestore.threadCollection.doc(thread.id.getOrCrash());
       final answerDto = AnswerDto.fromDomain(answer);
 
       await threadDoc.answerCollection
-          .document(answerDto.id)
-          .setData(answerDto.toJson());
+          .doc(answerDto.id)
+          .set(answerDto.toJson());
 
       return right(unit);
     } on PlatformException catch (e, s) {
@@ -54,11 +54,10 @@ class AnswerRepository implements IAnswerRepository {
   Future<Either<AnswerFailure, Unit>> deleteByThread(Answer answer,
       {@required Thread thread}) async {
     try {
-      final threadDoc =
-          _firestore.threadCollection.document(thread.id.getOrCrash());
+      final threadDoc = _firestore.threadCollection.doc(thread.id.getOrCrash());
       final answerId = answer.id.getOrCrash();
 
-      await threadDoc.answerCollection.document(answerId).delete();
+      await threadDoc.answerCollection.doc(answerId).delete();
 
       return right(unit);
     } on PlatformException catch (e, s) {
@@ -81,13 +80,12 @@ class AnswerRepository implements IAnswerRepository {
   Future<Either<AnswerFailure, Unit>> updateByThread(Answer answer,
       {@required Thread thread}) async {
     try {
-      final threadDoc =
-          _firestore.threadCollection.document(thread.id.getOrCrash());
+      final threadDoc = _firestore.threadCollection.doc(thread.id.getOrCrash());
       final answerDto = AnswerDto.fromDomain(answer);
 
       await threadDoc.answerCollection
-          .document(answerDto.id)
-          .updateData(answerDto.toJson());
+          .doc(answerDto.id)
+          .update(answerDto.toJson());
 
       return right(unit);
     } on PlatformException catch (e, s) {
@@ -112,15 +110,14 @@ class AnswerRepository implements IAnswerRepository {
   @override
   Stream<Either<AnswerFailure, IList<Answer>>> watchAllByThread(
       Thread thread) async* {
-    final threadDoc =
-        _firestore.threadCollection.document(thread.id.getOrCrash());
+    final threadDoc = _firestore.threadCollection.doc(thread.id.getOrCrash());
 
     yield* threadDoc.answerCollection
         .orderBy('published')
         .snapshots()
         .map(
           (snapshot) => right<AnswerFailure, IList<Answer>>(
-            IList.from(snapshot.documents
+            IList.from(snapshot.docs
                 .map((doc) => AnswerDto.fromFirestore(doc).toDomain())),
           ),
         )

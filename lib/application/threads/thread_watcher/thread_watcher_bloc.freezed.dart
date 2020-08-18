@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'thread_watcher_bloc.dart';
 
@@ -12,10 +12,12 @@ T _$identity<T>(T value) => value;
 class _$ThreadWatcherEventTearOff {
   const _$ThreadWatcherEventTearOff();
 
+// ignore: unused_element
   _WatchAllStarted watchAllStarted() {
     return const _WatchAllStarted();
   }
 
+// ignore: unused_element
   _ThreadsReceived threadsReceived(
       Either<ThreadFailure, IList<Thread>> failureOrThreads) {
     return _ThreadsReceived(
@@ -286,20 +288,24 @@ abstract class _ThreadsReceived implements ThreadWatcherEvent {
 class _$ThreadWatcherStateTearOff {
   const _$ThreadWatcherStateTearOff();
 
+// ignore: unused_element
   Initial initial() {
     return const Initial();
   }
 
+// ignore: unused_element
   DataTransferInProgress loadInProgress() {
     return const DataTransferInProgress();
   }
 
+// ignore: unused_element
   LoadSuccess loadSuccess(IList<Thread> threads) {
     return LoadSuccess(
       threads,
     );
   }
 
+// ignore: unused_element
   LoadFailure loadFailure(ThreadFailure threadFailure) {
     return LoadFailure(
       threadFailure,

@@ -4,18 +4,20 @@
 // AutoRouteGenerator
 // **************************************************************************
 
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: public_member_api_docs
+
 import 'package:auto_route/auto_route.dart';
-import 'package:contributed_machinery/presentation/pages/splash/splash_page.dart';
-import 'package:contributed_machinery/presentation/pages/sign_in/sign_in_page.dart';
-import 'package:contributed_machinery/presentation/pages/threads/threads_overview/threads_overview_page.dart';
-import 'package:contributed_machinery/presentation/pages/threads/thread_form/thread_form_page.dart';
-import 'package:contributed_machinery/domain/threads/thread.dart';
-import 'package:contributed_machinery/presentation/pages/threads/thread_detail/thread_detail_page.dart';
-import 'package:contributed_machinery/presentation/routes/page_transitions.dart';
-import 'package:contributed_machinery/presentation/pages/threads/answer_form/answer_form_page.dart';
-import 'package:contributed_machinery/domain/threads/answers/answer.dart';
+import 'package:flutter/material.dart';
+
+import '../../domain/threads/answers/answer.dart';
+import '../../domain/threads/thread.dart';
+import '../pages/sign_in/sign_in_page.dart';
+import '../pages/splash/splash_page.dart';
+import '../pages/threads/answer_form/answer_form_page.dart';
+import '../pages/threads/thread_detail/thread_detail_page.dart';
+import '../pages/threads/thread_form/thread_form_page.dart';
+import '../pages/threads/threads_overview/threads_overview_page.dart';
+import 'router.dart';
 
 class Routes {
   static const String splashPage = '/';
@@ -48,46 +50,50 @@ class Router extends RouterBase {
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    SplashPage: (RouteData data) {
+    SplashPage: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => SplashPage(),
         settings: data,
       );
     },
-    SignInPage: (RouteData data) {
+    SignInPage: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => SignInPage(),
         settings: data,
       );
     },
-    ThreadsOverviewPage: (RouteData data) {
+    ThreadsOverviewPage: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => ThreadsOverviewPage().wrappedRoute(context),
         settings: data,
       );
     },
-    ThreadFormPage: (RouteData data) {
-      var args = data.getArgs<ThreadFormPageArguments>(nullOk: false);
+    ThreadFormPage: (data) {
+      final args = data.getArgs<ThreadFormPageArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) =>
-            ThreadFormPage(key: args.key, editedThread: args.editedThread),
+        builder: (context) => ThreadFormPage(
+          key: args.key,
+          editedThread: args.editedThread,
+        ),
         settings: data,
         fullscreenDialog: true,
       );
     },
-    ThreadDetailPage: (RouteData data) {
-      var args = data.getArgs<ThreadDetailPageArguments>(nullOk: false);
+    ThreadDetailPage: (data) {
+      final args = data.getArgs<ThreadDetailPageArguments>(nullOk: false);
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            ThreadDetailPage(key: args.key, thread: args.thread)
-                .wrappedRoute(context),
+            ThreadDetailPage(
+          key: args.key,
+          thread: args.thread,
+        ).wrappedRoute(context),
         settings: data,
-        transitionsBuilder: PageTransitions.slideRight,
+        transitionsBuilder: slideRight,
         transitionDuration: const Duration(milliseconds: 300),
       );
     },
-    AnswerFormPage: (RouteData data) {
-      var args = data.getArgs<AnswerFormPageArguments>(nullOk: false);
+    AnswerFormPage: (data) {
+      final args = data.getArgs<AnswerFormPageArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) => AnswerFormPage(
           key: args.key,
@@ -101,25 +107,25 @@ class Router extends RouterBase {
   };
 }
 
-// *************************************************************************
-// Arguments holder classes
-// **************************************************************************
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
 
-//ThreadFormPage arguments holder class
+/// ThreadFormPage arguments holder class
 class ThreadFormPageArguments {
   final Key key;
   final Thread editedThread;
   ThreadFormPageArguments({this.key, @required this.editedThread});
 }
 
-//ThreadDetailPage arguments holder class
+/// ThreadDetailPage arguments holder class
 class ThreadDetailPageArguments {
   final Key key;
   final Thread thread;
   ThreadDetailPageArguments({this.key, @required this.thread});
 }
 
-//AnswerFormPage arguments holder class
+/// AnswerFormPage arguments holder class
 class AnswerFormPageArguments {
   final Key key;
   final Answer editedAnswer;

@@ -47,8 +47,8 @@ class _ThreadsOverviewPageState extends State<ThreadsOverviewPage> {
         BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
             state.maybeMap(
-              unauthenticated: (_) => ExtendedNavigator.ofRouter<Router>()
-                  .pushReplacementNamed(Routes.signInPage),
+              unauthenticated: (_) =>
+                  context.navigator.replace(Routes.signInPage),
               orElse: () {},
             );
           },
@@ -94,7 +94,7 @@ class _ThreadsOverviewPageState extends State<ThreadsOverviewPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            ExtendedNavigator.ofRouter<Router>().pushNamed(
+            context.navigator.push(
               Routes.threadFormPage,
               arguments: ThreadFormPageArguments(editedThread: null),
             );

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'answer_form_bloc.dart';
 
@@ -12,24 +12,28 @@ T _$identity<T>(T value) => value;
 class _$AnswerFormEventTearOff {
   const _$AnswerFormEventTearOff();
 
+// ignore: unused_element
   _Initialized initialized(Option<Answer> initialAnswerOption) {
     return _Initialized(
       initialAnswerOption,
     );
   }
 
+// ignore: unused_element
   _ContentChanged contentChanged(String contentStr) {
     return _ContentChanged(
       contentStr,
     );
   }
 
+// ignore: unused_element
   _Saved saved({@required Thread thread}) {
     return _Saved(
       thread: thread,
     );
   }
 
+// ignore: unused_element
   _DeletedByThread deletedByThread(Answer answer, {@required Thread thread}) {
     return _DeletedByThread(
       answer,
@@ -639,6 +643,7 @@ abstract class _DeletedByThread implements AnswerFormEvent {
 class _$AnswerFormStateTearOff {
   const _$AnswerFormStateTearOff();
 
+// ignore: unused_element
   _AnswerFormState call(
       {@required
           Answer answer,

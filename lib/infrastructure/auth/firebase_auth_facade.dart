@@ -2,29 +2,28 @@ import 'package:contributed_machinery/domain/auth/auth_failure.dart';
 import 'package:contributed_machinery/domain/auth/i_auth_facade.dart';
 import 'package:contributed_machinery/domain/auth/user.dart';
 import 'package:contributed_machinery/domain/auth/value_objects.dart';
+import 'package:contributed_machinery/infrastructure/core/firestore_helpers.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-
-import 'firebase_user_mapper.dart';
 
 @prod
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
-  final FirebaseUserMapper _firebaseUserMapper;
 
   FirebaseAuthFacade(
     this._firebaseAuth,
-    this._firebaseUserMapper,
   );
 
   @override
-  Future<Option<User>> getSignedInUser() async => _firebaseAuth
-      .currentUser()
-      .then((u) => optionOf(_firebaseUserMapper.toDomain(u)));
+  Future<Option<User>> getSignedInUser() async {
+    final user = _firebaseAuth.currentUser;
+
+    return optionOf(user?.toDomain());
+  }
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({

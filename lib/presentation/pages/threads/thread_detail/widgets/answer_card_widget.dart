@@ -37,7 +37,7 @@ class AnswerCard extends StatelessWidget {
           if (authBlocState is Authenticated &&
               authBlocState.user.emailAddress.getOrCrash() ==
                   answer.author.getOrCrash()) {
-            ExtendedNavigator.ofRouter<Router>().pushNamed(
+            context.navigator.push(
               Routes.answerFormPage,
               arguments: AnswerFormPageArguments(
                 editedAnswer: answer,

@@ -1,8 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contributed_machinery/domain/core/value_objects.dart';
 import 'package:contributed_machinery/domain/threads/request.dart';
 import 'package:contributed_machinery/domain/threads/thread.dart';
 import 'package:contributed_machinery/domain/threads/value_objects.dart';
-import 'package:contributed_machinery/infrastructure/core/firestore_helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'thread_dtos.freezed.dart';
@@ -74,7 +74,7 @@ abstract class ThreadDto with _$ThreadDto {
   }
 
   factory ThreadDto.fromFirestore(DocumentSnapshot doc) {
-    return ThreadDto.fromJson(doc.data).copyWith(id: doc.documentID);
+    return ThreadDto.fromJson(doc.data()).copyWith(id: doc.id);
   }
 
   factory ThreadDto.fromJson(Map<String, dynamic> json) =>

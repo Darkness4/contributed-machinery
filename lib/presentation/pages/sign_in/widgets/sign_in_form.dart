@@ -31,8 +31,7 @@ class SignInForm extends StatelessWidget {
                 ).show(context);
               },
               (_) {
-                ExtendedNavigator.ofRouter<Router>()
-                    .pushReplacementNamed(Routes.threadsOverviewPage);
+                context.navigator.replace(Routes.threadsOverviewPage);
                 context
                     .bloc<AuthBloc>()
                     .add(const AuthEvent.authCheckRequested());

@@ -101,7 +101,7 @@ class AnswerFormPage extends StatelessWidget implements AutoRouteWrapper {
               (_) {
                 // Can't be just a simple pop. If another route (like a Flushbar) is on top of stack, we'll need to pop even that to get to
                 // the overview page.
-                ExtendedNavigator.ofRouter<Router>().popUntil(
+                context.navigator.popUntil(
                     (route) => route.settings.name == Routes.threadDetailPage);
               },
             );

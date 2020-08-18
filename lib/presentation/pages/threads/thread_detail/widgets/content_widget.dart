@@ -30,7 +30,7 @@ class ContentWidget extends StatelessWidget {
           isSelf ? Theme.of(context).primaryColor : Theme.of(context).cardColor,
       child: InkWell(
         onTap: () {
-          ExtendedNavigator.ofRouter<Router>().pushNamed(
+          context.navigator.push(
             Routes.threadFormPage,
             arguments: ThreadFormPageArguments(
               editedThread: thread,

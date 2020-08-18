@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'answer_watcher_bloc.dart';
 
@@ -12,12 +12,14 @@ T _$identity<T>(T value) => value;
 class _$AnswerWatcherEventTearOff {
   const _$AnswerWatcherEventTearOff();
 
+// ignore: unused_element
   _WatchAllStarted watchAllByThreadStarted(Thread thread) {
     return _WatchAllStarted(
       thread,
     );
   }
 
+// ignore: unused_element
   _AnswersReceived answersReceived(
       Either<AnswerFailure, IList<Answer>> failureOrAnswers) {
     return _AnswersReceived(
@@ -324,20 +326,24 @@ abstract class _AnswersReceived implements AnswerWatcherEvent {
 class _$AnswerWatcherStateTearOff {
   const _$AnswerWatcherStateTearOff();
 
+// ignore: unused_element
   Initial initial() {
     return const Initial();
   }
 
+// ignore: unused_element
   DataTransferInProgress loadInProgress() {
     return const DataTransferInProgress();
   }
 
+// ignore: unused_element
   LoadSuccess loadSuccess(IList<Answer> answers) {
     return LoadSuccess(
       answers,
     );
   }
 
+// ignore: unused_element
   LoadFailure loadFailure(AnswerFailure answerFailure) {
     return LoadFailure(
       answerFailure,
