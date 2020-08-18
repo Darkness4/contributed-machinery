@@ -117,10 +117,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'stable'
+          channel: 'beta'
       - name: Upgrade flutter to stable latest
         run: |
-          flutter channel stable
+          flutter channel beta
           flutter upgrade
           flutter --version
       - run: flutter pub get
