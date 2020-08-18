@@ -5,7 +5,8 @@ import 'package:contributed_machinery/presentation/pages/threads/answer_form/ans
 import 'package:contributed_machinery/presentation/pages/threads/thread_detail/thread_detail_page.dart';
 import 'package:contributed_machinery/presentation/pages/threads/thread_form/thread_form_page.dart';
 import 'package:contributed_machinery/presentation/pages/threads/threads_overview/threads_overview_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/animation.dart';
+import 'package:flutter/widgets.dart';
 
 @MaterialAutoRouter(routes: <AutoRoute>[
   MaterialRoute(page: SplashPage, initial: true),
